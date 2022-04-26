@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import CombineReducers from './Store/showModalStore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const store = createStore(CombineReducers)
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
