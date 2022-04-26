@@ -14,22 +14,20 @@ body
     box-sizing: border-box;
 }
 
-.Header
+.Footer
 {
     width: 90vw;
     height: 4vw;
     background-color: white;
     position: static;
     z-index: 100;
-    //background-color: transparent;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    border-bottom: 1px solid rgb(194, 194, 194);
     padding: 0.6rem 0;
-    margin-bottom: 2rem;
+    margin-top: 3rem;
     @mixin textHeader($color, $font-size, $font-family, $font-weight) {
         color: $color;
         font-size: $font-size;
@@ -50,7 +48,6 @@ body
         align-items: center;
         padding: 1rem;
         cursor: pointer;
-        // margin-left: 5rem;
         i
         {
             color: black;
@@ -62,54 +59,22 @@ body
             @include textHeader(black, 2rem, "'Lato', sans-serif", 600);
         }
     }
-    &__Function
+    &__Contact
     {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        margin-right: 1rem;
-        // background-color: antiquewhite;
-        &-SignIn
+        width: 20%;
+        .facebook 
         {
-            @include textHeader(black, 1.6rem, "'Lato', sans-serif", 600);
-            margin-right: 2rem;
+            outline: none;
+            border: 2px solid $colorTextGreen1;
+            border-radius: 50%;
+            padding: 1rem 1.2rem;
             cursor: pointer;
+            color: rgb(153,153,153);
         }
-        &-search
-        {
-            @include iconHeader(1.8rem, 2rem, 400);
-            color: $textColor;
-        }
-        &-list
-        {
-            @include iconHeader(1.8rem, 2rem, 400);
-            color: $textColor;
-        }
-        &-cart
-        {
-            @include iconHeader(2.1rem, 2rem, 400);
-            position: relative;
-            color: $textColor;
-            &::before 
-            {
-                content: attr(numberOfProduct);
-                position: absolute;
-                left: 140%;
-                font-size: 1.4rem;
-                color: white;
-                background-color: rgb(172,199,191);
-                outline: none;
-                padding: 0.4rem 0.6rem;
-                border-radius: 50%;
-            }
-        }
-    }
+        
+    }    
 }
-
-// .test 
-// {
-//     background-color: rgb(15, 105, 184);
-//     width: 100%;
-//     height: 200vw;
-// }
