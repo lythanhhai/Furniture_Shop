@@ -3,6 +3,7 @@ import Header from '../Component/Header';
 import Banner from '../Component/Banner';
 import Products from '../Component/Products';
 import ModalCart from '../Component/ModalCart';
+import Footer from '../Component/Footer';
 
 const Home = () => {
     return(
@@ -11,6 +12,7 @@ const Home = () => {
                 <Banner />
                 <Products />
                 <ModalCart />
+                <Footer />
             </div>
     );
 }

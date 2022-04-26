@@ -3,7 +3,7 @@ const initial = {
 }
 
 const showModalReducer = (state= initial, action) => {
-    switch(action.name)
+    switch(action.type)
     {
         case 'show':
             return {
