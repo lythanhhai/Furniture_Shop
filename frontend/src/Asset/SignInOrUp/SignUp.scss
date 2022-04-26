@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import '../Variables/Variables.scss';
+
+html 
+{
+    font-size: 62.5%;
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+.Register
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    // align-items: center;
+    width: 80%;
+    height: 33vw;
+    margin: 0 auto;
+    // background-color: aliceblue;
+    border-bottom: 1px solid rgb(207, 204, 204);
+    padding-bottom: 2rem;
+    &__Left 
+    {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgb(207, 204, 204);
+        width: 40%;
+        align-items: center;
+        &-title
+        {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+        }
+        &-form 
+        {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            @mixin inputText() {
+                border: none;
+                border-bottom: 2px solid rgb(216, 215, 215);
+                outline: none;
+                padding: 0.5rem 1rem;
+                width: 90%;
+            }
+            .Username
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                margin-bottom: 2rem;
+                width: 90%;
+                input 
+                {
+                    @include inputText();
+                    
+                }
+                label
+                {
+                    margin-bottom: 1rem;
+                    font-size: 1.4rem;
+                    &::after
+                    {
+                        content: "*";
+                        color: red;
+                        margin-left: 0.5rem;
+                    }
+                }
+            }
+
+            .Phone_number
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                margin-bottom: 2rem;
+                width: 90%;
+                input 
+                {
+                    @include inputText();
+                    
+                }
+                label
+                {
+                    margin-bottom: 1rem;
+                    font-size: 1.4rem;
+                    &::after
+                    {
+                        content: "*";
+                        color: red;
+                        margin-left: 0.5rem;
+                    }
+                }
+            }
+
+            .Password
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                margin-bottom: 2rem;
+                width: 90%;
+                input 
+                {
+                    @include inputText();
+                    
+                }
+                label
+                {
+                    margin-bottom: 1rem;
+                    font-size: 1.4rem;
+                    &::after
+                    {
+                        content: "*";
+                        color: red;
+                        margin-left: 0.5rem;
+                    }
+                }
+            }
+
+            .infor 
+            {
+                width: 90%;
+                font-size: 1.3rem;
+                text-align: justify;
+                a 
+                {
+                    color: black;
+                    font-weight: 700;
+                    cursor: pointer;
+                }
+                margin-bottom: 2rem;
+            }
+
+            .but_sub
+            {
+                padding: 1rem 2rem;
+                width: 60%;
+                margin: 0rem auto 2rem;
+                outline: none;
+                border: none;
+                background-color: $colorButtonForm;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+        
+        }
+    }
+    &__Right
+    {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70%;
+        text-align: center;
+        h2 
+        {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+        p 
+        {
+            font-size: 1.4rem;
+            width: 80%;
+            color: #777777;
+            line-height: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        button 
+        {
+            background-color: $colorButtonFormRight;
+            color: #333333;
+            display: inline-flex;
+            font-size: 1.3rem;
+            font-weight: 600;
+            justify-content: center;
+            line-height: 1.8rem;
+            padding: 1.2rem 2rem;
+            text-align: center;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}
