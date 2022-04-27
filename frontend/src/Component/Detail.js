@@ -28,6 +28,11 @@ const Detail = () => {
         img.style.transformOrigin = 'center';
         img.style.transform = "scale(1)";
     }
+    const handleNavigateCart = () => {
+        localStorage.getItem("accessToken") === 'true'
+        ? navigate('/ViewCart/')
+        : navigate('/SignIn/')
+    }
     return(
         <section className='Detail'>
             <div className='Detail__ListImage'>
@@ -56,14 +61,7 @@ const Detail = () => {
                         </button>
                     </div>
                     <button type='button' className='button' onClick={() => {
-                        if(localStorage.getItem("accessToken") === true)
-                        {
-
-                        }
-                        else 
-                        {
-                            navigate('/SignIn/')
-                        }
+                        handleNavigateCart()
                     }}>
                         Add To Cart
                     </button>
