@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import '../Variables/Variables.scss';
+
+html 
+{
+    font-size: 62.5%;
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+.Product
+{   margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__title
+    {
+        font-size: 2.4rem;
+        font-weight: 600;
+    }
+    &__desc
+    {
+        font-size: 1.7rem;
+        font-weight: 400;
+    }
+    &__list 
+    {
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 2rem;
+        .product 
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .image 
+            {
+                position: relative;
+                img 
+                {
+                    width: 22rem;
+                    height: 25rem;
+                    object-fit: cover;
+                }
+                .button_add
+                {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: calc(100% - 2rem);
+                    padding: 1rem;
+                    font-size: 1.6rem;
+                    text-transform: uppercase;
+                    color: white;
+                    background-color: $colorTextGreen;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(90%);
+                    // animation-name: animationAddToCart;
+                    // animation-duration: 0.5s;
+                    // animation-fill-mode: forwards;
+                    // animation-timing-function: linear;
+                    // animation-iteration-count: 1;
+                    cursor: pointer;
+                }
+                .tool 
+                {
+                    position: absolute;
+                    top: 5%;
+                    right: 5%;
+                    padding: 0rem 1rem;
+                    font-size: 1.8rem;
+                    color:  rgb(156, 154, 154);
+                    background-color: white;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateX(140%);
+                    // animation-name: animationTool;
+                    // animation-duration: 0.5s;
+                    // animation-fill-mode: forwards;
+                    // animation-timing-function: linear;
+                    // animation-iteration-count: 1;
+                    .quick_search
+                    {
+                        cursor: pointer;
+                    }
+                    .wishlist
+                    {
+                        cursor: pointer;
+                    }
+                }
+            }
+            .name 
+            {
+                font-size: 1.4rem;
+                font-weight: 400;
+            }
+            .category 
+            {
+                font-size: 1.5rem;
+                font-weight: 400;
+            }
+            .price
+            {
+                font-size: 1.8rem;
+                font-weight: 400;
+                color: $colorTextGreen;
+            }
+        }
+    }
+}
+
+@keyframes animationAddToCart {
+    0%
+    {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(90%);
+    }
+    50%
+    {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(50%);
+    }
+    100%
+    {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0%);
+    }
+
+}
+
+@keyframes animationTool {
+    0%
+    {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(140%);
+    }
+    30%
+    {
+        opacity: 0.3;
+        visibility: hidden;
+        transform: translateX(90%);
+    }
+    70%
+    {
+        opacity: 0.6;
+        visibility: hidden;
+        transform: translateX(50%);
+    }
+    100%
+    {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0%);
+    }
+}

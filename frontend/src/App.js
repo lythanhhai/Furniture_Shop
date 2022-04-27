@@ -6,6 +6,7 @@ import SignUp_Page from './Pages/SignUp_Page';
 import SignIn_Page from './Pages/SignIn_Page';
 import { useEffect, useState, useCallback } from 'react';
 import Detail_Page from './Pages/Detail_Page';
+import { useSelector } from 'react-redux';
 
 function App() {
 
@@ -32,9 +33,9 @@ function App() {
     };
   }, [handleNavigation]);
   
-  const [id, setId] = useState(0)
+  const id = useSelector(state => state.getIndexReducer).index
   const [accessLogin, setAccessLogin] = useState(false)
-  localStorage.setItem("accessToken", true)
+  localStorage.setItem("accessToken", accessLogin)
   return (
     <BrowserRouter>
         <Routes>
@@ -65,7 +66,7 @@ function App() {
                   }>
             </Route>
 
-            <Route path={`/Detail/`}
+            <Route path={`/Detail/${id}`}
                    element={
                     <Detail_Page />
                   }>
@@ -73,9 +74,8 @@ function App() {
 
             <Route path={`/ViewCart/`}
                    element={
-                    accessLogin ? <Home />
-                    : 
-                    <Navigate to="/SignIn/" />
+                    <>
+                    </>
                   }>
             </Route>
 
@@ -86,3 +86,7 @@ function App() {
 }
 
 export default App;
+
+// accessLogin ? <Home />
+// : 
+// <Navigate to="/SignIn/" />
