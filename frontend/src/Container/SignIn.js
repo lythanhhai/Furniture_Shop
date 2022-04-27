@@ -1,8 +1,10 @@
 import React from 'react'
 import '../Asset/SignInOrUp/SignIn.scss'
 import { FaFacebookSquare, FaGooglePlusSquare } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
+    const navigate = useNavigate()
     return(
         <section className='Login'>
             <div className='Login__Left'>
@@ -45,7 +47,9 @@ const SignIn = () => {
             <div className='Login__Right'>
                 <h2>REGISTER</h2>
                 <p>Registering for this site allows you to access your order status and history. Just fill in the fields below, and we’ll get a new account set up for you in no time. We will only ask you for information necessary to make the purchase process faster and easier.</p>
-                <button type='button'>REGISTER</button>
+                <button type='button' onClick={() => {
+                    navigate('/SignUp/');
+                }}>REGISTER</button>
             </div>
         </section>
     );
