@@ -1,7 +1,10 @@
 import React from 'react'
 import '../Asset/SignInOrUp/SignUp.scss'
 
+import { useNavigate } from 'react-router-dom'
+
 const SignUp = () => {
+    const navigate = useNavigate()
     return(
         <section className='Register'>
             <div className='Register__Left'>
@@ -34,7 +37,9 @@ const SignUp = () => {
             <div className='Register__Right'>
                 <h2>LOGIN</h2>
                 <p>Login here by filling you're username and password or use your favorite social network account to enter to the site. Site login will simplify the purchase process and allows you to manage your personal account.</p>
-                <button type='button'>LOGIN</button>
+                <button type='button' onClick={() => {
+                    navigate('/SignIn/');
+                }}>LOGIN</button>
             </div>
         </section>
     );

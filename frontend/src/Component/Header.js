@@ -11,6 +11,7 @@ const Header = () => {
     const [numberOfProduct, setNumberOfProduct] = useState(0)
     const showOrHide = useSelector(state => state.showModalReducer).value
     const dispatch = useDispatch()
+    const [isLogin, setIsLogin] = useState(0)
     const handleClickCart = () => {
         if(showOrHide === 0)
         {
@@ -31,10 +32,14 @@ const Header = () => {
                     <p>Furniture Shop</p>
                 </div>
                 <div className='Header__Function'>
-                    <p className='Header__Function-SignIn' onClick={() => {
-                    navigate('/SignIn')
-                }}>
-                    LOGIN / REGISTER</p>
+                    {
+                        isLogin === 0 ? (<>
+                                <p className='Header__Function-SignIn' onClick={() => {
+                                        navigate('/SignIn')
+                                    }}>LOGIN / REGISTER</p>
+                        </>) : (<></>)
+                    }
+                    
                     <p className="Header__Function-search"><FaSearch /></p>
                     <p className="Header__Function-list"><FaRegHeart /></p>
                     <p className="Header__Function-cart" numberOfProduct={numberOfProduct} onClick={
