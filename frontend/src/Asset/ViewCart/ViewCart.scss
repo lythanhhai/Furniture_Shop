@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import '../Variables/Variables.scss';
+
+html 
+{
+    font-size: 62.5%;
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+.Viewcart 
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+    height: 34vw;
+        &__List
+        {
+            width: calc(70% + 4rem);
+            height: 100%;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            overflow-y: scroll; 
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .button 
+            {
+                outline: none;
+                border: none;
+                padding: 1rem 2rem;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+            position: relative;
+            thead 
+            {
+                position: sticky;
+            }
+            .table
+            {
+                border-collapse: collapse;
+                width: 100%;
+                th
+                {
+                    padding: 2rem;
+                    border-bottom: 0.1rem solid rgb(175, 172, 172);
+                    text-align: left;
+                    font-size: 1.7rem;
+                    // .edit, .delete
+                    // {
+                    //     margin: 0 1rem 0 1rem;
+                    //     padding: 1rem;
+                    //     font-weight: 300;
+                    //     outline: none;
+                    //     border: none;
+                    //     background-color: rgb(1,113,229);
+                    //     color: white;
+                    //     font-size: 1.4rem;
+                    //     cursor: pointer;
+                    // }
+                }
+                
+                .product 
+                {
+                    .remove 
+                    {
+                        cursor: pointer;
+                        font-size: 2.5rem;
+                    }
+                    td
+                    {
+                        padding: 2rem;
+                        border-bottom: 0.1rem solid rgb(175, 172, 172);
+                        text-align: left;
+                        font-size: 1.7rem;
+                    }
+                    .img 
+                    {
+                        text-align: center;
+                        img 
+                        {
+                            width: 40%;
+                            height: 40%;
+                            object-fit: cover;
+                        }
+                    }
+                    .number 
+                    {
+                        &__quantity
+                        {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                            .but_sub
+                            {
+                                border:1px solid rgb(182, 181, 181);
+                                padding: 0.4rem 1rem;
+                                font-size: 1.8rem;
+                                cursor: pointer;
+                                border-radius: 50%;
+                                height: 10%;
+                            }
+                            p 
+                            {
+                                padding: 1rem;
+                                font-size: 2rem;
+                            }
+                            .but_add
+                            {
+                                border:1px solid rgb(182, 181, 181);
+                                padding: 0.4rem 1rem;
+                                font-size: 1.8rem;
+                                cursor: pointer;
+                                border-radius: 50%;
+                                height: 10%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+    &__Total 
+    {
+        width: 30%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-left: 4rem;
+        padding: 0rem 2rem;
+        border: 2px solid rgb(185, 185, 185);
+        .name 
+        {
+            font-size: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .subtotal 
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgb(207, 207, 207);
+            width: 100%;
+            font-size: 1.6rem;
+        }
+        .shipping
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgb(207, 207, 207);
+            width: 100%;
+            font-size: 1.6rem;
+            padding: 2rem 0rem; 
+            .function 
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+                .flat 
+                {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                    input 
+                    {
+                        width: 1.8rem;
+                        height: 1.8rem;
+                        transform: translateY(-10%);
+                    }
+                }
+                .free
+                {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    input 
+                    {
+                        width: 1.8rem;
+                        height: 1.8rem;
+                        transform: translateY(-10%);
+                    }
+                }
+                .change 
+                {
+                    color: $colorTextGreen;
+                    cursor: pointer;
+                }
+            }
+            
+        }
+        .total 
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgb(207, 207, 207);
+            width: 100%;
+            font-size: 1.6rem;
+        }
+        .button 
+        {
+            padding: 4rem 0rem 2rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            border-bottom: 1px solid rgb(207, 207, 207);
+            width: 100%;
+            font-size: 1.6rem;
+            .button_update 
+            {
+                font-size: 1.5rem;
+                padding: 1rem 2rem;
+                outline: none;
+                border: none;
+                cursor: pointer;
+            }
+            .button_proceed
+            {
+                font-size: 1.5rem;
+                padding: 1rem 2rem;
+                outline: none;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    }
+}

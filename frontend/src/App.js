@@ -7,6 +7,7 @@ import SignIn_Page from './Pages/SignIn_Page';
 import { useEffect, useState, useCallback } from 'react';
 import Detail_Page from './Pages/Detail_Page';
 import { useSelector } from 'react-redux';
+import Cart_Page from './Pages/Cart_Page';
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
     };
   }, [handleNavigation]);
   
-  const id = useSelector(state => state.getIndexReducer).index
+  let id = useSelector(state => state.getIndexReducer).index
   const [accessLogin, setAccessLogin] = useState(false)
   localStorage.setItem("accessToken", accessLogin)
   return (
@@ -74,8 +75,7 @@ function App() {
 
             <Route path={`/ViewCart/`}
                    element={
-                    <>
-                    </>
+                    <Cart_Page />
                   }>
             </Route>
 
