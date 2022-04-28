@@ -71,13 +71,13 @@ const Products = () => {
     
             }} onMouseOut={() => {
                 handleMouseOut(index)
-            }} onClick={() => {
-                handleClickDetail(index)
-            }}>
+            }} >
                 <div className="image">
-                    <img src={Image} alt='err'></img>
+                    <img src={Image} alt='err' onClick={() => {
+                    handleClickDetail(index)
+            }}></img>
                     <div className="button_add" onClick={() => {
-                        handleAddToCart(index)
+                        handleAddToCart(index);
                     }}>Add to cart</div>
                     <div className='tool'>
                         <p className="quick_search" onClick={() => {
@@ -86,9 +86,15 @@ const Products = () => {
                         <p className="wishlist"><FaRegHeart /></p>
                     </div>
                 </div>
-                <p className="name">3D Geometric Candlestick</p>
-                <span className="category">Decor</span>
-                <p className="price">$232</p>
+                <p className="name" onClick={() => {
+                    handleClickDetail(index)
+            }}>3D Geometric Candlestick</p>
+                <span className="category" onClick={() => {
+                    handleClickDetail(index)
+            }}>Decor</span>
+                <p className="price" onClick={() => {
+                    handleClickDetail(index)
+            }}>$232</p>
 
             </div>
         )
