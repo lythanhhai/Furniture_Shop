@@ -11,7 +11,7 @@ const Header = () => {
     const [numberOfProduct, setNumberOfProduct] = useState(0)
     const showOrHide = useSelector(state => state.showModalReducer).value
     const dispatch = useDispatch()
-    const [isLogin, setIsLogin] = useState(0)
+    
     const handleClickCart = () => {
         if(showOrHide === 0)
         {
@@ -21,6 +21,14 @@ const Header = () => {
         {
             dispatch(hideModalCart())
         }
+    }
+    const handleMouseOverAccount = () => {
+        const Down = document.querySelector('.Header__Function-Account .Down')
+        Down.style.display = "flex"
+    }
+    const handleMouseOutAccount = () => {
+        const Down = document.querySelector('.Header__Function-Account .Down')
+        Down.style.display = "none"
     }
     return(
         <>
@@ -33,11 +41,62 @@ const Header = () => {
                 </div>
                 <div className='Header__Function'>
                     {
-                        isLogin === 0 ? (<>
+                        localStorage.getItem("accessToken") === 'false' ? (<>
                                 <p className='Header__Function-SignIn' onClick={() => {
                                         navigate('/SignIn')
                                     }}>LOGIN / REGISTER</p>
-                        </>) : (<></>)
+                        </>) : (<>
+                            <div className='Header__Function-Account'>
+                                <p className='title' onMouseOver={() => {
+                                    handleMouseOverAccount()
+                                }}
+                                onMouseOut={() => {
+                                    handleMouseOutAccount()
+                                }}>My Account</p>
+                                {
+                                    localStorage.getItem('isAdmin') === 'false'
+                                    ? (
+                                        <div className='Down' onMouseOver={() => {
+                                            handleMouseOverAccount()
+                                        }}
+                                        onMouseOut={() => {
+                                            handleMouseOutAccount()
+                                        }}>
+                                            <p onClick={() => {
+                                                navigate('/Home/')
+                                            }}>Home</p>
+                                            <p onClick={() => {
+                                                navigate('/MyAccount/AccountDetail')
+                                            }}>Account Detail</p>
+                                            <p onClick={() => {
+                                                navigate('/MyAccount/Address/')
+                                            }}>Address</p>
+                                            <p onClick={() => {
+                                                navigate('/SignIn/')
+                                            }}>Log Out</p>
+                                        </div>
+                                    )
+                                    : 
+                                    (
+                                        <div className='Down' onMouseOver={() => {
+                                            handleMouseOverAccount()
+                                        }}
+                                        onMouseOut={() => {
+                                            handleMouseOutAccount()
+                                        }}>
+                                            <p onClick={() => {
+                                                navigate('/Products/')
+                                            }}>Add Products</p>
+                                            <p onClick={() => {
+                                                navigate('/SignIn/')
+                                            }}>Log Out</p>
+                                        </div>
+                                    )
+                                }
+                                
+                            </div>
+                            
+                                    </>)
                     }
                     
                     <p className="Header__Function-search"><FaSearch /></p>
