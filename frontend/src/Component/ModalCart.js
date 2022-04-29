@@ -35,7 +35,7 @@ const ModalCart = () => {
                     </div>
                 </div> 
                 {
-                    totalPrice === 1 ?
+                    totalPrice === 0 ?
                     (<>
                         <CartEmpty />
                     </>)

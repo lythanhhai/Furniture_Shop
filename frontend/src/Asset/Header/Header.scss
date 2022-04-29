@@ -76,6 +76,46 @@ body
             margin-right: 2rem;
             cursor: pointer;
         }
+        &-Account
+        {
+            position: relative;
+            .title
+            {
+                @include textHeader(black, 1.6rem, "'Lato', sans-serif", 600);
+                margin-right: 2rem;
+                cursor: pointer;
+            }
+            .Down
+            {
+                position: absolute;
+                width: 150%;
+                padding: 1rem 1rem;
+                top: 100%;
+                left: 0;
+                z-index: 1;
+                background-color: white;
+                color: black;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                display: none;
+                &::before 
+                {
+                    content: "";
+                    width: 100%;
+                    height: 20%;
+                    position: absolute;
+                    top: -10%;
+                    left: 0;
+                }
+                p 
+                {
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+            
+        }
         &-search
         {
             @include iconHeader(1.8rem, 2rem, 400);
@@ -95,12 +135,12 @@ body
             {
                 content: attr(numberOfProduct);
                 position: absolute;
-                left: 140%;
+                left: 120%;
                 font-size: 1.4rem;
                 color: white;
                 background-color: rgb(172,199,191);
                 outline: none;
-                padding: 0.4rem 0.6rem;
+                padding: 0.3rem 0.6rem;
                 border-radius: 50%;
             }
         }
