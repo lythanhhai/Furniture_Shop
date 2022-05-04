@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import '../Variables/Variables.scss';
+
+html 
+{
+    font-size: 62.5%;
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+@keyframes transformModal {
+    0% 
+    {
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+    25%
+    {
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+    50%
+    {
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    75%
+    {
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100%
+    {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes transformTransparent {
+    0% 
+    {
+        
+        opacity: 0.7;
+    }
+    25%
+    {
+
+        opacity: 0.6;
+    }
+    50%
+    {
+
+        opacity: 0.5;
+    }
+    75%
+    {
+
+        opacity: 0.4;
+    }
+    100%
+    {
+        opacity: 0.3;
+    }
+}
+
+.ModalAddress
+{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    &__transparent
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background-color: black;
+        animation-name: transformTransparent;
+        animation-duration: 0.8s;
+        animation-timing-function: ease-in;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+    &__Cart
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.6);
+        z-index: 100;
+        width: 50%;
+        height: 70%;
+        background-color: white;
+        animation-name: transformModal;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        
+        
+    }
+    
+}
+.ModalAddress_hide
+{
+    display: none; 
+}
+
