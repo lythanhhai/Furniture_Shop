@@ -1,37 +1,37 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .Serializer.address import AddressSerializer
+from sale.Serializer.orders import OrdersSerializer
 # Create your views here.
-from .models import Address
+from sale.models import Orders
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
-		'List':'/Address-list/',
-		'Detail View':'/Address-detail/<int:pk>/',
-		'Create':'/Address-create/',
-		'Update':'/Address-update/<int:pk>/',
-		'Delete':'/Address-delete/<int:pk>/',
+		'List Orders':'/Orders-list/',
+		'Detail View Orders':'/Orders-detail/<int:pk>/',
+		'Create Orders':'/Orders-create/',
+		'Update Orders':'/Orders-update/<int:pk>/',
+		'Delete Orders':'/Orders-delete/<int:pk>/',
 		}
 
 	return Response(api_urls)
 
 @api_view(['GET'])
 def taskList(request):
-	address = Address.objects.all().order_by('-id')
-	serializer = AddressSerializer(address,many=True)
+	item = Orders.objects.all().order_by('-id')
+	serializer = OrdersSerializer(item,many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
 def taskDetail(request, pk):
-	address = Address.objects.get(id=pk)
-	serializer =AddressSerializer(address,many=False)
+	item = Orders.objects.get(id=pk)
+	serializer =OrdersSerializer(item,many=False)
 	return Response(serializer.data)
 
 
 @api_view(['POST'])
 def taskCreate(request):
-	serializer = AddressSerializer(data=request.data)
+	serializer = OrdersSerializer(data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -40,8 +40,8 @@ def taskCreate(request):
 
 @api_view(['POST'])
 def taskUpdate(request, pk):
-	address= Address.objects.get(id=pk)
-	serializer = AddressSerializer(instance=address, data=request.data)
+	item=Orders.objects.get(id=pk)
+	serializer =OrdersSerializer(instance=item, data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
@@ -51,8 +51,8 @@ def taskUpdate(request, pk):
 
 @api_view(['DELETE'])
 def taskDelete(request, pk):
-	address = Address.objects.get(id=pk)
-	address.delete()
+	item = Orders.objects.get(id=pk)
+	item.delete()
 
 	return Response('Item succsesfully delete!')
 
