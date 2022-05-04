@@ -1,6 +1,13 @@
 import React from 'react' 
 import '../Asset/Address/Address.scss';
 const Address = () => {
+    const handleUpdate = () => {
+        
+    }
+
+    const handleDelete = () => {
+
+    }
 
   return (
         <section className='Address'>
