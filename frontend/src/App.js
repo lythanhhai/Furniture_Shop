@@ -9,6 +9,7 @@ import Detail_Page from './Pages/Detail_Page';
 import { useSelector } from 'react-redux';
 import Cart_Page from './Pages/Cart_Page';
 import AccountDetail_Page from './Pages/AccountDetail_Page';
+import Address_Page from './Pages/Address_Page';
 
 function App() {
 
@@ -87,9 +88,15 @@ function App() {
                   }>
             </Route>
 
-            <Route path={`/MyAccount/AccountDetail`}
+            <Route path={`/my-account/AccountDetail`}
                    element={
                     <AccountDetail_Page />
+                  }>
+            </Route>
+
+            <Route path={`/my-account/Address`}
+                   element={
+                    <Address_Page />
                   }>
             </Route>
 

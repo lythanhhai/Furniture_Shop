@@ -32,10 +32,10 @@ ALLOWED_HOSTS = ['127.0.0.1',]
 
 INSTALLED_APPS = [
     'sale.apps.SaleConfig',
-    #'customer.apps.CustomerConfig',
-   # 'address.apps.AddressConfig',
-    #'orders.apps.OrdersConfig',
-   # 'product.apps.ProductConfig',
+    # 'customer.apps.CustomerConfig',
+    # 'address.apps.AddressConfig',
+    # 'orders.apps.OrdersConfig',
+    # 'product.apps.ProductConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
