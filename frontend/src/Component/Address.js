@@ -1,8 +1,12 @@
 import React from 'react' 
 import '../Asset/Address/Address.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { showModalUpdate } from '../Action/showModalAddress';
 const Address = () => {
+    const dispatch = useDispatch()
+    const showOrNot = useSelector(state => state.showModalAddressReducer).value
     const handleUpdate = () => {
-        
+        dispatch(showModalUpdate())
     }
 
     const handleDelete = () => {
@@ -27,7 +31,11 @@ const Address = () => {
                 </div>
             </div>
             <div className='Address__button'>
-                <button className='Address__button-update'>Update</button>
+                <button className='Address__button-update' onClick={
+                    () => {
+                        handleUpdate();
+                    }
+                }>Update</button>
                 <button className='Address__button-delete'>Delete</button>
             </div>
         </section>
