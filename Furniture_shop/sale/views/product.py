@@ -7,11 +7,11 @@ from sale.models import Products
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
-		'List Products':'/Products-list/',
-		'Detail View Products':'Products-detail/<int:pk>/',
-		'Create Products':'/Products-create/',
-		'Update Products':'/Products-update/<int:pk>/',
-		'Delete Products':'/Products-delete/<int:pk>/',
+		'List Products':'/Product-list/',
+		'Detail View Products':'Product-detail/<int:pk>/',
+		'Create Products':'/Product-create/',
+		'Update Products':'/Product-update/<int:pk>/',
+		'Delete Products':'/Product-delete/<int:pk>/',
 		}
 
 	return Response(api_urls)
