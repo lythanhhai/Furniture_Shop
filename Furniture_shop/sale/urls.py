@@ -35,4 +35,4 @@ urlpatterns = [
 	path('Orders-create/', orders.taskCreate, name="Orders-create"),
 	path('Orders-update/<int:pk>/', orders.taskUpdate, name="Orders-update"),
 	path('Orders-delete/<int:pk>/', orders.taskDelete, name="Orders-delete"),
-]
+] 
