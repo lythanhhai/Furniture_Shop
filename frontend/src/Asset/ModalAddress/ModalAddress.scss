@@ -14,7 +14,7 @@ body
     box-sizing: border-box;
 }
 
-@keyframes transformModal {
+@keyframes transformModal_Address {
     0% 
     {
         transform: translate(-50%, -50%) scale(0.6);
@@ -37,7 +37,7 @@ body
     }
 }
 
-@keyframes transformTransparent {
+@keyframes transformTransparent_Address {
     0% 
     {
         
@@ -80,13 +80,13 @@ body
         height: 100%;
         opacity: 0.3;
         background-color: black;
-        animation-name: transformTransparent;
+        animation-name: transformTransparent_Address;
         animation-duration: 0.8s;
         animation-timing-function: ease-in;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
     }
-    &__Cart
+    &__Modal
     {
         position: absolute;
         top: 50%;
@@ -96,7 +96,7 @@ body
         width: 50%;
         height: 70%;
         background-color: white;
-        animation-name: transformModal;
+        animation-name: transformModal_Address;
         animation-duration: 0.3s;
         animation-timing-function: ease-in-out;
         animation-iteration-count: 1;

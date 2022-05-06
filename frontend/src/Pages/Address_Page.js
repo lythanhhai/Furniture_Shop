@@ -5,8 +5,7 @@ import Address from '../Component/Address';
 import ModalAdress from '../Component/ModalAdress';
 
 const AccountDetail_Page = () => {
-    
-    return(
+    return( 
             <div className="App">
                 <Header />
                 <Address />
