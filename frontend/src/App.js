@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import Cart_Page from './Pages/Cart_Page';
 import AccountDetail_Page from './Pages/AccountDetail_Page';
 import Address_Page from './Pages/Address_Page';
+import ManageProducts_Pages from './Pages/ManageProducts_Pages';
 
 function App() {
 
@@ -97,6 +98,12 @@ function App() {
             <Route path={`/my-account/Address`}
                    element={
                     <Address_Page />
+                  }>
+            </Route>
+
+            <Route path={`/admin/manage-products`}
+                   element={
+                    <ManageProducts_Pages />
                   }>
             </Route>
 

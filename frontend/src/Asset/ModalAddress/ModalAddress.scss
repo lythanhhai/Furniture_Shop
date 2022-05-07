@@ -86,22 +86,130 @@ body
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
     }
-    &__Modal
+    &__Update
     {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.6);
         z-index: 100;
-        width: 50%;
-        height: 70%;
+        width: 45%;
+        height: 55%;
         background-color: white;
         animation-name: transformModal_Address;
         animation-duration: 0.3s;
         animation-timing-function: ease-in-out;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
-        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &-title
+        {
+            font-size: 2rem;
+        }
+        &-nameAndNumber
+        {
+            display: flex;
+            flex-direction: row;
+            margin: 2rem;
+            .fullname 
+            {   
+                position: relative;
+                margin-right: 2rem;
+                label 
+                {
+                    position: absolute;
+                    font-size: 1.3rem;
+                    top: -15%;
+                    left: 5%;
+                    background-color: white;
+                    color: $textColorAddress;
+                }
+                input
+                {
+                    outline: none;
+                    border: 1px solid rgb(190, 189, 189);
+                    padding: 1rem;
+
+                }
+            }
+            .phone
+            {   
+                position: relative;
+                label 
+                {
+                    position: absolute;
+                    font-size: 1.3rem;
+                    top: -15%;
+                    left: 5%;
+                    background-color: white;
+                    color: $textColorAddress;
+                }
+                input
+                {
+                    outline: none;
+                    border: 1px solid rgb(190, 189, 189);
+                    padding: 1rem;
+
+                }
+            }
+        }
+        &-chooseCity
+        {
+            width: calc(68%);
+            margin: 2rem 0;
+            position: relative;
+            label 
+            {
+                position: absolute;
+                font-size: 1.3rem;
+                top: -15%;
+                left: 5%;
+                background-color: white;
+                color: $textColorAddress;
+            }
+            select
+            {
+                outline: none;
+                border: 1px solid rgb(190, 189, 189);
+                padding: 1rem;
+                width: 100%;
+                background-color: transparent;
+            }
+        }
+        &-specific
+        {
+            position: relative;
+            width: calc(68% - 2rem);
+            margin: 2rem 2rem 2rem 0rem;
+            label 
+            {
+                position: absolute;
+                font-size: 1.3rem;
+                top: -15%;
+                left: 5%;
+                background-color: white;
+                color: $textColorAddress;
+            }
+            input
+            {
+                outline: none;
+                border: 1px solid rgb(190, 189, 189);
+                padding: 1rem;
+                width: 100%;
+            }
+        }
+        .Button__Update
+        {
+            outline: none;
+            border: 1px solid rgb(190, 189, 189);
+            padding: 1rem 3rem;
+            font-size: 1.5rem;
+            background-color: $colorTextGreen;
+            color: white;
+            cursor: pointer;
+        }
         
     }
     

@@ -20,8 +20,32 @@ const ModalAddress = () => {
                 hideModal()
             }}>
             </div>
-            <div className='ModalAddress__Modal'>
-            </div>
+            <form className='ModalAddress__Update'>
+                <p className='ModalAddress__Update-title'>Update Address</p>
+                <div className='ModalAddress__Update-nameAndNumber'>
+                    <div className='fullname'>
+                        <label htmlFor='name'>Fullname</label>
+                        <input type="text" name="name"/>
+                    </div>
+                    <div className='phone'>
+                        <label htmlFor='phone'>Phone Number</label>
+                        <input type="text" name="phone"/>
+                    </div>
+                </div>
+                <div className='ModalAddress__Update-chooseCity'>
+                    <label htmlFor=''>City, District, wards</label>
+                    <select className='choose'>
+                        <option>aaa</option>
+                        <option>bbb</option>
+                        <option>ccc</option>
+                    </select>
+                </div>
+                <div className='ModalAddress__Update-specific'>
+                    <label htmlFor='specificAddress'>Specific Address</label>
+                    <input type="text" name="specificAddress"/>
+                </div>
+                <button className='Button__Update'>Update</button>
+            </form>
         </section>
     );
 }

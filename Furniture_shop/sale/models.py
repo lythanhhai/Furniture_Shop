@@ -23,12 +23,9 @@ class Products(models.Model):
     name_product=models.CharField(max_length=100)
     price=models.FloatField()
     desc=models.TextField()
-<<<<<<< HEAD
     url= models.ImageField()
     
-=======
     url= models.ImageField(upload_to=upload_to, blank=True, null=True)
->>>>>>> backend
 class Orders(models.Model):
     id= models.IntegerField(primary_key=True)
     id_person=models.ForeignKey(Customer, on_delete=models.CASCADE)

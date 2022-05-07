@@ -1,19 +1,17 @@
 import React from 'react'
 import Header from '../Component/Header';
-import SignUp from '../Container/SignUp';
 import Footer from '../Component/Footer';
-import ModalCart from '../Component/ModalCart'
+import ViewCart from '../Component/ViewCart';
+import ManageProducts from '../Component/ManageProducts';
 
-
-const SignUp_Page = () => {
+const Cart_Page = () => {
     return(
             <div className="App">
                 <Header />
-                <SignUp />
-                <ModalCart />
+                <ManageProducts />
                 <Footer />
             </div>
     );
 }
 
-export default React.memo(SignUp_Page)
+export default React.memo(Cart_Page)

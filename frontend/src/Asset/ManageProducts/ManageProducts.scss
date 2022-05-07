@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import '../Variables/Variables.scss';
+
+html 
+{
+    font-size: 62.5%;
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+.ManageProducts
+{
+    margin: 0 auto;
+    width: 90%;
+    height: 20rem;
+    margin-top: 2rem;
+    position: relative;
+    .table
+    {
+        border-collapse: collapse;
+        width: 100%;
+
+        th, td
+        {
+            padding: 15px;
+            border: 1px solid rgb(175, 172, 172);
+            text-align: left;
+            font-size: 1.6rem;
+            .edit, .delete
+            {
+                margin: 0 1rem 0 1rem;
+                padding: 1rem;
+                font-weight: 300;
+                outline: none;
+                border: none;
+                background-color: rgb(1,113,229);
+                color: white;
+                font-size: 1.4rem;
+                cursor: pointer;
+            }
+        }
+    }
+    .Button
+    {
+        background-color: rgb(30, 30, 233);
+        padding: 1.5rem 3rem;
+        outline: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin-top: 3rem;
+        cursor: pointer;
+    }
+}
