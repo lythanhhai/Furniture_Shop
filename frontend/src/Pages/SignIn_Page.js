@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../Component/Header';
 import SignIn from '../Container/SignIn';
 import Footer from '../Component/Footer';
+import ModalCart from '../Component/ModalCart'
 
 
 const SignIn_Page = () => {
@@ -9,6 +10,7 @@ const SignIn_Page = () => {
             <div className="App">
                 <Header />
                 <SignIn />
+                <ModalCart />
                 <Footer />
             </div>
     );
