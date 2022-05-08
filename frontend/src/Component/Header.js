@@ -39,6 +39,10 @@ const Header = () => {
                     <i className="fa-brands fa-drupal"></i>
                     <p>Furniture Shop</p>
                 </div>
+                <div className='Header_Search'>
+                    <label htmlFor='search'></label>
+                    <input type="text" placeholder="Enter name product"></input>
+                </div>
                 <div className='Header__Function'>
                     {
                         localStorage.getItem("accessToken") === 'false' ? (<>

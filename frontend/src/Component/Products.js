@@ -10,39 +10,49 @@ import getIndex from '../Action/getIndexProduct'
 
 const Products = () => { 
     const navigate = useNavigate()
-    const [Products, setProducts] = useState([Image, Image, Image, Image, Image, Image])
+    const [Products, setProducts] = useState([Image, Image, Image, Image, Image, Image, Image, Image, Image, Image, Image, Image])
+    const [mouseOver, setMouseOver] = useState(0)
+    const [indexCurrent, setIndexCurrent] = useState(-1)
     const handleMouseOver = (i) => {
-        const animationWork = document.querySelectorAll('.product .image .button_add')
-        const animationWork1 = document.querySelectorAll('.product .image .tool')
+        setMouseOver(1);
+        setIndexCurrent(i)
+        // const animationWork = document.querySelectorAll('.product .image .button_add')
+        // const animationWork1 = document.querySelectorAll('.product .image .tool')
     
-        animationWork[i].style.animationName = 'animationAddToCart';
-        animationWork[i].style.animationDuration = '0.5s';
-        animationWork[i].style.animationFillMode = 'forwards';
-        animationWork[i].style.animationTimingFunction = 'linear';
-        animationWork[i].style.animationIterationCount = '1';
+        // animationWork[i].style.animationName = 'animationAddToCart';
+        // animationWork[i].style.animationDuration = '0.5s';
+        // animationWork[i].style.animationFillMode = 'forwards';
+        // animationWork[i].style.animationTimingFunction = 'linear';
+        // animationWork[i].style.animationIterationCount = '1';
         
-        animationWork1[i].style.animationName = 'animationTool';
-        animationWork1[i].style.animationDuration = '0.5s';
-        animationWork1[i].style.animationFillMode = 'forwards';
-        animationWork1[i].style.animationTimingFunction = 'linear';
-        animationWork1[i].style.animationIterationCount = '1';
+        // animationWork1[i].style.animationName = 'animationTool';
+        // animationWork1[i].style.animationDuration = '0.5s';
+        // animationWork1[i].style.animationFillMode = 'forwards';
+        // animationWork1[i].style.animationTimingFunction = 'linear';
+        // animationWork1[i].style.animationIterationCount = '1';
 
     }
 
     const handleMouseOut = (i) => {
-        const animationWork = document.querySelectorAll('.product .image .button_add')
-        const animationWork1 = document.querySelectorAll('.product .image .tool')
-        animationWork[i].style.animationName = 'animationAddToCart';
-        animationWork[i].style.animationDuration = '0.5s';
-        animationWork[i].style.animationFillMode = 'backwards';
-        animationWork[i].style.animationTimingFunction = 'linear';
-        animationWork[i].style.animationIterationCount = '1';
+        setMouseOver(0);
+        setIndexCurrent(-1)
+        // const animationWork = document.querySelectorAll('.product .image .button_add')
+        // const animationWork1 = document.querySelectorAll('.product .image .tool')
+        // animationWork[i].style.animation = 'none';
+
+        // animationWork1[i].style.animationName = 'none';
+
+        // animationWork[i].style.animationName = 'animationAddToCart';
+        // animationWork[i].style.animationDuration = '0.5s';
+        // animationWork[i].style.animationFillMode = 'backwards';
+        // animationWork[i].style.animationTimingFunction = 'linear';
+        // animationWork[i].style.animationIterationCount = '1';
         
-        animationWork1[i].style.animationName = 'animationTool';
-        animationWork1[i].style.animationDuration = '0.5s';
-        animationWork1[i].style.animationFillMode = 'backwards';
-        animationWork1[i].style.animationTimingFunction = 'linear';
-        animationWork1[i].style.animationIterationCount = '1';
+        // animationWork1[i].style.animationName = 'animationTool';
+        // animationWork1[i].style.animationDuration = '0.5s';
+        // animationWork1[i].style.animationFillMode = 'backwards';
+        // animationWork1[i].style.animationTimingFunction = 'linear';
+        // animationWork1[i].style.animationIterationCount = '1';
 
         // animationWork[i].style.opacity = '0';
         // animationWork[i].style.visibility = 'hidden';
@@ -51,6 +61,7 @@ const Products = () => {
         // animationWork1[i].style.visibility = 'hidden';
 
     }
+
     const dispatch = useDispatch()
     const handleAddToCart= (i) => {
         localStorage.getItem("accessToken") === 'true'
@@ -76,10 +87,10 @@ const Products = () => {
                     <img src={Image} alt='err' onClick={() => {
                     handleClickDetail(index)
             }}></img>
-                    <div className="button_add" onClick={() => {
+                    <div className={mouseOver === 1 && index === indexCurrent ? "button_add" : "button_add_1"} onClick={() => {
                         handleAddToCart(index);
                     }}>Add to cart</div>
-                    <div className='tool'>
+                    <div className={mouseOver === 1 && index === indexCurrent ? "tool" : "tool_1"}>
                         <p className="quick_search" onClick={() => {
                             handleClickDetail(index)
                         }}><FaSearch /></p>
