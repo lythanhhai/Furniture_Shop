@@ -1,13 +1,24 @@
 import React from 'react'
 import '../Asset/ManageProducts/ManageProducts.scss'
 // import ModalAdd from './ModalAdd'
-// import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import ModalAddProduct from './ModalAddProduct'
 // import axios from 'axios'
 
 const ManageProducts = () => 
 {
 
-    // const [showModal, setShowModal] = useState(false) 
+    const [showModalAdd, setShowModalAdd] = useState(false) 
+    const handleShowModalAdd = () => {
+        if(showModalAdd)
+        {
+            setShowModalAdd(false)
+        }
+        else
+        {
+            setShowModalAdd(true)
+        }
+    }
     // const [countClick, setCountClick] = useState(0) 
     // const [departments, setDepartment] = useState([])
 
@@ -84,7 +95,12 @@ const ManageProducts = () =>
 
                     </tbody>
                 </table>
-                <button type='button' className='Button'>Add Product</button>
+                <button type='button' className='Button' onClick={() => {
+                    handleShowModalAdd()
+                }}>Add Product</button>
+                <section className={showModalAdd === true ? 'Modal__Show' : 'Modal__Hide'}>
+                    <ModalAddProduct />
+                </section>
             </section>
         </>
     );

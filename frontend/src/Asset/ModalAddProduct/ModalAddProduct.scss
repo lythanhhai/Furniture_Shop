@@ -22,13 +22,13 @@ body
 
 .Modal__Show
 {
-    width: 40vw;
-    height: 50vh;
+    width: 60vw;
+    height: 70vh;
     background-color: rgb(228, 225, 225);
     color: black;
-    position: absolute;
+    position: fixed;
     left: 50%;
-    top: 90%;
+    top: 50%;
     transform: translate(-50%, -50%);
     display: block;
     h3 

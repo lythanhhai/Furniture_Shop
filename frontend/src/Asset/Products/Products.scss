@@ -36,13 +36,14 @@ body
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 2rem;
-        .product 
+        .product
         {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            
             .image 
             {
                 position: relative;
@@ -66,11 +67,11 @@ body
                     opacity: 0;
                     visibility: hidden;
                     transform: translateY(90%);
-                    // animation-name: animationAddToCart;
-                    // animation-duration: 0.5s;
-                    // animation-fill-mode: forwards;
-                    // animation-timing-function: linear;
-                    // animation-iteration-count: 1;
+                    animation-name: animationAddToCart;
+                    animation-duration: 0.5s;
+                    animation-fill-mode: forwards;
+                    animation-timing-function: linear;
+                    animation-iteration-count: 1;
                     cursor: pointer;
                 }
                 .tool 
@@ -85,11 +86,58 @@ body
                     opacity: 0;
                     visibility: hidden;
                     transform: translateX(140%);
-                    // animation-name: animationTool;
-                    // animation-duration: 0.5s;
-                    // animation-fill-mode: forwards;
-                    // animation-timing-function: linear;
-                    // animation-iteration-count: 1;
+                    animation-name: animationTool;
+                    animation-duration: 0.5s;
+                    animation-fill-mode: forwards;
+                    animation-timing-function: linear;
+                    animation-iteration-count: 1;
+                    .quick_search
+                    {
+                        cursor: pointer;
+                    }
+                    .wishlist
+                    {
+                        cursor: pointer;
+                    }
+                }
+                .button_add_1
+                {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: calc(100% - 2rem);
+                    padding: 1rem;
+                    font-size: 1.6rem;
+                    text-transform: uppercase;
+                    color: white;
+                    background-color: $colorTextGreen;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(90%);
+                    animation-name: 'animationAddToCart';
+                    animation-duration: '0.5s';
+                    animation-fill-mode: 'backwards';
+                    animation-timing-function: 'linear';
+                    animation-iteration-count: '1';
+                    cursor: pointer;
+                }
+                .tool_1
+                {
+                    position: absolute;
+                    top: 5%;
+                    right: 5%;
+                    padding: 0rem 1rem;
+                    font-size: 1.8rem;
+                    color:  rgb(156, 154, 154);
+                    background-color: white;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateX(140%);
+                    animation-name: 'animationTool';
+                    animation-duration: '0.5s';
+                    animation-fill-mode: 'backwards';
+                    animation-timing-function: 'linear';
+                    animation-iteration-count: '1';
                     .quick_search
                     {
                         cursor: pointer;
@@ -117,8 +165,59 @@ body
                 color: $colorTextGreen;
             }
         }
+        // .MouseOver 
+        // {
+        //     .image 
+        //     {
+        //         .button_add
+        //         {
+        //             animation-name: 'animationAddToCart';
+        //             animation-duration: '0.5s';
+        //             animation-fill-mode: 'forwards';
+        //             animation-timing-function: 'linear';
+        //             animation-iteration-count: '1';
+        //         }
+        //         .tool 
+        //         {
+
+        //             animation-name: 'animationTool';
+        //             animation-duration: '0.5s';
+        //             animation-fill-mode: 'forwards';
+        //             animation-timing-function: 'linear';
+        //             animation-iteration-count: '1';
+        //         }
+        //     }
+        // }
+
+        // .MouseOut
+        // {
+        //     .image
+        //     {
+        //         .button_add
+        //         {
+        //             animation-name: 'animationAddToCart';
+        //             animation-duration: '0.5s';
+        //             animation-fill-mode: 'backwards';
+        //             animation-timing-function: 'linear';
+        //             animation-iteration-count: '1';
+        
+                    
+        //         }
+        //         .tool
+        //         {
+        //             animation-name: 'animationTool';
+        //             animation-duration: '0.5s';
+        //             animation-fill-mode: 'backwards';
+        //             animation-timing-function: 'linear';
+        //             animation-iteration-count: '1';
+
+        //         }
+        //     }
+        // }
     }
 }
+
+
 
 @keyframes animationAddToCart {
     0%
