@@ -12,15 +12,19 @@ def apiOverview(request):
 		'Create Customer':'/Customer-create/',
 		'Update Customer':'/Customer-update/<int:pk>/',
 		'Delete Customer':'/Customer-delete/<int:pk>/',
+		'Get Id_Address':'/customer-get/<str:pk/',
 		}
 
 	return Response(api_urls)
 
-@api_view(['GET'])
+
+
+api_view(['GET'])
 def taskList(request):
 	item = Customer.objects.all().order_by('-phone_number')
 	serializer = CustomerSerializer(item,many=True)
 	return Response(serializer.data)
+
 
 @api_view(['GET'])
 def taskDetail(request, pk):
@@ -55,4 +59,10 @@ def taskDelete(request, pk):
 	item.delete()
 
 	return Response('Item succsesfully delete!')
+
+api_view(['GET'])
+def taskGetIdAddress(request,pk):
+	item = Customer.objects.get(phone_number=pk)
+	id_add= item.id_address
+	return Response(id_add)
 

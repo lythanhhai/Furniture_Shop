@@ -14,6 +14,7 @@ urlpatterns = [
 	path('Customer-create/', customer.taskCreate, name="Customer-create"),
 	path('Customer-update/<int:pk>/', customer.taskUpdate, name="Customer-update"),
 	path('Customer-delete/<int:pk>/', customer.taskDelete, name="Customer-delete"),
+	path('Customer-get/<str:pk>/', customer.taskGetIdAddress, name="Customer-get"),
 	###
 	path('History-list/', history.taskList, name="History-list"),
 	path('History-detail/<int:pk>/',  history.taskDetail, name="History-detail"),
