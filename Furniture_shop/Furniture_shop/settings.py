@@ -22,6 +22,12 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
 # URL used to access the media
 MEDIA_URL = '/media/'
 
+# login fb
+SOCIAL_AUTH_FACEBOOK_KEY = '354048556602608'
+SOCIAL_AUTH_FACEBOOK_SECRET = '063df2d8640ef6de499d67e3d2eb9f0f'
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -38,13 +44,6 @@ ALLOWED_HOSTS = ['127.0.0.1',]
 
 INSTALLED_APPS = [
     'sale.apps.SaleConfig',
-<<<<<<< HEAD
-    # 'customer.apps.CustomerConfig',
-    # 'address.apps.AddressConfig',
-    # 'orders.apps.OrdersConfig',
-    # 'product.apps.ProductConfig',
-=======
->>>>>>> backend
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'social_django',
     
 ]
 
@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Furniture_shop.urls'
@@ -79,10 +80,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'Furniture_shop.wsgi.application'
 

@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sale.Serializer.orders import OrdersSerializer
 # Create your views here.
-from sale.models import Orders
+from sale.models import Address, Customer, Orders
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
@@ -16,10 +16,16 @@ def apiOverview(request):
 
 	return Response(api_urls)
 
+@api_view(["GET"])
+def taskViewOrders(request,phone):
+	person= Customer.objects.filter(phone_number=phone).values()
+	address= Address.objects.filter(id=person.phone_number)
+
+
 @api_view(['GET'])
 def taskList(request):
 	item = Orders.objects.all().order_by('-id')
-	serializer = OrdersSerializer(item,many=True)
+	serializer = OrdersSerializer(item, many=True)
 	return Response(serializer.data)
 
 @api_view(['GET'])
@@ -46,7 +52,7 @@ def taskUpdate(request, pk):
 	if serializer.is_valid():
 		serializer.save()
 
-	return Response(serializer.data)
+
 
 
 @api_view(['DELETE'])
@@ -55,4 +61,5 @@ def taskDelete(request, pk):
 	item.delete()
 
 	return Response('Item succsesfully delete!')
+
 
