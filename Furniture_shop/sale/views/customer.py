@@ -2,6 +2,9 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sale.Serializer.customer import CustomerSerializer
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from sale.models import Customer
 @api_view(['GET'])
@@ -13,34 +16,37 @@ def apiOverview(request):
 		'Update Customer':'/Customer-update/<int:pk>/',
 		'Delete Customer':'/Customer-delete/<int:pk>/',
 		'Get Id_Address':'/customer-get/<str:pk/',
-		}
+	}
 
 	return Response(api_urls)
 
 
 
-api_view(['GET'])
+# api_view(['GET'])
 def taskList(request):
-	item = Customer.objects.all().order_by('-phone_number')
-	serializer = CustomerSerializer(item,many=True)
-	return Response(serializer.data)
+	if request.method == "GET":
+		item = Customer.objects.all().order_by('-phone_number')
+		serializer = CustomerSerializer(item, many=True)
+		return JsonResponse(serializer.data, safe= False)
 
 
 @api_view(['GET'])
 def taskDetail(request, pk):
 	item = Customer.objects.get(phone_number=pk)
-	serializer =CustomerSerializer(item,many=False)
+	serializer = CustomerSerializer(item,many=False)
 	return Response(serializer.data)
 
 
 @api_view(['POST'])
+# @csrf_exempt
 def taskCreate(request):
-	serializer = CustomerSerializer(data=request.data)
-
+	customer_data = JSONParser().parse(request)
+	serializer = CustomerSerializer(data= customer_data)
 	if serializer.is_valid():
 		serializer.save()
-
-	return Response(serializer.data)
+		return JsonResponse("Add is successful", safe= False)
+	else:
+		return JsonResponse("Add is unsuccessful", safe= False)
 
 @api_view(['POST'])
 def taskUpdate(request, pk):
