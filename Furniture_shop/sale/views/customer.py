@@ -38,7 +38,7 @@ def taskDetail(request, pk):
 
 
 @api_view(['POST'])
-# @csrf_exempt
+@csrf_exempt
 def taskCreate(request):
 	customer_data = JSONParser().parse(request)
 	serializer = CustomerSerializer(data= customer_data)
