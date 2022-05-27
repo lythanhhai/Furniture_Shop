@@ -9,12 +9,20 @@ const SignUp = () => {
     phone_number: "",
     user_name: "",
     pass_word: "",
-    id_address: null,
+    id_address: 0,
   });
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
+    e.preventDefault()
+    const infor = {
+        ...inforPerson
+    };
+    const headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      }
     axios
-      .post("http://127.0.0.1:8000/sale/Customer-create/", inforPerson)
+      .post("http://127.0.0.1:8000/sale/Customer-create/", infor)
       .then((response) => {
         console.log(response);
       })
@@ -32,8 +40,8 @@ const SignUp = () => {
           name="Register__Left-form"
           method="POST"
           className="Register__Left-form"
-          onSubmit={() => {
-            handleRegister();
+          onSubmit={(e) => {
+            handleRegister(e);
           }}
         >
           <div className="Username">
@@ -84,9 +92,12 @@ const SignUp = () => {
             throughout this website, to manage access to your account, and for
             other purposes described in our <a>privacy policy.</a>
           </p>
-          <button type="submit" className="but_sub">
+          <button type="submit" className="but_sub" >
             Register
           </button>
+          {/* onClick={() => {
+            navigate("/Home/");
+          }} */}
         </form>
       </div>
       <div className="Register__Right">

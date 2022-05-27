@@ -12,6 +12,7 @@ urlpatterns = [
 	path('Customer-list/', customer.taskList, name="Customer-list"),
 	path('Customer-detail/<int:pk>/', customer.taskDetail, name="Customer-detail"),
 	path('Customer-create/', customer.taskCreate, name="Customer-create"),
+	path('Customer-SignIn/', customer.signIn, name="Customer-signin"),
 	path('Customer-update/<int:pk>/', customer.taskUpdate, name="Customer-update"),
 	path('Customer-delete/<int:pk>/', customer.taskDelete, name="Customer-delete"),
 	path('Customer-get/<str:pk>/', customer.taskGetIdAddress, name="Customer-get"),
