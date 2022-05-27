@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from yaml import CUnsafeLoader, serialize
 from sale.Serializer.customer import CustomerSerializer
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
@@ -13,6 +14,7 @@ def apiOverview(request):
 		'List Customer':'/Customer-list/',
 		'Detail View Customer':'/Customer-detail/<int:pk>/',
 		'Create Customer':'/Customer-create/',
+		'Sign In':'/Customer-SignIn/',
 		'Update Customer':'/Customer-update/<int:pk>/',
 		'Delete Customer':'/Customer-delete/<int:pk>/',
 		'Get Id_Address':'/customer-get/<str:pk/',
@@ -35,6 +37,18 @@ def taskDetail(request, pk):
 	item = Customer.objects.get(phone_number=pk)
 	serializer = CustomerSerializer(item,many=False)
 	return Response(serializer.data)
+
+@api_view(['POST'])
+@csrf_exempt
+def signIn(request):
+	input_data = JSONParser().parse(request)
+	customer_list = list(Customer.objects.all())
+	for item in customer_list:
+		if input_data["phone_number"] == item.phone_number and input_data["pass_word"] == item.pass_word:
+			return JsonResponse("SignIn successful", safe= False)
+			
+	
+	return JsonResponse("SignIn unsuccessful", safe= False)
 
 
 @api_view(['POST'])
@@ -67,7 +81,7 @@ def taskDelete(request, pk):
 	return Response('Item succsesfully delete!')
 
 api_view(['GET'])
-def taskGetIdAddress(request,pk):
+def taskGetIdAddress(request, pk):
 	item = Customer.objects.get(phone_number=pk)
 	id_add= item.id_address
 	return Response(id_add)
