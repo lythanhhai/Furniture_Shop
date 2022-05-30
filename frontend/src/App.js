@@ -39,12 +39,20 @@ function App() {
   
   let id = useSelector(state => state.getIndexReducer).index
   const [accessLogin, setAccessLogin] = useState(false)
-  localStorage.setItem("accessToken", accessLogin)
+
+  useEffect(
+    () => {
+      sessionStorage.setItem("accessToken", accessLogin)
+    }, [accessLogin]
+  )
+
   const [isAdmin, setIsAdmin] = useState(false)
   localStorage.setItem("isAdmin", isAdmin)
+
   const Login = () => {
     setAccessLogin(true)
   }
+
   const Logout = () => {
     setAccessLogin(false)
   }
@@ -67,7 +75,7 @@ function App() {
 
             <Route path="/SignIn/"
                    element={
-                    <SignIn_Page />
+                    (sessionStorage.getItem("accessToken") === 'true') ? (<Navigate to="/Home/" />) : (<SignIn_Page />)
                   }>
             </Route>
 

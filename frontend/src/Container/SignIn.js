@@ -1,9 +1,10 @@
 import React from "react";
 import "../Asset/SignInOrUp/SignIn.scss";
 import { FaFacebookSquare, FaGooglePlusSquare } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
-import axios from 'axios'
+import axios from "axios";
+
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const SignIn = () => {
     const infor = {
       ...inforSignIn,
     };
-    console.log(infor)
+    console.log(infor);
     const headers = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -26,6 +27,7 @@ const SignIn = () => {
     axios
       .post("http://127.0.0.1:8000/sale/Customer-SignIn/", infor)
       .then((response) => {
+        sessionStorage.setItem("accessToken", true);
         console.log(response.data);
       })
       .catch((err) => {
@@ -37,31 +39,45 @@ const SignIn = () => {
     <section className="Login">
       <div className="Login__Left">
         <p className="Login__Left-title">LOGIN</p>
-        <form name="Login__Left-form" className="Login__Left-form" onSubmit={(e) => {handleSignIn(e)}} method="POST">
+        <form
+          name="Login__Left-form"
+          className="Login__Left-form"
+          onSubmit={(e) => {
+            handleSignIn(e);
+          }}
+          method="POST"
+        >
           <div className="Phone_number">
             <label htmlFor="phone">Phone number</label>
-            <input type="text" placeholder="" name="phone" onChange={(e) => {
+            <input
+              type="text"
+              placeholder=""
+              name="phone"
+              onChange={(e) => {
                 setInforSignIn({
                   ...inforSignIn,
                   phone_number: e.target.value,
                 });
-              }}/>
+              }}
+            />
           </div>
           <div className="Password">
             <label htmlFor="password">Password</label>
-            <input type="password" placeholder="" name="password" onChange={(e) => {
+            <input
+              type="password"
+              placeholder=""
+              name="password"
+              onChange={(e) => {
                 setInforSignIn({
                   ...inforSignIn,
                   pass_word: e.target.value,
                 });
-              }}/>
+              }}
+            />
           </div>
 
-          <button type="submit" className="but_sub" >
+          <button type="submit" className="but_sub">
             LOG IN
-            {/* onClick={() => {
-            navigate("/Home/");
-          }} */}
           </button>
 
           <div className="Footer_Login">
