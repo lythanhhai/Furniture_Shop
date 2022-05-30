@@ -23,10 +23,10 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
 MEDIA_URL = '/media/'
 
 # login fb
-SOCIAL_AUTH_FACEBOOK_KEY = '354048556602608'
-SOCIAL_AUTH_FACEBOOK_SECRET = '063df2d8640ef6de499d67e3d2eb9f0f'
+# SOCIAL_AUTH_FACEBOOK_KEY = '354048556602608'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '063df2d8640ef6de499d67e3d2eb9f0f'
 
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+# SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'social_django',
     
 ]
 
@@ -83,20 +82,18 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
             ],
         },
     },
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOpenId',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.open_id.OpenIdAuth',
+#     'social_core.backends.google.GoogleOpenId',
+#     'social_core.backends.google.GoogleOAuth2',
+#     'social_core.backends.facebook.FacebookOAuth2',
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 
 WSGI_APPLICATION = 'Furniture_shop.wsgi.application'
 
