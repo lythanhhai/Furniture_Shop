@@ -1,13 +1,13 @@
 from django.urls import path
-from .views import address,customer,history,orders,product
+from .views import customer,history,orders,product
 
 urlpatterns = [
-	path('', address.apiOverview, name="api-overview"),
-	path('Address-list/', address.taskList, name="Address-list"),
-	path('Address-detail/<int:pk>/', address.taskDetail, name="Address-detail"),
-	path('Address-create/', address.taskCreate, name="Address-create"),
-	path('Address-update/<int:pk>/', address.taskUpdate, name="Address-update"),
-	path('Address-delete/<int:pk>/', address.taskDelete, name="Address-delete"),
+	# path('', address.apiOverview, name="api-overview"),
+	# path('Address-list/', address.taskList, name="Address-list"),
+	# path('Address-detail/<int:pk>/', address.taskDetail, name="Address-detail"),
+	# path('Address-create/', address.taskCreate, name="Address-create"),
+	# path('Address-update/<int:pk>/', address.taskUpdate, name="Address-update"),
+	# path('Address-delete/<int:pk>/', address.taskDelete, name="Address-delete"),
 	###
 	path('Customer-list/', customer.taskList, name="Customer-list"),
 	path('Customer-detail/<int:pk>/', customer.taskDetail, name="Customer-detail"),

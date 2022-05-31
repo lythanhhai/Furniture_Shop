@@ -41,7 +41,7 @@ body
         &-form 
         {
             display: flex;
-            flex-direction: column;
+           flex-direction: column;
             width: 100%;
             align-items: center;
             @mixin inputText() {
@@ -55,9 +55,9 @@ body
             {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+               justify-content: center;
                 align-items: flex-start;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
                 width: 90%;
                 input 
                 {
@@ -83,7 +83,7 @@ body
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
                 width: 90%;
                 input 
                 {
@@ -102,14 +102,14 @@ body
                     }
                 }
             }
-
+            
             .Password
             {
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
+               justify-content: center;
                 align-items: flex-start;
-                margin-bottom: 2rem;
+                margin-bottom: 1rem;
                 width: 90%;
                 input 
                 {
@@ -128,23 +128,48 @@ body
                     }
                 }
             }
-
-            .infor 
+            .Address
             {
+                 display: flex;
+                flex-direction: column;
+                // justify-content: center;
+                align-items: flex-start;
+                margin-bottom: 1rem;
                 width: 90%;
-                font-size: 1.3rem;
-                text-align: justify;
-                a 
+                
+                input 
                 {
-                    color: black;
-                    font-weight: 700;
-                    cursor: pointer;
+                    @include inputText();
+                    margin-bottom: 2rem;
                 }
-                margin-bottom: 2rem;
+                label
+                {
+                    margin-bottom: 1rem;
+                    font-size: 1.4rem;
+                    &::after
+                    {
+                        content: "*";
+                        color: red;
+                        margin-left: 0.5rem;
+                    }
+                }
             }
+            // .infor 
+            // {
+            //     width: 90%;
+            //     font-size: 1.3rem;
+            //     text-align: justify;
+            //     a 
+            //     {
+            //         color: black;
+            //         font-weight: 700;
+            //         cursor: pointer;
+            //     }
+            //     margin-bottom: 1rem;
+            // }
 
             .but_sub
-            {
+            {   
                 padding: 1rem 2rem;
                 width: 60%;
                 margin: 0rem auto 2rem;
@@ -189,7 +214,7 @@ body
             display: inline-flex;
             font-size: 1.3rem;
             font-weight: 600;
-            justify-content: center;
+             justify-content: center;
             line-height: 1.8rem;
             padding: 1.2rem 2rem;
             text-align: center;

@@ -9,7 +9,7 @@ const SignUp = () => {
     phone_number: "",
     user_name: "",
     pass_word: "",
-    id_address: 0,
+    address:"",
   });
 
   const handleRegister = (e) => {
@@ -44,6 +44,7 @@ const SignUp = () => {
             handleRegister(e);
           }}
         >
+          
           <div className="Username">
             <label htmlFor="username">Username</label>
             <input
@@ -86,15 +87,31 @@ const SignUp = () => {
               }}
             />
           </div>
-
-          <p className="infor">
+          
+          <div className="Address">
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              placeholder=""
+              name="address"
+              onChange={(e) => {
+                setInforPerson({
+                  ...inforPerson,
+                  address: e.target.value,
+                });
+              }}
+            />
+             <button type="submit" className="but_sub" >
+            Register
+          </button>
+          </div>
+         
+          {/* <p className="infor">
             Your personal data will be used to support your experience
             throughout this website, to manage access to your account, and for
             other purposes described in our <a>privacy policy.</a>
-          </p>
-          <button type="submit" className="but_sub" >
-            Register
-          </button>
+          </p> */}
+          
           {/* onClick={() => {
             navigate("/Home/");
           }} */}

@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sale.Serializer.orders import OrdersSerializer
 # Create your views here.
-from sale.models import Address, Customer, Orders
+from sale.models import  Customer, Orders
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
@@ -19,7 +19,8 @@ def apiOverview(request):
 @api_view(["GET"])
 def taskViewOrders(request,phone):
 	person= Customer.objects.filter(phone_number=phone).values()
-	address= Address.objects.filter(id=person.phone_number)
+	# address= Address.objects.filter(id=person.phone_number)
+	address=person.address
 
 
 @api_view(['GET'])
