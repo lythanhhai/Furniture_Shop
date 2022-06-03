@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from yaml import CUnsafeLoader, serialize
+
 from sale.Serializer.customer import CustomerSerializer
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
