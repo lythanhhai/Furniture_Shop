@@ -1,23 +1,22 @@
 import React from 'react'
 import '../Asset/ManageProducts/ManageProducts.scss'
-// import ModalAdd from './ModalAdd'
 import { useState, useEffect } from 'react'
 import ModalAddProduct from './ModalAddProduct'
+import { useSelector, useDispatch } from 'react-redux'
+import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
 // import axios from 'axios'
 
 const ManageProducts = () => 
 {
-
-    const [showModalAdd, setShowModalAdd] = useState(false) 
+    const showModalAdd = useSelector(state => state.showModalProductReducer).value
+    const dispatch = useDispatch()
     const handleShowModalAdd = () => {
-        if(showModalAdd)
-        {
-            setShowModalAdd(false)
-        }
-        else
-        {
-            setShowModalAdd(true)
-        }
+        alert(showModalAdd)
+        dispatch(showModalProduct())
+    }
+    const handleHideModalAdd = () => {
+        alert(showModalAdd)
+        dispatch(hideModalProduct())
     }
     // const [countClick, setCountClick] = useState(0) 
     // const [departments, setDepartment] = useState([])
@@ -80,7 +79,7 @@ const ManageProducts = () =>
     // })
     return(
         <>
-            <section className='ManageProducts'>
+            <section className='ManageProducts' onClick={() => {}}>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -98,9 +97,12 @@ const ManageProducts = () =>
                 <button type='button' className='Button' onClick={() => {
                     handleShowModalAdd()
                 }}>Add Product</button>
-                <section className={showModalAdd === true ? 'Modal__Show' : 'Modal__Hide'}>
-                    <ModalAddProduct />
-                </section>
+                <div className='wrap__modal'>
+
+                    <section className={showModalAdd === 1 ? 'Modal__Show' : 'Modal__Hide'}>
+                        <ModalAddProduct />
+                    </section>
+                </div>
             </section>
         </>
     );

@@ -21,7 +21,7 @@ class History(models.Model):
     product= models.TextField()
     
 class Products(models.Model):
-    id=models.IntegerField(default= 1, primary_key=True)
+    id=models.AutoField(default= 1, primary_key=True)
     name_product=models.CharField(max_length=100)
     price=models.FloatField()
     desc=models.TextField()
