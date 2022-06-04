@@ -11,11 +11,9 @@ const ManageProducts = () =>
     const showModalAdd = useSelector(state => state.showModalProductReducer).value
     const dispatch = useDispatch()
     const handleShowModalAdd = () => {
-        alert(showModalAdd)
         dispatch(showModalProduct())
     }
     const handleHideModalAdd = () => {
-        alert(showModalAdd)
         dispatch(hideModalProduct())
     }
     // const [countClick, setCountClick] = useState(0) 
@@ -88,6 +86,7 @@ const ManageProducts = () =>
                             <th className='head'>Description</th>
                             <th className='head'>Price</th>
                             <th className='head'>Url</th>
+                            <th className='head'></th>
                         </tr>
                     </thead>
                     <tbody>

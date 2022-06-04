@@ -2,11 +2,21 @@ import React from 'react'
 import '../Asset/ModalAddProduct/ModalAddProduct.scss'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
 
 const ModalAddProduct = () => {
     const [productName, setProductName] = useState({
 
     })
+    const showModalAdd = useSelector(state => state.showModalProductReducer).value
+    const dispatch = useDispatch()
+    const handleShowModalAdd = () => {
+        dispatch(showModalProduct())
+    }
+    const handleHideModalAdd = () => {
+        dispatch(hideModalProduct())
+    }
     // const handleAddDepartment = () => {
     //     const Department = {
     //         DepartmentName: departmentName,
@@ -42,8 +52,10 @@ const ModalAddProduct = () => {
         setSelectedFile(e.target.files[0])
     }
     return(
-        <>
-                <h3>Add Product</h3>
+        <>      <div className='header_add'>
+                    <h3>Add Product</h3>
+                    <p onClick={() => {handleHideModalAdd()}}>close</p>
+                </div>
                 <hr></hr>
                 <form className='Input__Name' onSubmit={() => {}} method="POST">
                     <div className='Input__Name-left'>

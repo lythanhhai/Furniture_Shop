@@ -31,12 +31,26 @@ body
     top: 50%;
     transform: translate(-50%, -50%);
     display: block;
-    h3 
+    .header_add
     {
-        text-align: left;
-        font-size: 1.8rem;
-        font-weight: 600;
-        margin-left: 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        h3 
+        {
+            text-align: left;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-left: 2rem;
+        }
+        p 
+        {
+            text-align: left;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-right: 2rem;
+            cursor: pointer;
+        }
     }
     .Input__Name
     {

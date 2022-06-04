@@ -1,7 +1,7 @@
 from django.db import models
 
 def upload_to(instance, filename):
-    return 'images/{filename}'.format(filename=filename)
+    return 'images/{filename}'.format(filename= filename)
 
 # # Create your models here.
 # class Address(models.Model):
