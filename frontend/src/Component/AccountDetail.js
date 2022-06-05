@@ -2,18 +2,78 @@ import React from 'react'
 import '../Asset/AccountDetail/AccountDetail.scss';
 import axios from "axios";
 import { useState, useEffect } from 'react'
-export const phone = "0985367105";
+export const phone = "0978337444";
 
 const AccountDetail = () => {
 
+ 
+    //
+    const [input, setInput] = useState({
+      CurrentPass: '',
+      NewPass: '',
+      ConfirmPass: ''
+    });
+   
+    const [error, setError] = useState({
+      CurrentPass: '',
+      NewPass: '',
+      ConfirmPass: ''
+    })
+   
+    const onInputChange = e => {
+      const { name, value } = e.target;
+      setInput(prev => ({
+        ...prev,
+        [name]: value
+      }));
+      validateInput(e);
+    }
+   
+    const validateInput = e => {
+      let { name, value } = e.target;
+      setError(prev => {
+        const stateObj = { ...prev, [name]: "" };
+   
+        switch (name) {
+          case "CurrentPass":
+            if (value!== passs) {
+              stateObj[name] = "incorrect password .";
+            }
+            break;
+   
+          case "NewPass":
+            if (!value) {
+              stateObj[name] = "Please enter Password.";
+            } else if (input.ConfirmPass && value !== input.ConfirmPass) {
+              stateObj["ConfirmPass"] = "Password and Confirm Password does not match.";
+            } else {
+              stateObj["ConfirmPass"] = input.ConfirmPass ? "" : error.ConfirmPass;
+            }
+            break;
+   
+          case "ConfirmPass":
+            if (!value) {
+              stateObj[name] = "Please enter Confirm Password.";
+            } else if (input.NewPass && value !== input.NewPass) {
+              stateObj[name] = "Password and Confirm Password does not match.";
+            }
+            break;
+   
+          default:
+            break;
+        }
+   
+        return stateObj;
+      });
+    }
+
+
 
     //
-
-    
     const [inforPerson, setInforPerson] = useState({
         // phone_number: "",
         // user_name: "",
-        // pass_word: "",
+       // pass_word: "",
         // address:"",
       });
     
@@ -37,19 +97,17 @@ const AccountDetail = () => {
       useEffect(() => {
         handleperson()
     },[])
-    const { user_name, phone_number,address} = inforPerson
+    const { user_name, phone_number,address,pass_word} = inforPerson
    //
-   const [infor, setInfor] = useState({
-    phone_number: "",
-    user_name: "",
-    pass_word: "",
-    address:"",
-  });
+   const passs= pass_word;
+  
+  
+   
 
   const handleupdate = (e) => {
     e.preventDefault()
     const infor1 = {
-        ...infor
+        ...inforPerson
     };
     const headers = {
         "Access-Control-Allow-Origin": "*",
@@ -88,60 +146,73 @@ const AccountDetail = () => {
 
                     <div className='Username'>
                         <label htmlFor='Username'>Username</label>
-                        <input type='text' placeholder='' name='Username' value={user_name} disabled
-                        onChange={(e) => {
-                            setInfor({
-                              ...infor,
-                              user_name: {user_name},
-                            });
-                          }}
+                        <input type='text' placeholder='' name='Username' disabled
+                         value={user_name}
+                        
+              
                         />
 
                     </div>
 
                     <div className='Phone'>
                         <label htmlFor='Phone'>Phone</label>
-                        <input type='text' placeholder='' name='Phone' value={phone_number} disabled
-                         onChange={(e) => {
-                            setInfor({
-                              ...infor,
-                              phone_number: {phone_number},
-                            });
-                          }}
+                        <input type='text' placeholder='' name='Phone'  disabled
+                        value={phone_number}
+                       
                         />
                     </div>
                     <div className='Phone'>
                         <label htmlFor='Phone'>Address</label>
-                        <input type='text' placeholder='' name='Phone' value={address}
-                         onChange={(e) => {
-                            setInfor({
-                              ...infor,
-                              address: address,
-                            });
-                          }}
+                        <input type='text' placeholder='' name='Phone' 
+                        value={address}
+                        onChange={(e) => {
+                          setInforPerson({
+                            ...inforPerson,
+                            address: e.target.value,
+                          });
+                        }}
                         />
                     </div>
+
                     <div className='Change__Password'>
                         <div className='CurrentPass'>
                             <label htmlFor='CurrentPass'>Current password (leave blank to leave unchanged)</label>
-                            <input type='password' placeholder='' name='CurrentPass' />
-
+                            <input type='password' placeholder='' name='CurrentPass'
+                            //
+                          //  value={input.pass}
+                            onChange={onInputChange}
+                           onBlur={validateInput}
+                            //
+                            />
+                            {error.CurrentPass && <span className='err'>{error.CurrentPass}</span>}
                         </div>
 
                         <div className='NewPass'>
                             <label htmlFor='NewPass'>New password (leave blank to leave unchanged)</label>
                             <input type='password' placeholder='' name='NewPass'
                             onChange={(e) => {
-                                setInfor({
-                                  ...infor,
+                                setInforPerson({
+                                  ...inforPerson,
                                   pass_word: e.target.value,
                                 });
-                              }}/>
+                              }}
+                              //
+                             // value={input.password}
+                              
+                              onBlur={validateInput}
+                              //
+                              />
+                               {error.NewPass && <span className='err'>{error.NewPass}</span>}
                         </div>
 
                         <div className='ConfirmPass'>
                             <label htmlFor='ConfirmPass'>Confirm new password</label>
-                            <input type='password' placeholder='' name='ConfirmPass'/>
+                            <input type='password' placeholder='' name='ConfirmPass'
+                          //  value={input.confirmPassword}
+                            onChange={onInputChange}
+                            onBlur={validateInput}
+                            />
+                            {error.ConfirmPass && <span className='err'>{error.ConfirmPass}</span>}
                         </div>
                     </div>
                     <button type='submit' className='Account__form-saveChange'>SAVE CHANGE</button>

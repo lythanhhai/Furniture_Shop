@@ -63,15 +63,17 @@ def taskCreate(request):
 		return JsonResponse("Add is unsuccessful", safe= False)
 
 @api_view(['POST'])
+@csrf_exempt
 def taskUpdate(request, pk):
-    
 	item= Customer.objects.get(phone_number=pk)
-	serializer = CustomerSerializer(instance=item, data=request.data)
+	customer_data = JSONParser().parse(request)
+	serializer = CustomerSerializer(instance=item, data=customer_data)
 
 	if serializer.is_valid():
 		serializer.save()
-
-	return Response(serializer.data)
+		return JsonResponse("Add is successful", safe= False)
+	else :
+		return JsonResponse("Add is unsuccessful", safe= False)
 
 
 
