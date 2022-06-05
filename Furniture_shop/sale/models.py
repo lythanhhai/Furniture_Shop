@@ -13,6 +13,7 @@ class Customer(models.Model):
     user_name= models.CharField(max_length= 100)
     pass_word= models.CharField(max_length= 100)
     address= models.TextField(null=True)
+    key_per=models.IntegerField(default= 0)
 class History(models.Model):
     id=models.IntegerField(default= 1, primary_key= True)
     id_person=models.ForeignKey(Customer, on_delete=models.CASCADE)

@@ -103,7 +103,7 @@ function App() {
                   }>
             </Route>
 
-            <Route path={`/my-account/Address`}
+            <Route path={`/my-account/Address/`}
                    element={
                     <Address_Page />
                   }>
