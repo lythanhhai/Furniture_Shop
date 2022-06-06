@@ -17,7 +17,7 @@ def apiOverview(request):
 		'Sign In':'/Customer-SignIn/',
 		'Update Customer':'/Customer-update/<int:pk>/',
 		'Delete Customer':'/Customer-delete/<int:pk>/',
-		'Get Id_Address':'/customer-get/<str:pk/',
+		'Get Address':'/customer-get/<str:pk/',
 	}
 
 	return Response(api_urls)
@@ -63,14 +63,18 @@ def taskCreate(request):
 		return JsonResponse("Add is unsuccessful", safe= False)
 
 @api_view(['POST'])
+@csrf_exempt
 def taskUpdate(request, pk):
-	item=Customer.objects.get(id=pk)
-	serializer =CustomerSerializer(instance=item, data=request.data)
+	item= Customer.objects.get(phone_number=pk)
+	customer_data = JSONParser().parse(request)
+	serializer = CustomerSerializer(instance=item, data=customer_data)
 
 	if serializer.is_valid():
 		serializer.save()
+		return JsonResponse("Add is successful", safe= False)
+	else :
+		return JsonResponse("Add is unsuccessful", safe= False)
 
-	return Response(serializer.data)
 
 
 @api_view(['DELETE'])
@@ -80,9 +84,9 @@ def taskDelete(request, pk):
 
 	return Response('Item succsesfully delete!')
 
-api_view(['GET'])
-def taskGetIdAddress(request, pk):
+@api_view(['GET'])
+def taskGetAddress(request, pk):
 	item = Customer.objects.get(phone_number=pk)
-	id_add= item.id_address
-	return Response(id_add)
+	serializer = CustomerSerializer(item,many=False)
+	return Response(serializer.data)
 
