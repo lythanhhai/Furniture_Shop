@@ -31,45 +31,118 @@ body
     top: 50%;
     transform: translate(-50%, -50%);
     display: block;
-    h3 
+    .header_add
     {
-        text-align: center;
-        font-size: 1.8rem;
-        font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        h3 
+        {
+            text-align: left;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-left: 2rem;
+        }
+        p 
+        {
+            text-align: left;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-right: 2rem;
+            cursor: pointer;
+        }
     }
     .Input__Name
     {
         display: flex;
-        flex-direction: column;    
-        label 
+        flex-direction: row;    
+        // justify-content: flex-start;
+        &-left 
         {
-            padding: 1.5rem 1.5rem 0rem 1.5rem;
-            font-size: 1.7rem;
-            font-weight: 400;
+            display: flex;
+            flex-direction: column;    
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 50%;
+            #label_name
+            {
+                padding: 1.5rem 1rem 0rem 1.5rem;
+                font-size: 1.7rem;
+                font-weight: 400;
+            }
+            #input_name
+            {
+                margin: 1.5rem 1.5rem 0rem 1.5rem;
+                font-size: 1.3rem;
+                padding: 1rem;
+                font-weight: 400;
+                outline: none;
+                border: 1px solid rgb(182, 182, 182);
+                width: 80%;
+            }
+    
+            #label_description
+            {
+                padding: 1.5rem 1rem 0rem 1.5rem;
+                font-size: 1.7rem;
+                font-weight: 400;
+            }
+            #input_description
+            {
+                margin: 1.5rem 1.5rem 0rem 1.5rem;
+                font-size: 1.3rem;
+                padding: 1rem;
+                font-weight: 400;
+                outline: none;
+                border: 1px solid rgb(182, 182, 182);
+                width: 80%;
+            }
+
+            #label_price
+            {
+                padding: 1.5rem 1rem 0rem 1.5rem;
+                font-size: 1.7rem;
+                font-weight: 400;
+            }
+            #input_price
+            {
+                margin: 1.5rem 1.5rem 0rem 1.5rem;
+                font-size: 1.3rem;
+                padding: 1rem;
+                font-weight: 400;
+                outline: none;
+                border: 1px solid rgb(182, 182, 182);
+                width: 80%;
+            }
+
+            button 
+            {
+                margin: 3rem 1.5rem 0rem 13rem;
+                font-size: 1.3rem;
+                padding: 1rem;
+                font-weight: 400;
+                outline: none;
+                border: none;
+                width: 20%;
+                background-color: rgb(1,113,229);
+                color: white;
+                font-size: 1.4rem;
+                cursor: pointer;
+            }
         }
-        input 
+        &-right
         {
-            margin: 1.5rem 1.5rem 0rem 1.5rem;
-            font-size: 1.3rem;
-            padding: 1rem;
-            font-weight: 400;
-            outline: none;
-            border: 1px solid rgb(182, 182, 182);
-            width: 40%;
-        }
-        button 
-        {
-            margin: 1.5rem 1.5rem 0rem 1.5rem;
-            font-size: 1.3rem;
-            padding: 1rem;
-            font-weight: 400;
-            outline: none;
-            // border: 1px solid rgb(182, 182, 182);
-            border: none;
-            width: 10%;
-            background-color: rgb(1,113,229);
-            color: white;
-            font-size: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            img 
+            {
+                width: 70%;
+                height: 70%;
+                object-fit: cover;
+                margin-top: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
         }
     }
 

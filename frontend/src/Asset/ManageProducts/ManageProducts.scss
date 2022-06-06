@@ -18,14 +18,13 @@ body
 {
     margin: 0 auto;
     width: 90%;
-    height: 20rem;
+    height: 46rem;
     margin-top: 2rem;
     position: relative;
     .table
     {
         border-collapse: collapse;
         width: 100%;
-
         th, td
         {
             padding: 15px;
@@ -58,4 +57,14 @@ body
         margin-top: 3rem;
         cursor: pointer;
     }
+
+    // .wrap__modal
+    // {
+    //     width: 100vw;
+    //     height: 100vh;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     // background-color: $backFb;
+    // }
 }

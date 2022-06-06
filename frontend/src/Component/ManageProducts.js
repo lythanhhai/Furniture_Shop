@@ -1,40 +1,37 @@
 import React from 'react'
 import '../Asset/ManageProducts/ManageProducts.scss'
-// import ModalAdd from './ModalAdd'
 import { useState, useEffect } from 'react'
 import ModalAddProduct from './ModalAddProduct'
-// import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
+import axios from 'axios'
 
 const ManageProducts = () => 
 {
-
-    const [showModalAdd, setShowModalAdd] = useState(false) 
+    const showModalAdd = useSelector(state => state.showModalProductReducer).value
+    const dispatch = useDispatch()
     const handleShowModalAdd = () => {
-        if(showModalAdd)
-        {
-            setShowModalAdd(false)
-        }
-        else
-        {
-            setShowModalAdd(true)
-        }
+        dispatch(showModalProduct())
+    }
+    const handleHideModalAdd = () => {
+        dispatch(hideModalProduct())
     }
     // const [countClick, setCountClick] = useState(0) 
-    // const [departments, setDepartment] = useState([])
+    const [products, setProducts] = useState([])
 
-    // const getDepartment = () => {
-    //     axios.get('http://localhost:8000/Department/')
-    //     .then(response => response.data)
-    //     .then(data => {
-    //         //console.log(data); 
-    //         setDepartment(data)
-    //     })
-    //     .catch(err => {alert(err)})
-    // }
+    const getProducts = () => {
+        axios.get('http://127.0.0.1:8000/sale/Product-list/')
+        .then(response => response.data)
+        .then(data => {
 
-    // useEffect(() => {
-    //     getDepartment()
-    // },[])
+            setProducts(data)
+        })
+        .catch(err => {alert(err)})
+    }   
+
+    useEffect(() => {
+        getProducts()
+    }, [])
 
     // const handleAdd = () => {
     //     if(countClick === 0)
@@ -61,26 +58,29 @@ const ManageProducts = () =>
     //     .catch(err => {console.log(err)})
     // }
 
-    // const dataDepartmentElement = departments.map((department, index) => {
-    //     const {DepartmentId, DepartmentName} = department
-    //     return(
-    //             <tr key={index}>
-    //                 <td className='data'>{DepartmentId}</td>
-    //                 <td className='data'>{DepartmentName}</td>
-    //                 <td className='data'>
-    //                     <button className='edit'>
-    //                         Edit
-    //                     </button>
-    //                     <button className='delete' onClick={() => {handleDelete(index)}}>
-    //                         Delete
-    //                     </button>
-    //                 </td>
-    //             </tr>
-    //     );
-    // })
+    const dataProductElement = products.map((product, index) => {
+        const {id, name_product, price, desc, url} = product
+        return(
+                <tr key={index}>
+                    <td className='data'>{id}</td>
+                    <td className='data'>{name_product}</td>
+                    <td className='data'>{desc}</td>
+                    <td className='data'>{price}</td>
+                    <td className='data'>{url}</td>
+                    <td className='data'>
+                        <button className='edit'>
+                            Edit
+                        </button>
+                        <button className='delete' onClick={() => {}}>
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+        );
+    })
     return(
         <>
-            <section className='ManageProducts'>
+            <section className='ManageProducts' onClick={() => {}}>
                 <table className='table'>
                     <thead>
                         <tr>
@@ -89,18 +89,22 @@ const ManageProducts = () =>
                             <th className='head'>Description</th>
                             <th className='head'>Price</th>
                             <th className='head'>Url</th>
+                            <th className='head'></th>
                         </tr>
                     </thead>
                     <tbody>
-
+                            {dataProductElement}
                     </tbody>
                 </table>
                 <button type='button' className='Button' onClick={() => {
                     handleShowModalAdd()
                 }}>Add Product</button>
-                <section className={showModalAdd === true ? 'Modal__Show' : 'Modal__Hide'}>
-                    <ModalAddProduct />
-                </section>
+                <div className='wrap__modal'>
+
+                    <section className={showModalAdd === 1 ? 'Modal__Show' : 'Modal__Hide'}>
+                        <ModalAddProduct />
+                    </section>
+                </div>
             </section>
         </>
     );
