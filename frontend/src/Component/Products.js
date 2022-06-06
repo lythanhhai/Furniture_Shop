@@ -7,10 +7,11 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { showModalCart } from '../Action/showModal';
 import getIndex from '../Action/getIndexProduct'
+import axios from 'axios'
 
 const Products = () => { 
     const navigate = useNavigate()
-    const [Products, setProducts] = useState([Image, Image, Image, Image, Image, Image, Image, Image, Image, Image, Image, Image])
+    const [Products, setProducts] = useState([])
     const [mouseOver, setMouseOver] = useState(0)
     const [indexCurrent, setIndexCurrent] = useState(-1)
     const handleMouseOver = (i) => {
@@ -62,6 +63,19 @@ const Products = () => {
 
     }
 
+    const getProducts = () => {
+        axios.get('http://127.0.0.1:8000/sale/Product-list/')
+        .then(response => response.data)
+        .then(data => {
+
+            setProducts(data)
+        })
+        .catch(err => {alert(err)})
+    }   
+    useEffect(() => {
+        getProducts()
+    }, [])
+
     const dispatch = useDispatch()
     const handleAddToCart= (i) => {
         localStorage.getItem("accessToken") === 'true'
@@ -75,7 +89,7 @@ const Products = () => {
             dispatch(getIndex(index))
     }
     const elementProducts = Products.map((Product, index) => {
-        const {} = Product
+        const {id, name_product, price, desc, url} = Product
         return(
             <div className="product" key={index} onMouseOver={() => {
                 handleMouseOver(index)
@@ -84,7 +98,7 @@ const Products = () => {
                 handleMouseOut(index)
             }} >
                 <div className="image">
-                    <img src={Image} alt='err' onClick={() => {
+                    <img src={'http://127.0.0.1:8000' + url} alt='err' onClick={() => {
                     handleClickDetail(index)
             }}></img>
                     <div className={mouseOver === 1 && index === indexCurrent ? "button_add" : "button_add_1"} onClick={() => {
@@ -99,13 +113,13 @@ const Products = () => {
                 </div>
                 <p className="name" onClick={() => {
                     handleClickDetail(index)
-            }}>3D Geometric Candlestick</p>
+            }}>{name_product}</p>
                 <span className="category" onClick={() => {
                     handleClickDetail(index)
             }}>Decor</span>
                 <p className="price" onClick={() => {
                     handleClickDetail(index)
-            }}>$232</p>
+            }}>{price}</p>
 
             </div>
         )

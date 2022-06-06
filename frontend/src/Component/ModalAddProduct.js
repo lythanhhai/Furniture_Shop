@@ -61,6 +61,7 @@ const ModalAddProduct = () => {
             url: selectedFile
         })
 
+        console.log(selectedFile)
         const objectUrl = URL.createObjectURL(selectedFile)
         setPreview(objectUrl)
 
