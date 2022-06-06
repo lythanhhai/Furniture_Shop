@@ -2,6 +2,9 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sale.Serializer.product import ProductsSerializer
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
 # Create your views here.
 from sale.models import Products
 @api_view(['GET'])
@@ -28,15 +31,26 @@ def taskDetail(request, pk):
 	serializer =ProductsSerializer(item,many=False)
 	return Response(serializer.data)
 
-
 @api_view(['POST'])
 def taskCreate(request):
-	serializer = ProductsSerializer(data=request.data)
+	serializer = ProductsSerializer(data= request.data)
 
 	if serializer.is_valid():
 		serializer.save()
+		return Response("Add Product successful")
+	else:
+		return Response("Add Product unsuccessful")
 
-	return Response(serializer.data)
+# @api_view(['POST'])
+# @csrf_exempt
+# def taskCreate(request):
+# 	product_data = JSONParser().parse(request)
+# 	serializer = ProductsSerializer(data= product_data)
+# 	if serializer.is_valid():
+# 		serializer.save()
+# 		return JsonResponse("Add is successful", safe= False)
+# 	else:
+# 		return JsonResponse("Add is unsuccessful", safe= False)
 
 @api_view(['POST'])
 def taskUpdate(request, pk):
