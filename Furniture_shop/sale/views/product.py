@@ -27,8 +27,8 @@ def taskList(request):
 
 @api_view(['GET'])
 def taskDetail(request, pk):
-	item = Products.objects.get(id=pk)
-	serializer =ProductsSerializer(item,many=False)
+	item = Products.objects.get(id= pk)
+	serializer = ProductsSerializer(item, many= False)
 	return Response(serializer.data)
 
 @api_view(['POST'])
