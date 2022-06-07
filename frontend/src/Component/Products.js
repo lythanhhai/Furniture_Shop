@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { showModalCart } from '../Action/showModal';
 import getIndex from '../Action/getIndexProduct'
 import axios from 'axios'
+import getIdProductAction from '../Action/getIdProductAction';
 
 const Products = () => { 
     const navigate = useNavigate()
@@ -84,41 +85,43 @@ const Products = () => {
 
     }
 
-    const handleClickDetail = (index) => {
-            navigate(`/Detail/${index}`)
-            dispatch(getIndex(index))
+    const handleClickDetail = (id) => {
+            dispatch(getIdProductAction(id))
+            navigate(`/Detail/${id}`)
+            dispatch(getIndex(id))
     }
+    
     const elementProducts = Products.map((Product, index) => {
         const {id, name_product, price, desc, url} = Product
         return(
-            <div className="product" key={index} onMouseOver={() => {
-                handleMouseOver(index)
+            <div className="product" key={id} onMouseOver={() => {
+                handleMouseOver(id)
     
             }} onMouseOut={() => {
-                handleMouseOut(index)
+                handleMouseOut(id)
             }} >
                 <div className="image">
                     <img src={'http://127.0.0.1:8000' + url} alt='err' onClick={() => {
-                    handleClickDetail(index)
+                    handleClickDetail(id)
             }}></img>
-                    <div className={mouseOver === 1 && index === indexCurrent ? "button_add" : "button_add_1"} onClick={() => {
+                    <div className={mouseOver === 1 && id === indexCurrent ? "button_add" : "button_add_1"} onClick={() => {
                         handleAddToCart(index);
                     }}>Add to cart</div>
-                    <div className={mouseOver === 1 && index === indexCurrent ? "tool" : "tool_1"}>
+                    <div className={mouseOver === 1 && id === indexCurrent ? "tool" : "tool_1"}>
                         <p className="quick_search" onClick={() => {
-                            handleClickDetail(index)
+                            handleClickDetail(id)
                         }}><FaSearch /></p>
                         <p className="wishlist"><FaRegHeart /></p>
                     </div>
                 </div>
                 <p className="name" onClick={() => {
-                    handleClickDetail(index)
+                    handleClickDetail(id)
             }}>{name_product}</p>
                 <span className="category" onClick={() => {
-                    handleClickDetail(index)
+                    handleClickDetail(id)
             }}>Decor</span>
                 <p className="price" onClick={() => {
-                    handleClickDetail(index)
+                    handleClickDetail(id)
             }}>{price}</p>
 
             </div>

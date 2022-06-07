@@ -3,6 +3,9 @@ import '../Asset/Detail/Detail.scss'
 import { useNavigate } from 'react-router-dom'
 import Image from '../Public/Image/empty-cart.png'
 import { Navigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Detail = () => {
     const navigate = useNavigate()
@@ -12,6 +15,14 @@ const Detail = () => {
                 <img src={image} alt="err" className='image'></img>
             </>
         );
+    })
+
+    const [item, setItem] = useState({
+        id: 0,
+        name_product: "",
+        price: 0,
+        desc: "",
+        url: "",
     })
     const handleMove = (e) => {
         const x = e.clientX - e.target.offsetLeft;
@@ -28,11 +39,38 @@ const Detail = () => {
         img.style.transformOrigin = 'center';
         img.style.transform = "scale(1)";
     }
+
     const handleNavigateCart = () => {
         localStorage.getItem("accessToken") === 'true'
         ? navigate('/ViewCart/')
         : navigate('/SignIn/')
     }
+
+    const idOfProduct = useSelector(state => state.getIdProductReducer).id
+
+    const getDetailProduct = () => {
+        axios.get(`http://127.0.0.1:8000/sale/Product-detail/${idOfProduct}/`)
+        .then(res => {
+            return res.data
+        })
+        .then(data => {
+            setItem({
+                id: idOfProduct,
+                name_product: data["name_product"],
+                price: data["price"],
+                desc: data["desc"],
+                url: data["url"],
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    useEffect(() => {
+        getDetailProduct()
+    }, [])
+
     return(
         <section className='Detail'>
             <div className='Detail__ListImage'>
@@ -42,14 +80,14 @@ const Detail = () => {
                 handleLeave(e)
             }}>
 
-                <img src={Image} alt="err" className='image' onMouseMove={(e) => {
+                <img src={"http://127.0.0.1:8000" + item.url} alt="err" className='image' onMouseMove={(e) => {
                 handleMove(e)
             }}></img>
             </div>
             <div className='Detail__info'>
-                <p className='Detail__info-name'>Wall Stickers Clock</p>
-                <p className='Detail__info-price'>$210.00</p>
-                <p className='Detail__info-desc'>A ac scelerisque adipiscing a vel augue vestibulum facilisi id aptent justo sociis neque a inceptos curae.A dis convallis natoque a sem ad adipiscing at per ullamcorper urna quam eleifend feugiat ut nostra nibh sem aliquam odio.</p>
+                <p className='Detail__info-name'>{item.name_product}</p>
+                <p className='Detail__info-price'>${item.price}</p>
+                <p className='Detail__info-desc'>{item.desc}</p>
                 <div className='Detail__info-add'>
                     <div className='number'>
                         <button className='but_sub' type='button'>
