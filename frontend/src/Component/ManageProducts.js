@@ -2,6 +2,7 @@ import React from 'react'
 import '../Asset/ManageProducts/ManageProducts.scss'
 import { useState, useEffect } from 'react'
 import ModalAddProduct from './ModalAddProduct'
+import ModalEditProduct from './ModalEditProduct'
 import { useSelector, useDispatch } from 'react-redux'
 import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
 import axios from 'axios'
@@ -13,6 +14,7 @@ const ManageProducts = () =>
     const handleShowModalAdd = () => {
         dispatch(showModalProduct())
     }
+    
     const handleHideModalAdd = () => {
         dispatch(hideModalProduct())
     }
@@ -33,30 +35,22 @@ const ManageProducts = () =>
         getProducts()
     }, [])
 
-    // const handleAdd = () => {
-    //     if(countClick === 0)
-    //     {
-    //         setShowModal(true)
-    //         setCountClick(1)
-    //     }
-    //     else
-    //     {
-    //         setShowModal(false)
-    //         setCountClick(0)
-    //     }
-    // }
-    // const handleDelete = (index) => {
-    //     alert("a")
-    //     axios.delete(`http://localhost:8000/Department/${index}/`)
-    //     .then(res =>
-    //         {
-    //             console.log(res)
-    //             console.log(res.data)
-    //         }
+    const getid=(id)=>
+    {
+        return id;
+    }
+    const handleDelete = (id) => {
+        
+        axios.delete(`http://127.0.0.1:8000/sale/Product-delete/${id}/`)
+        .then(res =>
+            {
+                console.log(res)
+                console.log(res.data)
+            }
             
-    //     )
-    //     .catch(err => {console.log(err)})
-    // }
+        )
+        .catch(err => {console.log(err)})
+    }
 
     const dataProductElement = products.map((product, index) => {
         const {id, name_product, price, desc, url} = product
@@ -68,10 +62,17 @@ const ManageProducts = () =>
                     <td className='data'>{price}</td>
                     <td className='data'>{url}</td>
                     <td className='data'>
-                        <button className='edit'>
+                        <button    className='edit' 
+                        onClick={() => {
+                            handleShowModalAdd()
+                        }}>
                             Edit
                         </button>
-                        <button className='delete' onClick={() => {}}>
+
+                       
+                        <button className='delete' onClick={() => {
+                            handleDelete( Number(id))
+                        }}>
                             Delete
                         </button>
                     </td>
@@ -102,7 +103,7 @@ const ManageProducts = () =>
                 <div className='wrap__modal'>
 
                     <section className={showModalAdd === 1 ? 'Modal__Show' : 'Modal__Hide'}>
-                        <ModalAddProduct />
+                        <ModalEditProduct />
                     </section>
                 </div>
             </section>
