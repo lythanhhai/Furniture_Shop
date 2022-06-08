@@ -4,8 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
-import { ManageProducts } from './ManageProducts'
-export const id_pro= "17";
+export const id_pro= 17;
 const ModalEditProduct = () => {
     const [productName, setProductName] = useState({
        
