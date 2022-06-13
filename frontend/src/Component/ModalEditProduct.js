@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
 export const id_pro= 17;
 const ModalEditProduct = () => {
-    const [productName, setProductName] = useState({
+    const [productName1, setProductName1] = useState({
        
     })
   
@@ -25,14 +25,14 @@ const ModalEditProduct = () => {
     }
     // add product
 
-    const handleAddProduct = () => {
+    const handleAddProduct1= () => {
        
        
         axios
           .get(`http://127.0.0.1:8000/sale/Product-detail/${id_pro}/`)
           .then((response) => {
             // console.log(response);
-            setProductName(response.data)
+            setProductName1(response.data)
           })
           .catch((err) => {
             console.log(err);
@@ -40,17 +40,17 @@ const ModalEditProduct = () => {
       };
     
       useEffect(() => {
-        handleAddProduct()
+        handleAddProduct1()
     },[])
-    const { name_product, price,desc,url} = productName
+    const { name_product, price,desc,url} = productName1
     
     useEffect(() => {
         if (!selectedFile) {
             setPreview(undefined)
             return
         }
-        setProductName({
-            ...productName,
+        setProductName1({
+            ...productName1,
             url: selectedFile
         })
 
@@ -80,17 +80,17 @@ const ModalEditProduct = () => {
     //
 
 
-    const handleupdate = (e) => {
+    const handleupdate1 = (e) => {
         e.preventDefault()
-        const product= {
-            ...productName
+        const product1= {
+            ...productName1
         };
         const headers = {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
           }
         axios
-          .post(`http://127.0.0.1:8000/sale/Product-update/${id_pro}/`, product)
+          .post(`http://127.0.0.1:8000/sale/Product-update/${id_pro}/`, product1)
           .then((response) => {
             console.log(response);
           })
@@ -104,30 +104,32 @@ const ModalEditProduct = () => {
                     <p onClick={() => {handleHideModalAdd()}}>close</p>
                 </div>
                 <hr></hr>
-                <form className='Input__Name' ref={form} onSubmit={(e) => {handleupdate(e)}}>
+                <form className='Input__Name' ref={form} 
+                method="POST"
+                onSubmit={(e) => {handleupdate1(e)}}>
                     <div className='Input__Name-left'>
                         <label htmlFor='product__name' id="label_name">Product Name: </label>
                         <input name="product__name" id="input_name" placeholder="Enter Product Name"
                         value={name_product}
                          onChange={
-                            (e) => {setProductName({
-                                ...productName,
+                            (e) => {setProductName1({
+                                ...productName1,
                                 name_product: e.target.value
                             })}
                             }></input>
                         <label htmlFor='product__desc' id="label_description">Description: </label>
                         <input name="product__desc" id="input_description" placeholder="Enter Description" 
                         value={desc} onChange={
-                            (e) => {setProductName({
-                                ...productName,
+                            (e) => {setProductName1({
+                                ...productName1,
                                 desc: e.target.value
                             })}
                             }></input>
                         <label htmlFor='product__price' id="label_price">Price: </label>
                         <input name="product__price" id="input_price" placeholder="Enter Price"
                         value={price} onChange={
-                            (e) => {setProductName({
-                                ...productName,
+                            (e) => {setProductName1({
+                                ...productName1,
                                 price: parseFloat(e.target.value)
                             })}
                             }></input>
@@ -138,8 +140,8 @@ const ModalEditProduct = () => {
                         {selectedFile !== undefined ? <img src={preview} /> : <img src={`http://127.0.0.1:8000${url}`} alt="err"></img> }
                         <input type='file' id="input_file" onChange={
                             (e) => {
-                                setProductName({
-                                    ...productName,
+                                setProductName1({
+                                    ...productName1,
                                     url:onSelectFile(e)
                                 })}
                             }></input>
