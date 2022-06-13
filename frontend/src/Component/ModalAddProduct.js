@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { showModalProduct, hideModalProduct, hideModalUpdate, showModalUpdate } from '../Action/showModalProduct'
 
-const ModalAddProduct = () => {
+const ModalAddProduct = ({getCheckAddSuccess}) => {
     const [productName, setProductName] = useState({
         name_product: "",
         price: 0,
@@ -44,6 +44,7 @@ const ModalAddProduct = () => {
             headers: { "Content-Type": "multipart/form-data" },
           }).then(res => {
               //handle success
+              getCheckAddSuccess(1)
               console.log(res);
             }).catch(err => {
               //handle error
@@ -69,10 +70,10 @@ const ModalAddProduct = () => {
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        // console.log(productName)
-    }, [productName])
+    //     // console.log(productName)
+    // }, [productName])
 
     const onSelectFile = e => {
         if (!e.target.files || e.target.files.length === 0) {

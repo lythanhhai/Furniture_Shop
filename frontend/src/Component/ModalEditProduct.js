@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
 export const id_pro = 17;
-const ModalEditProduct = () => {
+const ModalEditProduct = ({getCheckEditSuccess, id}) => {
     const [productName, setProductName] = useState({
        
     })
@@ -25,11 +25,11 @@ const ModalEditProduct = () => {
     }
     // add product
 
-    const handleAddProduct = () => {
+    const handleGetDetailProduct = () => {
        
-       
+        alert(id);
         axios
-          .get(`http://127.0.0.1:8000/sale/Product-detail/${id_pro}/`)
+          .get(`http://127.0.0.1:8000/sale/Product-detail/${id}/`)
           .then((response) => {
             // console.log(response);
             setProductName(response.data)
@@ -39,10 +39,11 @@ const ModalEditProduct = () => {
           });
       };
     
-      useEffect(() => {
-        handleAddProduct()
-    },[])
-    const { name_product, price,desc,url} = productName
+    useEffect(() => {
+        handleGetDetailProduct()
+    }, [id])
+
+    const { name_product, price, desc, url} = productName
     
     useEffect(() => {
         if (!selectedFile) {
@@ -90,8 +91,9 @@ const ModalEditProduct = () => {
             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
           }
         axios
-          .post(`http://127.0.0.1:8000/sale/Product-update/${id_pro}/`, product)
+          .post(`http://127.0.0.1:8000/sale/Product-update/${id}/`, product)
           .then((response) => {
+            getCheckEditSuccess(1)
             console.log(response);
           })
           .catch((err) => {

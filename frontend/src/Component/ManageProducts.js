@@ -4,13 +4,17 @@ import { useState, useEffect } from 'react'
 import ModalAddProduct from './ModalAddProduct'
 import ModalEditProduct from './ModalEditProduct'
 import { useSelector, useDispatch } from 'react-redux'
-import { showModalProduct, hideModalProduct, hideModalUpdate, showModalUpdate } from '../Action/showModalProduct'
+import { showModalProduct, hideModalProduct, showModalUpdate, hideModalUpdate } from '../Action/showModalProduct'
 import axios from 'axios'
 
 const ManageProducts = () => 
 {
     const showModalAdd = useSelector(state => state.showModalProductReducer).value
-    const showModalUpdate = useSelector(state => state.showModalProductReducer).value_edit
+    const ModalUpdate = useSelector(state => state.showModalProductReducer).value_edit
+    const [checkAdd, setCheckAdd] = useState(0)
+    const [checkEdit, setCheckEdit] = useState(0)
+    const [idClick, setIdClick] = useState(-1)
+    var id_current = -1
     const dispatch = useDispatch()
     const handleShowModalAdd = () => {
         dispatch(showModalProduct())
@@ -27,6 +31,29 @@ const ManageProducts = () =>
     const handleHideModalUpdate = () => {
         dispatch(hideModalUpdate())
     }
+
+    const getCheckAddSuccess = (data) => {
+        // return 
+        if(data === 1)
+        {
+            setCheckAdd(1)
+        }
+        else
+        {
+            setCheckAdd(0)
+        }
+    }
+    const getCheckEditSuccess = (data) => {
+        // return 
+        if(data === 1)
+        {
+            setCheckEdit(1)
+        }
+        else
+        {
+            setCheckEdit(0)
+        }
+    }
     // const [countClick, setCountClick] = useState(0) 
     const [products, setProducts] = useState([])
 
@@ -42,12 +69,17 @@ const ManageProducts = () =>
 
     useEffect(() => {
         getProducts()
-    }, [])
+    }, [checkAdd, checkEdit])
 
-    const getid=(id)=>
+    const getid = (id)=>
     {
         return id;
     }
+
+    useEffect(() => {
+        setIdClick(id_current)
+    })
+
     const handleDelete = (id) => {
         
         axios.delete(`http://127.0.0.1:8000/sale/Product-delete/${id}/`)
@@ -73,6 +105,8 @@ const ManageProducts = () =>
                     <td className='data'>
                         <button    className='edit' 
                         onClick={() => {
+                            // alert(id_click)
+                            id_current = parseInt(id)
                             handleShowModalUpdate();
                            
                         }}>
@@ -112,12 +146,12 @@ const ManageProducts = () =>
                 }}>Add Product</button>
                 <div className='wrap__modal'>
 
-                    <section className={showModalAdd === 1 && showModalUpdate === 0 ? 'Modal__Show' : 'Modal__Hide'}>
-                        <ModalAddProduct />
+                    <section className={showModalAdd === 1 && ModalUpdate === 0 ? 'Modal__Show' : 'Modal__Hide'}>
+                        <ModalAddProduct getCheckAddSuccess={getCheckAddSuccess}/>
                     </section>
 
-                    <section className={showModalAdd === 0 && showModalUpdate === 1 ? 'Modal__Show' : "Modal__Hide"}>
-                        <ModalEditProduct />
+                    <section className={showModalAdd === 0 && ModalUpdate === 1 ? 'Modal__Show' : "Modal__Hide"}>
+                        <ModalEditProduct getCheckEditSuccess={getCheckEditSuccess} id={idClick} />
                     </section>
                 </div>
             </section>
