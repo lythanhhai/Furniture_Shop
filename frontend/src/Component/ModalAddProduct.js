@@ -3,7 +3,7 @@ import '../Asset/ModalAddProduct/ModalAddProduct.scss'
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
+import { showModalProduct, hideModalProduct, hideModalUpdate, showModalUpdate } from '../Action/showModalProduct'
 
 const ModalAddProduct = () => {
     const [productName, setProductName] = useState({

@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react'
 import ModalAddProduct from './ModalAddProduct'
 import ModalEditProduct from './ModalEditProduct'
 import { useSelector, useDispatch } from 'react-redux'
-import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
+import { showModalProduct, hideModalProduct, hideModalUpdate, showModalUpdate } from '../Action/showModalProduct'
 import axios from 'axios'
 
 const ManageProducts = () => 
 {
     const showModalAdd = useSelector(state => state.showModalProductReducer).value
+    const showModalUpdate = useSelector(state => state.showModalProductReducer).value_edit
     const dispatch = useDispatch()
     const handleShowModalAdd = () => {
         dispatch(showModalProduct())
@@ -17,6 +18,14 @@ const ManageProducts = () =>
     
     const handleHideModalAdd = () => {
         dispatch(hideModalProduct())
+    }
+
+    const handleShowModalUpdate = () => {
+        dispatch(showModalUpdate())
+    }
+    
+    const handleHideModalUpdate = () => {
+        dispatch(hideModalUpdate())
     }
     // const [countClick, setCountClick] = useState(0) 
     const [products, setProducts] = useState([])
@@ -64,7 +73,8 @@ const ManageProducts = () =>
                     <td className='data'>
                         <button    className='edit' 
                         onClick={() => {
-                            handleShowModalAdd()
+                            handleShowModalUpdate();
+                           
                         }}>
                             Edit
                         </button>
@@ -102,7 +112,11 @@ const ManageProducts = () =>
                 }}>Add Product</button>
                 <div className='wrap__modal'>
 
-                    <section className={showModalAdd === 1 ? 'Modal__Show' : 'Modal__Hide'}>
+                    <section className={showModalAdd === 1 && showModalUpdate === 0 ? 'Modal__Show' : 'Modal__Hide'}>
+                        <ModalAddProduct />
+                    </section>
+
+                    <section className={showModalAdd === 0 && showModalUpdate === 1 ? 'Modal__Show' : "Modal__Hide"}>
                         <ModalEditProduct />
                     </section>
                 </div>

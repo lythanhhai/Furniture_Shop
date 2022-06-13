@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { showModalProduct, hideModalProduct } from '../Action/showModalProduct'
-export const id_pro= 17;
+export const id_pro = 17;
 const ModalEditProduct = () => {
     const [productName, setProductName] = useState({
        
@@ -100,7 +100,7 @@ const ModalEditProduct = () => {
       };
     return(
         <>      <div className='header_add'>
-                    <h3>Add Product</h3>
+                    <h3>Edit Product</h3>
                     <p onClick={() => {handleHideModalAdd()}}>close</p>
                 </div>
                 <hr></hr>
