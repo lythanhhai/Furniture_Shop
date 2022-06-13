@@ -38,11 +38,11 @@ function App() {
   }, [handleNavigation]);
   
   let id = useSelector(state => state.getIndexReducer).index
-  const [accessLogin, setAccessLogin] = useState(false)
+  const [accessLogin, setAccessLogin] = useState(true)
 
   useEffect(
     () => {
-      sessionStorage.setItem("accessToken", accessLogin)
+      localStorage.setItem("accessToken", accessLogin)
     }, [accessLogin]
   )
 
@@ -63,55 +63,56 @@ function App() {
 
             <Route path=""
                    element={
-                    <Home />
+                    (localStorage.getItem("accessToken") === 'true') ? (<Home />)  : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path="/Home/"
                    element={
-                    <Home />
+                    (localStorage.getItem("accessToken") === 'true') ? (<Home />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path="/SignIn/"
                    element={
-                    (sessionStorage.getItem("accessToken") === 'true') ? (<Navigate to="/Home/" />) : (<SignIn_Page />)
-                  }>
+                    (localStorage.getItem("accessToken") === 'true') ? (<Navigate to="/Home/" />) : (<SignIn_Page />)
+                  }>   
             </Route>
 
             <Route path="/SignUp/"
                    element={
-                    <SignUp_Page />
+                    (localStorage.getItem("accessToken") === 'true') ? (<Navigate to="/Home/" />) : (<SignUp_Page />)
                   }>
             </Route>
 
             <Route path={`/Detail/${id}`}
                    element={
-                    <Detail_Page />
+                    (localStorage.getItem("accessToken") === 'true') ? (<Detail_Page />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path={`/ViewCart/`}
                    element={
-                    <Cart_Page />
+                    (localStorage.getItem("accessToken") === 'true') ? (<Cart_Page />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path={`/my-account/AccountDetail`}
                    element={
-                    <AccountDetail_Page />
+                    (localStorage.getItem("accessToken") === 'true') ? (<AccountDetail_Page />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path={`/my-account/Address/`}
                    element={
-                    <Address_Page />
+                    (localStorage.getItem("accessToken") === 'true') ? (<Address_Page />) : (<SignIn_Page />)
+    
                   }>
             </Route>
 
             <Route path={`/admin/manage-products`}
                    element={
-                    <ManageProducts_Pages />
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'true') ? (<ManageProducts_Pages />) : (<SignIn_Page />)
                   }>
             </Route>
 

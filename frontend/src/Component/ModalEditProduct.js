@@ -27,7 +27,7 @@ const ModalEditProduct = ({getCheckEditSuccess, id}) => {
 
     const handleGetDetailProduct = () => {
        
-        alert(id);
+        // alert(id);
         axios
           .get(`http://127.0.0.1:8000/sale/Product-detail/${id}/`)
           .then((response) => {
@@ -63,11 +63,6 @@ const ModalEditProduct = ({getCheckEditSuccess, id}) => {
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
-    // useEffect(() => {
-        
-    //     // console.log(productName)
-    // }, [productName])
-
     const onSelectFile = e => {
         if (!e.target.files || e.target.files.length === 0) {
             setSelectedFile(undefined)
@@ -86,19 +81,36 @@ const ModalEditProduct = ({getCheckEditSuccess, id}) => {
         const product= {
             ...productName
         };
-        const headers = {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-          }
-        axios
-          .post(`http://127.0.0.1:8000/sale/Product-update/${id}/`, product)
-          .then((response) => {
-            getCheckEditSuccess(1)
-            console.log(response);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        // const headers = {
+        //     "Access-Control-Allow-Origin": "*",
+        //     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        //   }
+        // axios
+        //   .post(`http://127.0.0.1:8000/sale/Product-update/${id}/`, product)
+        //   .then((response) => {
+        //     getCheckEditSuccess(1)
+        //     console.log(response.data);
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+        var bodyFormData = new FormData();
+        bodyFormData.append('name_product', product["name_product"]);
+        bodyFormData.append('price', product["price"]);
+        bodyFormData.append('desc', product["desc"]);
+        console.log(selectedFile)
+        bodyFormData.append('url', selectedFile); 
+        axios({
+            method: "POST",
+            url: `http://127.0.0.1:8000/sale/Product-update/${id}/`,
+            data: bodyFormData,
+            headers: { "Content-Type": "multipart/form-data" },
+          }).then(res => {
+              getCheckEditSuccess(1)
+              console.log(res);
+            }).catch(err => {
+              console.log(err);
+            });
       };
     return(
         <>      <div className='header_add'>
