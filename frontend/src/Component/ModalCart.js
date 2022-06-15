@@ -10,11 +10,27 @@ import CartEmpty from './CartEmpty'
 const ModalCart = () => {
     var showOrHide = useSelector(state => state.showModalReducer).value
     const dispatch = useDispatch()
-    const elementItem = [].map((item, index) => {
-        const {} = item
+    var itemInCart =  JSON.parse(sessionStorage.getItem("listCart"))
+    // console.log(itemInCart === null)
+    var condition = itemInCart === null ? [] : itemInCart
+    const elementItem = condition.map((item, index) => {
+        const {name_product, number, price, url } = item
         return(
             <div className='item' key={index}>
-
+                <img className='item__url' src={`http://127.0.0.1:8000${item.url}`}></img>
+                <div className='item__info'>
+                    <p>{name_product}</p>
+                    <div class="quantity">
+                        <input type="button" value="-" className="minus" />
+                        {/* <label className="screen-reader-text" for="quantity_62aa07f704c48">Candlestick Metal quantity</label> */}
+                        <input type="number" id="quantity_62aa07f704c48" className="input-text qty text" step="1" min="0" max="" name="quantity" value={number} title="Qty" placeholder="" inputmode="numeric" />
+                        <input type="button" value="+" className="plus" />
+                    </div>
+                    <p>{price + '$'}</p>
+                </div>
+                <p className='item__close'>
+                    <AiOutlineClose />
+                </p>
             </div>
         );
     })
@@ -35,7 +51,7 @@ const ModalCart = () => {
                     </div>
                 </div> 
                 {
-                    totalPrice === 0 ?
+                    totalPrice === 1 ?
                     (<>
                         <CartEmpty />
                     </>)
