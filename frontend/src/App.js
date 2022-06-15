@@ -46,7 +46,7 @@ function App() {
     }, [accessLogin]
   )
 
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(true)
   localStorage.setItem("isAdmin", isAdmin)
 
   const Login = () => {
