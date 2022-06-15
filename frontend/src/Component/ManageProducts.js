@@ -14,7 +14,7 @@ const ManageProducts = () =>
     const [checkAdd, setCheckAdd] = useState(0)
     const [checkEdit, setCheckEdit] = useState(0)
     const [idClick, setIdClick] = useState(-1)
-    var id_current = -1
+
     const dispatch = useDispatch()
     const handleShowModalAdd = () => {
         dispatch(showModalProduct())
@@ -71,14 +71,6 @@ const ManageProducts = () =>
         getProducts()
     }, [checkAdd, checkEdit])
 
-    const getid = (id)=>
-    {
-        return id;
-    }
-
-    useEffect(() => {
-        setIdClick(id_current)
-    })
 
     const handleDelete = (id) => {
         
@@ -105,8 +97,7 @@ const ManageProducts = () =>
                     <td className='data'>
                         <button    className='edit' 
                         onClick={() => {
-                            // alert(id_click)
-                            id_current = parseInt(id)
+                            setIdClick(id)
                             handleShowModalUpdate();
                            
                         }}>
