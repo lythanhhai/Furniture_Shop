@@ -46,7 +46,7 @@ function App() {
     }, [accessLogin]
   )
 
-  const [isAdmin, setIsAdmin] = useState(true)
+  const [isAdmin, setIsAdmin] = useState(false)
   localStorage.setItem("isAdmin", isAdmin)
 
   const Login = () => {
@@ -63,49 +63,49 @@ function App() {
 
             <Route path=""
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Home />)  : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Home />)  : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path="/Home/"
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Home />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Home />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path="/SignIn/"
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Navigate to="/Home/" />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Navigate to="/Home/" />) : (<SignIn_Page />)
                   }>   
             </Route>
 
             <Route path="/SignUp/"
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Navigate to="/Home/" />) : (<SignUp_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Navigate to="/Home/" />) : (<SignUp_Page />)
                   }>
             </Route>
 
             <Route path={`/Detail/${id}`}
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Detail_Page />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Detail_Page />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path={`/ViewCart/`}
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Cart_Page />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Cart_Page />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path={`/my-account/AccountDetail`}
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<AccountDetail_Page />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<AccountDetail_Page />) : (<SignIn_Page />)
                   }>
             </Route>
 
             <Route path={`/my-account/Address/`}
                    element={
-                    (localStorage.getItem("accessToken") === 'true') ? (<Address_Page />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Address_Page />) : (<SignIn_Page />)
     
                   }>
             </Route>
