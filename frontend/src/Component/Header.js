@@ -70,10 +70,10 @@ const Header = () => {
                                                 navigate('/Home/')
                                             }}>Home</p>
                                             <p onClick={() => {
-                                                navigate('/MyAccount/AccountDetail')
+                                                navigate('/my-account/AccountDetail')
                                             }}>Account Detail</p>
                                             <p onClick={() => {
-                                                navigate('/MyAccount/Address/')
+                                                navigate('/my-account/Address/')
                                             }}>Address</p>
                                             <p onClick={() => {
                                                 navigate('/SignIn/')

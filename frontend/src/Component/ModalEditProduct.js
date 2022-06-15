@@ -98,8 +98,15 @@ const ModalEditProduct = ({getCheckEditSuccess, id}) => {
         bodyFormData.append('name_product', product["name_product"]);
         bodyFormData.append('price', product["price"]);
         bodyFormData.append('desc', product["desc"]);
-        console.log(selectedFile)
-        bodyFormData.append('url', selectedFile); 
+        // console.log(selectedFile)
+        if(selectedFile !== undefined)
+        {
+            bodyFormData.append('url', selectedFile); 
+        }
+        else
+        {
+
+        }
         axios({
             method: "POST",
             url: `http://127.0.0.1:8000/sale/Product-update/${id}/`,
