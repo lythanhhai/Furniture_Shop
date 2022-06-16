@@ -7,6 +7,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import { legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux'
 import CombineReducers from './Store/showModalStore';
+import { useEffect } from 'react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const store = createStore(CombineReducers)

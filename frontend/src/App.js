@@ -40,11 +40,27 @@ function App() {
   let id = useSelector(state => state.getIndexReducer).index
   const [accessLogin, setAccessLogin] = useState(true)
 
+  // tat ca storage
   useEffect(
     () => {
       localStorage.setItem("accessToken", accessLogin)
     }, [accessLogin]
-  )
+    )
+    
+  useEffect(() => {
+      sessionStorage.setItem("listCart", JSON.stringify([]))
+  }, [])
+  // useEffect(() => {
+  //   window.addEventListener('beforeunload', function(e) {
+  //     sessionStorage.setItem("listCart", JSON.stringify([]))
+  //   }, false);
+
+  //   return () => {
+  //     window.addEventListener('beforeunload', function(e) {
+  //       sessionStorage.setItem("listCart", JSON.stringify([]))
+  //     }, false);
+  //   };
+  // });
 
   const [isAdmin, setIsAdmin] = useState(false)
   localStorage.setItem("isAdmin", isAdmin)

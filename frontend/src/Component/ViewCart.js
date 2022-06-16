@@ -1,28 +1,123 @@
 import React from 'react'
 import '../Asset/ViewCart/ViewCart.scss'
 import Image from '../Public/Image/empty-cart.png'
+import { useState, useEffect } from 'react'
 
 const ViewCart = () => {
-    const elementItemCart = ['a', 'b', 'c', 'd'].map((product, index) => {
-        
+    var itemInCart =  JSON.parse(sessionStorage.getItem("listCart"))
+    // console.log(itemInCart === null)
+    var condition = itemInCart === null ? [] : itemInCart
+
+    const [numberOfItem, setNumberOfProduct] = useState(1)
+    const increaseNumber = (id) => {
+        const newArray = JSON.parse(sessionStorage.getItem("listCart"))
+        for(let i = 0; i < newArray.length; i++)
+        {
+
+            if(id === newArray[i]["id"])
+            {                
+                newArray[i] = {
+                    ...newArray[i],
+                    number: newArray[i]["number"] + 1
+                }
+                setNumberOfProduct(newArray[i]["number"])
+                break;
+            }
+        }
+        sessionStorage.setItem("listCart", JSON.stringify(newArray))
+    }
+    useEffect(() => {
+        setNumberOfProduct(numberOfItem)
+    }, [numberOfItem])
+
+    const decreaseNumber = (id) => {
+        if(numberOfItem === 1)
+        {
+            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
+            const array = []
+            for(let i = 0; i < newArray.length; i++)
+            {
+
+                if(id === newArray[i]["id"])
+                {                
+                    continue
+                }
+                else 
+                {
+                    array.push(newArray[i])
+                }
+            }
+            setNumberOfProduct(0)
+            sessionStorage.setItem("listCart", JSON.stringify(array)) 
+        }
+        else  
+        {
+            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
+            for(let i = 0; i < newArray.length; i++)
+            {
+
+                if(id === newArray[i]["id"])
+                {                
+                    newArray[i] = {
+                        ...newArray[i],
+                        number: newArray[i]["number"] - 1
+                    }
+                    setNumberOfProduct(newArray[i]["number"])
+                    break;
+                }
+            }
+            sessionStorage.setItem("listCart", JSON.stringify(newArray))
+        }
+    }
+
+    const removeItem = (id) => {
+
+            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
+            const array = []
+            for(let i = 0; i < newArray.length; i++)
+            {
+
+                if(id === newArray[i]["id"])
+                {                
+                    continue
+                }
+                else 
+                {
+                    array.push(newArray[i])
+                }
+            }
+            setNumberOfProduct(0)
+            sessionStorage.setItem("listCart", JSON.stringify(array)) 
+
+    }
+
+
+    const elementItemCart = condition.map((product, index) => {
+        const {id, name_product, price, url, number} = product
         return(
             <tr className='product'>
-                <td className='remove'>X</td>
-                <td className='img'><img src={Image} alt=""></img></td> 
-                <td className='name'>3D Geometric Candlestick</td>
-                <td className='price'>$232.00</td>
+                <td className='remove' onClick={() => {
+                    removeItem(id)
+                }}>X</td>
+                <td className='img'><img src={`http://127.0.0.1:8000${url}`} alt=""></img></td> 
+                <td className='name'>{name_product}</td>
+                <td className='price'>{'$' + price}</td>
                 <td className='number'>
                     <div className='number__quantity'>
-                        <button className='but_sub' type='button'>
+                        <button className='but_sub' type='button' onClick={() => {
+                            decreaseNumber(id)
+                        }}>
                             -
                         </button>
-                        <p>1</p>
-                        <button className='but_add' type='button'>
+                        <p>{number}</p>
+                        <button className='but_add' type='button' onClick={() => {
+                            increaseNumber(id)
+                        }}>
                             +
                         </button>
                     </div>
                 </td>
-                <td className='total'>$232.00</td>
+                <td className='total'>{"$" + price * number}</td>
 
             </tr>
         )

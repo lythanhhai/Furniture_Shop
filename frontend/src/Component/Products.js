@@ -41,10 +41,7 @@ const Products = () => {
     }, [])
 
     const dispatch = useDispatch()
-    useEffect(() => {
-        sessionStorage.setItem("listCart", JSON.stringify([]))
-
-    }, [])
+    
     // console.log(JSON.parse(sessionStorage.getItem("listCart")))
     const handleAddToCart= (i, object) => {
         localStorage.getItem("accessToken") === 'true'
