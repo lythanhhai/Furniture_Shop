@@ -114,7 +114,7 @@ const Detail = () => {
         setNumberOfProduct(numberOfItem + 1) 
     }
 
-    const decresetNumber = () => {
+    const decreaseNumber = () => {
         if(numberOfItem === 1)
         {
             setNumberOfProduct(numberOfItem)  
@@ -150,7 +150,7 @@ const Detail = () => {
                 <div className='Detail__info-add'>
                     <div className='number'>
                         <button className='but_sub' type='button' onClick={() => (
-                            decresetNumber()
+                            decreaseNumber()
                         )}>
                             -
                         </button>
