@@ -5,6 +5,7 @@ import Image from '../Public/Image/empty-cart.png'
 import { Navigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
+import {showModalCart} from '../Action/showModal'
 import axios from 'axios'
 
 const Detail = () => {
@@ -24,6 +25,7 @@ const Detail = () => {
         desc: "",
         url: "",
     })
+
     const handleMove = (e) => {
         const x = e.clientX - e.target.offsetLeft;
         const y = e.clientY - e.target.offsetTop;
@@ -41,9 +43,45 @@ const Detail = () => {
     }
 
     const handleNavigateCart = () => {
+        // localStorage.getItem("accessToken") === 'true'
+        // ? navigate('/ViewCart/')
+        // : navigate('/SignIn/')
+    }
+
+    const dispatch = useDispatch()
+    const handleAddToCart= (object) => {
         localStorage.getItem("accessToken") === 'true'
-        ? navigate('/ViewCart/')
-        : navigate('/SignIn/')
+        ? 
+        (
+            dispatch(showModalCart())
+        )
+        :
+        (
+            navigate('/SignIn/')
+
+        )
+
+        // xử lý chọn nhiều 
+        const newArray = JSON.parse(sessionStorage.getItem("listCart"))
+        let check = 0
+        for(let i = 0; i < newArray.length; i++)
+        {
+            if(object["id"] === newArray[i]["id"])
+            {
+                check += 1
+                newArray[i] = {
+                    ...newArray[i],
+                    number: newArray[i]["number"] + numberOfItem
+                }
+                break;
+            }
+        }
+        if(check === 0)
+        {
+            newArray.push(object)
+        }
+        sessionStorage.setItem("listCart", JSON.stringify(newArray))
+        // console.log(JSON.parse(sessionStorage.getItem("listCart")))
     }
 
     const idOfProduct = useSelector(state => state.getIdProductReducer).id
@@ -71,6 +109,27 @@ const Detail = () => {
         getDetailProduct()
     }, [])
 
+    const [numberOfItem, setNumberOfProduct] = useState(1)
+    const increaseNumber = () => {
+        setNumberOfProduct(numberOfItem + 1) 
+    }
+
+    const decresetNumber = () => {
+        if(numberOfItem === 1)
+        {
+            setNumberOfProduct(numberOfItem)  
+        }
+        else  
+        {
+            setNumberOfProduct(numberOfItem - 1)  
+        }
+    }
+
+    // update number 
+    useEffect(() => {
+        setNumberOfProduct(numberOfItem)
+    }, [numberOfItem])
+
     return(
         <section className='Detail'>
             <div className='Detail__ListImage'>
@@ -90,16 +149,28 @@ const Detail = () => {
                 <p className='Detail__info-desc'>{item.desc}</p>
                 <div className='Detail__info-add'>
                     <div className='number'>
-                        <button className='but_sub' type='button'>
+                        <button className='but_sub' type='button' onClick={() => (
+                            decresetNumber()
+                        )}>
                             -
                         </button>
-                        <p>1</p>
-                        <button className='but_add' type='button'>
+                        <p>{numberOfItem}</p>
+                        <button className='but_add' type='button' onClick={() => (
+                            increaseNumber()
+                        )}>
                             +
                         </button>
                     </div>
                     <button type='button' className='button' onClick={() => {
-                        handleNavigateCart()
+                        // handleNavigateCart()
+                        const object = {
+                            id: item.id,
+                            name_product: item.name_product,
+                            number: numberOfItem,
+                            price: item.price,
+                            url: item.url,
+                        }
+                        handleAddToCart(object);
                     }}>
                         Add To Cart
                     </button>
