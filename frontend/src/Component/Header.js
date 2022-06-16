@@ -22,6 +22,7 @@ const Header = () => {
             dispatch(hideModalCart())
         }
     }
+    
     const handleMouseOverAccount = () => {
         const Down = document.querySelector('.Header__Function-Account .Down')
         Down.style.display = "flex"

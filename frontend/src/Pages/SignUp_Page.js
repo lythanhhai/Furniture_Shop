@@ -10,7 +10,7 @@ const SignUp_Page = () => {
             <div className="App">
                 <Header />
                 <SignUp />
-                <ModalCart />
+                {/* <ModalCart /> */}
                 <Footer />
             </div>
     );

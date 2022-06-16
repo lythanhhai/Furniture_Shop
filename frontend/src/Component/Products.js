@@ -58,8 +58,28 @@ const Products = () => {
 
         )
 
+        // xử lý chọn nhiều 
         const newArray = JSON.parse(sessionStorage.getItem("listCart"))
-        newArray.push(object)
+        let check = 0
+        for(let i = 0; i < newArray.length; i++)
+        {
+            if(object["id"] === newArray[i]["id"])
+            {
+                // console.log(newArray[i])
+                check += 1
+                newArray[i] = {
+                    ...newArray[i],
+                    number: newArray[i]["number"] + 1
+                }
+                // console.log(newArray[i])
+                break;
+            }
+        }
+        // alert(check)
+        if(check === 0)
+        {
+            newArray.push(object)
+        }
         sessionStorage.setItem("listCart", JSON.stringify(newArray))
         // console.log(JSON.parse(sessionStorage.getItem("listCart")))
     }
@@ -86,6 +106,7 @@ const Products = () => {
             }}></img>
                     <div className={mouseOver === 1 && id === indexCurrent ? "button_add" : "button_add_1"} onClick={() => {
                         const object = {
+                            id: id,
                             name_product: name_product,
                             number: 1,
                             price: price,
