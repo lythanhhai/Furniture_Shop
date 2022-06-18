@@ -6,13 +6,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { showModalCart, hideModalCart } from '../Action/showModal';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { SignInAction, LogoutAction } from "../Action/SignInAction";
+import getIdProductAction from '../Action/getIdProductAction';
+
 
 const Header = () => {
     const navigate = useNavigate()
     const [numberOfProduct, setNumberOfProduct] = useState(0)
     const showOrHide = useSelector(state => state.showModalReducer).value
     const dispatch = useDispatch()
-    
+    const handleClickDetail = (keywork)=> {
+        dispatch(getIdProductAction(keywork))
+        navigate(`/search/${keywork}`)
+       
+}
     const handleClickCart = () => {
         if(showOrHide === 0)
         {
@@ -47,7 +53,17 @@ const Header = () => {
                 </div>
                 <div className='Header_Search'>
                     <label htmlFor='search'></label>
-                    <input type="text" placeholder="Enter name product"></input>
+                    <input type="text" placeholder="Enter name product" 
+                    // onChange={(e)=>{
+                    //     handleClickDetail(e.target.value)
+                    // }}
+                    onKeyPress={event => {
+                        if (event.key === 'Enter') {
+                          handleClickDetail(event.target.value)
+                        }
+                      }
+                    }
+                    ></input>
                 </div>
                 <div className='Header__Function'>
                     {

@@ -1,3 +1,4 @@
+
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -12,12 +13,14 @@ import AccountDetail_Page from "./Pages/AccountDetail_Page";
 import Address_Page from "./Pages/Address_Page";
 import ManageProducts_Pages from "./Pages/ManageProducts_Pages";
 import SignInReducer from "./Reducer/SignInReducer";
+import Search1 from './Pages/Search_page';
 
 function App() {
+
   // const [y, setY] = useState(window.scrollY);
 
   // const handleNavigation = useCallback(
-  //   (e) => {
+  //   e => {
   //     const window = e.currentTarget;
   //     if (y > window.scrollY) {
   //       console.log("scrolling up");
@@ -25,8 +28,7 @@ function App() {
   //       console.log("scrolling down");
   //     }
   //     setY(window.scrollY);
-  //   },
-  //   [y]
+  //   }, [y]
   // );
 
   // useEffect(() => {
@@ -37,10 +39,12 @@ function App() {
   //     window.removeEventListener("scroll", handleNavigation);
   //   };
   // }, [handleNavigation]);
+  
+  let keywork = useSelector(state => state.getIndexReducer).index
+  const [accessLogin, setAccessLogin] = useState(true)
 
   let id = useSelector((state) => state.getIndexReducer).index;
 
-  // localStorage.setItem("isAdmin", isAdmin)
   const inforLogin = useSelector(state => state.SignInReducer)
 
   return (
@@ -153,7 +157,14 @@ function App() {
             )
           }
         ></Route>
+
+            <Route path={`/search/${keywork}`}
+                   element={
+                    inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (<Search1/>) : (<SignIn_Page />)
+                  }>
+            </Route>
       </Routes>
+
     </BrowserRouter>
   );
 }
