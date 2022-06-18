@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { showModalCart, hideModalCart } from '../Action/showModal';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { SignInAction, LogoutAction } from "../Action/SignInAction";
 import getIdProductAction from '../Action/getIdProductAction';
+
 
 const Header = () => {
     const navigate = useNavigate()
@@ -32,10 +34,14 @@ const Header = () => {
         const Down = document.querySelector('.Header__Function-Account .Down')
         Down.style.display = "flex"
     }
+
     const handleMouseOutAccount = () => {
         const Down = document.querySelector('.Header__Function-Account .Down')
         Down.style.display = "none"
     }
+
+    const inforLogin = useSelector(state => state.SignInReducer)
+
     return(
         <>
             <section className='Header'>
@@ -61,7 +67,7 @@ const Header = () => {
                 </div>
                 <div className='Header__Function'>
                     {
-                        localStorage.getItem("accessToken") === 'false' ? (<>
+                        inforLogin.access === 0 ? (<>
                                 <p className='Header__Function-SignIn' onClick={() => {
                                         navigate('/SignIn')
                                     }}>LOGIN / REGISTER</p>
@@ -74,7 +80,7 @@ const Header = () => {
                                     handleMouseOutAccount()
                                 }}>My Account</p>
                                 {
-                                    localStorage.getItem('isAdmin') === 'false'
+                                    inforLogin.isAdmin === 0
                                     ? (
                                         <div className='Down' onMouseOver={() => {
                                             handleMouseOverAccount()
@@ -92,6 +98,8 @@ const Header = () => {
                                                 navigate('/my-account/Address/')
                                             }}>Address</p>
                                             <p onClick={() => {
+                                                dispatch(LogoutAction())
+                                                
                                                 navigate('/SignIn/')
                                             }}>Log Out</p>
                                         </div>
@@ -108,6 +116,8 @@ const Header = () => {
                                                 navigate('/Products/')
                                             }}>Add Products</p>
                                             <p onClick={() => {
+                                                dispatch(LogoutAction())
+
                                                 navigate('/SignIn/')
                                             }}>Log Out</p>
                                         </div>

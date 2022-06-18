@@ -1,6 +1,6 @@
 import React from "react";
 import "../Asset/SignInOrUp/SignUp.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -11,7 +11,9 @@ const SignUp = () => {
     pass_word: "",
     address:"",
   });
+  const [checkSuccess, setCheckSuccess] = useState(0) 
 
+  const navigate = useNavigate()
   const handleRegister = (e) => {
     e.preventDefault()
     const infor = {
@@ -24,14 +26,23 @@ const SignUp = () => {
     axios
       .post("http://127.0.0.1:8000/sale/Customer-create/", infor)
       .then((response) => {
-        console.log(response);
+        if(response.status === 200)
+        {
+          console.log(response);
+          navigate("/SignIn")
+        }
+        else 
+        {
+          setCheckSuccess(0)
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  
 
-  const navigate = useNavigate();
+
   return (
     <section className="Register">
       <div className="Register__Left">

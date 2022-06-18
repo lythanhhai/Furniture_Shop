@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Asset/SignInOrUp/SignIn.scss";
 import { FaFacebookSquare, FaGooglePlusSquare } from "react-icons/fa";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-
+import { SignInAction, LogoutAction } from "../Action/SignInAction";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -14,26 +15,44 @@ const SignIn = () => {
     pass_word: "",
   });
 
+  const inforLogin = useSelector(state => state.SignInReducer)
+  const dispatch = useDispatch()
+
   const handleSignIn = (e) => {
     e.preventDefault();
     const infor = {
       ...inforSignIn,
     };
-    console.log(infor);
+
     const headers = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     };
+
     axios
       .post("http://127.0.0.1:8000/sale/Customer-SignIn/", infor)
       .then((response) => {
-        sessionStorage.setItem("accessToken", true);
-        console.log(response.data);
+        return response.data;
+      })
+      .then((data) => {
+        
+        if (data.key_per === 0) {
+          console.log(data)
+          dispatch(SignInAction(data.key_per, data.phone_number))
+          navigate("/Home")
+          
+        } else if (data.key_per === 1) {
+          dispatch(SignInAction(data.key_per, data.phone_number))
+          navigate("/admin/manage-products")
+        } else {
+          console.log(typeof data.key_per);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
 
   return (
     <section className="Login">
