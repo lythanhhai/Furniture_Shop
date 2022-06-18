@@ -9,7 +9,7 @@ import SignInReducer from '../Reducer/SignInReducer';
 const AccountDetail = () => {
 
     const phone = useSelector(state => state.SignInReducer).phone_number
-    console.log(phone)
+    // console.log(phone)
     //
     const [input, setInput] = useState({
       CurrentPass: '',
