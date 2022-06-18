@@ -26,6 +26,7 @@ urlpatterns = [
 
 	###
 	path('Product-list/', product.taskList, name="Product-list"),
+	path('Product-search/<str:pk>/', product.taskSearch, name="Product-search"),
 	path('Product-detail/<int:pk>/', product.taskDetail, name="Product-detail"),
 	path('Product-create/', product.taskCreate, name="Product-create"),
 	path('Product-update/<int:pk>/', product.taskUpdate, name="Product-update"),

@@ -15,6 +15,7 @@ def apiOverview(request):
 		'Create Products':'/Product-create/',
 		'Update Products':'/Product-update/<int:pk>/',
 		'Delete Products':'/Product-delete/<int:pk>/',
+		'List Products search':'/Product-list/<str:pk>',
 		}
 
 	return Response(api_urls)
@@ -24,6 +25,8 @@ def taskList(request):
 	item = Products.objects.all().order_by('-id')
 	serializer = ProductsSerializer(item, many=True)
 	return Response(serializer.data)
+
+
 
 @api_view(['GET'])
 def taskDetail(request, pk):
@@ -70,3 +73,9 @@ def taskDelete(request, pk):
 
 	return Response('Item succsesfully delete!')
 
+@api_view(['GET'])
+def taskSearch(request,pk):
+	# postresult = Products.objects.filter(name_product=pk)
+	postresult = Products.objects.filter(name_product__icontains=pk)
+	serializer = ProductsSerializer(postresult, many=True)
+	return Response(serializer.data)
