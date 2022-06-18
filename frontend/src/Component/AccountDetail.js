@@ -2,11 +2,14 @@ import React from 'react'
 import '../Asset/AccountDetail/AccountDetail.scss';
 import axios from "axios";
 import { useState, useEffect } from 'react'
-export const phone = "0978337444";
+import { useSelector } from 'react-redux';
+import SignInReducer from '../Reducer/SignInReducer';
+// export const phone = "0978337444";
 
 const AccountDetail = () => {
 
- 
+    const phone = useSelector(state => state.SignInReducer).phone_number
+    console.log(phone)
     //
     const [input, setInput] = useState({
       CurrentPass: '',
@@ -94,10 +97,10 @@ const AccountDetail = () => {
             console.log(err);
           });
       };
-      useEffect(() => {
+    useEffect(() => {
         handleperson()
     },[])
-    const { user_name, phone_number,address,pass_word} = inforPerson
+   const { user_name, phone_number, address, pass_word} = inforPerson
    //
    const passs= pass_word;
   
