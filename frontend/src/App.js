@@ -11,6 +11,7 @@ import Cart_Page from './Pages/Cart_Page';
 import AccountDetail_Page from './Pages/AccountDetail_Page';
 import Address_Page from './Pages/Address_Page';
 import ManageProducts_Pages from './Pages/ManageProducts_Pages';
+import Search1 from './Pages/Search_page';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
   }, [handleNavigation]);
   
   let id = useSelector(state => state.getIndexReducer).index
+  let keywork = useSelector(state => state.getIndexReducer).index
   const [accessLogin, setAccessLogin] = useState(true)
 
   // tat ca storage
@@ -128,7 +130,12 @@ function App() {
 
             <Route path={`/admin/manage-products`}
                    element={
-                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'true') ? (<ManageProducts_Pages />) : (<SignIn_Page />)
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<ManageProducts_Pages />) : (<SignIn_Page />)
+                  }>
+            </Route>
+            <Route path={`/search/${keywork}`}
+                   element={
+                    (localStorage.getItem("accessToken") === 'true') && (localStorage.getItem("isAdmin") === 'false') ? (<Search1/>) : (<SignIn_Page />)
                   }>
             </Route>
 

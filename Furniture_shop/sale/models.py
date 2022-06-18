@@ -33,4 +33,4 @@ class Orders(models.Model):
     id_product=models.ForeignKey(Products,on_delete=models.CASCADE)
     number_product=models.IntegerField(default= 1)
     total_price= models.FloatField()
-    status=models.BooleanField()
+    status=models.BooleanField(default=0)
