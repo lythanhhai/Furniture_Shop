@@ -132,9 +132,9 @@ const ManageProducts = () =>
                             {dataProductElement}
                     </tbody>
                 </table>
-                <button type='button' className='Button' onClick={() => {
+                {/* <button type='button' className='Button' onClick={() => {
                     handleShowModalAdd()
-                }}>Add Product</button>
+                }}>Add Product</button> */}
                 <div className='wrap__modal'>
 
                     <section className={showModalAdd === 1 && ModalUpdate === 0 ? 'Modal__Show' : 'Modal__Hide'}>
@@ -146,6 +146,9 @@ const ManageProducts = () =>
                     </section>
                 </div>
             </section>
+            <button type='button' className='Button' onClick={() => {
+                    handleShowModalAdd()
+            }}>Add Product</button>
         </>
     );
 }

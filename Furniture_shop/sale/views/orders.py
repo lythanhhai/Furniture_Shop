@@ -2,8 +2,12 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sale.Serializer.orders import OrdersSerializer
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+# from django.db.models.utils import li
 # Create your views here.
-from sale.models import  Customer, Orders
+from sale.models import  Customer, Orders, Products
 @api_view(['GET'])
 def apiOverview(request):
 	api_urls = {
@@ -30,6 +34,34 @@ def taskList(request):
 	return Response(serializer.data)
 
 @api_view(['GET'])
+def taskListModalCart(request):
+	# list_item = list(Orders.objects.all().order_by('-id'))
+	list_item = list(Orders.objects.all())
+	product_list = list(Products.objects.all())
+	array = []
+	count = 0
+	for item_order in list_item:
+		for item_product in product_list:
+			if item_order.id_product_id == item_product.id:
+				object = {
+					'price': item_product.price,
+					'id_product': item_order.id_product_id ,
+					'id': item_order.id,
+					'id_person': item_order.id_person_id,
+					'status': item_order.status,
+					'total_price': item_order.total_price,
+					'number_product': item_order.number_product,
+					'url': str(item_product.url),
+					'name_product': item_product.name_product,
+					'desc': item_product.desc,
+				}
+				count += 1
+				array.append(object)
+	# serializer = OrdersSerializer(array, many=True)
+	return JsonResponse(array, safe= False)
+
+
+@api_view(['GET'])
 def taskDetail(request, pk):
 	item = Orders.objects.get(id=pk)
 	serializer =OrdersSerializer(item,many=False)
@@ -45,16 +77,24 @@ def taskCreate(request):
 
 	return Response(serializer.data)
 
+# @api_view(['POST'])
+# @csrf_exempt
+# def taskCreate(request):
+# 	order_data = JSONParser().parse(request)
+# 	serializer = OrdersSerializer(data= order_data)
+# 	if serializer.is_valid():
+# 		serializer.save()
+# 		return JsonResponse("Add is successful", safe= False)
+# 	else:
+# 		return JsonResponse("Add is unsuccessful", safe= False)
+
 @api_view(['POST'])
 def taskUpdate(request, pk):
-	item=Orders.objects.get(id=pk)
-	serializer =OrdersSerializer(instance=item, data=request.data)
+	item = Orders.objects.get(id=pk)
+	serializer = OrdersSerializer(instance=item, data=request.data)
 
 	if serializer.is_valid():
 		serializer.save()
-
-
-
 
 @api_view(['DELETE'])
 def taskDelete(request, pk):

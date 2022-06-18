@@ -34,6 +34,7 @@ urlpatterns = [
 
 	###
 	path('Orders-list/', orders.taskList, name="Orders-list"),
+	path('Orders-listModalCart/', orders.taskListModalCart, name="Orders-listModalCart"),
 	path('Orders-detail/<int:pk>/', orders.taskDetail, name="Orders-detail"),
 	path('Orders-create/', orders.taskCreate, name="Orders-create"),
 	path('Orders-update/<int:pk>/', orders.taskUpdate, name="Orders-update"),

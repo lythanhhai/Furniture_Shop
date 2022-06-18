@@ -1,4 +1,3 @@
-
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -13,10 +12,10 @@ import AccountDetail_Page from "./Pages/AccountDetail_Page";
 import Address_Page from "./Pages/Address_Page";
 import ManageProducts_Pages from "./Pages/ManageProducts_Pages";
 import SignInReducer from "./Reducer/SignInReducer";
-import Search1 from './Pages/Search_page';
+import Search1 from "./Pages/Search_page";
+import { SignInAction, LogoutAction } from "../src/Action/SignInAction";
 
 function App() {
-
   // const [y, setY] = useState(window.scrollY);
 
   // const handleNavigation = useCallback(
@@ -39,13 +38,19 @@ function App() {
   //     window.removeEventListener("scroll", handleNavigation);
   //   };
   // }, [handleNavigation]);
-  
-  let keywork = useSelector(state => state.getIndexReducer).index
-  const [accessLogin, setAccessLogin] = useState(true)
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", function (e) {
+  //     dispatch(LogoutAction())
+  //   });
+  // }, [])
+
+  let keywork = useSelector((state) => state.getIndexReducer).index;
+  const [accessLogin, setAccessLogin] = useState(true);
 
   let id = useSelector((state) => state.getIndexReducer).index;
 
-  const inforLogin = useSelector(state => state.SignInReducer)
+  const inforLogin = useSelector((state) => state.SignInReducer);
 
   return (
     <BrowserRouter>
@@ -53,8 +58,7 @@ function App() {
         <Route
           path=""
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Home />
             ) : (
               <Navigate to="/SignIn/" />
@@ -65,8 +69,7 @@ function App() {
         <Route
           path="/Home/"
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Home />
             ) : (
               <Navigate to="/SignIn/" />
@@ -77,8 +80,7 @@ function App() {
         <Route
           path="/SignIn/"
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Navigate to="/Home/" />
             ) : (
               <SignIn_Page />
@@ -89,8 +91,7 @@ function App() {
         <Route
           path="/SignUp/"
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Navigate to="/Home/" />
             ) : (
               <SignUp_Page />
@@ -101,8 +102,7 @@ function App() {
         <Route
           path={`/Detail/${id}`}
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Detail_Page />
             ) : (
               <SignIn_Page />
@@ -113,8 +113,7 @@ function App() {
         <Route
           path={`/ViewCart/`}
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Cart_Page />
             ) : (
               <SignIn_Page />
@@ -125,8 +124,7 @@ function App() {
         <Route
           path={`/my-account/AccountDetail`}
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <AccountDetail_Page />
             ) : (
               <SignIn_Page />
@@ -137,8 +135,7 @@ function App() {
         <Route
           path={`/my-account/Address/`}
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 0 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Address_Page />
             ) : (
               <SignIn_Page />
@@ -149,8 +146,7 @@ function App() {
         <Route
           path={`/admin/manage-products`}
           element={
-            inforLogin.access === 1 &&
-            inforLogin.isAdmin === 1 ? (
+            inforLogin.access === 1 && inforLogin.isAdmin === 1 ? (
               <ManageProducts_Pages />
             ) : (
               <SignIn_Page />
@@ -158,13 +154,17 @@ function App() {
           }
         ></Route>
 
-            <Route path={`/search/${keywork}`}
-                   element={
-                    inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (<Search1/>) : (<SignIn_Page />)
-                  }>
-            </Route>
+        <Route
+          path={`/search/${keywork}`}
+          element={
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
+              <Search1 />
+            ) : (
+              <SignIn_Page />
+            )
+          }
+        ></Route>
       </Routes>
-
     </BrowserRouter>
   );
 }

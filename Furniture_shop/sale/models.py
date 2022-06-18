@@ -28,9 +28,9 @@ class Products(models.Model):
     url= models.ImageField(upload_to= upload_to, blank=True, null=True)
 
 class Orders(models.Model):
-    id= models.IntegerField(primary_key=True)
+    id= models.AutoField(primary_key=True)
     id_person=models.ForeignKey(Customer, on_delete=models.CASCADE)
-    id_product=models.ForeignKey(Products,on_delete=models.CASCADE)
+    id_product=models.ForeignKey(Products, on_delete=models.CASCADE)
     number_product=models.IntegerField(default= 1)
     total_price= models.FloatField()
     status=models.BooleanField(default=0)

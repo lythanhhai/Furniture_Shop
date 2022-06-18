@@ -2,13 +2,34 @@ import React from 'react'
 import '../Asset/ViewCart/ViewCart.scss'
 import Image from '../Public/Image/empty-cart.png'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const ViewCart = () => {
-    var itemInCart =  JSON.parse(sessionStorage.getItem("listCart"))
-    // console.log(itemInCart === null)
-    var condition = itemInCart === null ? [] : itemInCart
+    var [listCart, setListCart] = useState([])
 
+    const navigate = useNavigate()
     const [numberOfItem, setNumberOfProduct] = useState(1)
+
+    const getListCart = () => {
+        axios
+            .get("http://127.0.0.1:8000/sale/Orders-listModalCart/")
+            .then((response) => {
+                // console.log(response)
+                return response.data;
+            })
+            .then((data) => {
+                setListCart(data)
+            })
+            .catch((err) => {
+                console.log(err);
+        });
+    }
+
+    useEffect(() => {
+        getListCart()
+    }, [])
+
     const increaseNumber = (id) => {
         const newArray = JSON.parse(sessionStorage.getItem("listCart"))
         for(let i = 0; i < newArray.length; i++)
@@ -92,14 +113,14 @@ const ViewCart = () => {
     }
 
 
-    const elementItemCart = condition.map((product, index) => {
-        const {id, name_product, price, url, number} = product
+    const elementItemCart = listCart.map((product, index) => {
+        const {id, id_product, name_product, number_product, price, url, total_price } = product
         return(
             <tr className='product'>
                 <td className='remove' onClick={() => {
                     removeItem(id)
                 }}>X</td>
-                <td className='img'><img src={`http://127.0.0.1:8000${url}`} alt=""></img></td> 
+                <td className='img'><img src={`http://127.0.0.1:8000/media/${url}`} alt=""></img></td> 
                 <td className='name'>{name_product}</td>
                 <td className='price'>{'$' + price}</td>
                 <td className='number'>
@@ -109,7 +130,7 @@ const ViewCart = () => {
                         }}>
                             -
                         </button>
-                        <p>{number}</p>
+                        <p>{number_product}</p>
                         <button className='but_add' type='button' onClick={() => {
                             increaseNumber(id)
                         }}>
@@ -117,7 +138,7 @@ const ViewCart = () => {
                         </button>
                     </div>
                 </td>
-                <td className='total'>{"$" + price * number}</td>
+                <td className='total'>{"$" + price * number_product}</td>
 
             </tr>
         )
