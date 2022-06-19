@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import {showModalCart} from '../Action/showModal'
 import axios from 'axios'
+import SignInReducer from '../Reducer/SignInReducer'
 
 const Detail = () => {
     const navigate = useNavigate()
@@ -49,40 +50,74 @@ const Detail = () => {
     }
 
     const dispatch = useDispatch()
-    const handleAddToCart= (object) => {
-        localStorage.getItem("accessToken") === 'true'
-        ? 
-        (
-            dispatch(showModalCart())
-        )
-        :
-        (
-            navigate('/SignIn/')
-
-        )
-
-        // xử lý chọn nhiều 
-        const newArray = JSON.parse(sessionStorage.getItem("listCart"))
-        let check = 0
-        for(let i = 0; i < newArray.length; i++)
-        {
-            if(object["id"] === newArray[i]["id"])
+    const addOrUpdate = (newArray, object) => {
+        let check = 0;
+            for (let i = 0; i < newArray.length; i++) {
+            // console.log(object["id_product"] === newArray[i]["id_product"] && object["id_person"] === newArray[i]["id_person"])
+            // console.log(object["id_product"])
+            // console.log(newArray[i]["id_product"])
+            if (object["id_product"] === newArray[i]["id_product"] && object["id_person"] === newArray[i]["id_person"])
             {
-                check += 1
-                newArray[i] = {
-                    ...newArray[i],
-                    number: newArray[i]["number"] + numberOfItem
+                check += 1;
+                const new_object = {
+                    ...object,
+                    number_product: newArray[i]["number_product"] + numberOfItem,
+                    total_price: (newArray[i]["number_product"] + numberOfItem) * object["total_price"]
                 }
+                // add vao gio hang
+                axios
+                .post(`http://127.0.0.1:8000/sale/Orders-update/${newArray[i]["id"]}/`, new_object)
+                .then((response) => {
+                    // console.log(response)
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
                 break;
             }
-        }
-        if(check === 0)
-        {
-            newArray.push(object)
-        }
-        sessionStorage.setItem("listCart", JSON.stringify(newArray))
-        // console.log(JSON.parse(sessionStorage.getItem("listCart")))
-    }
+            }
+            // alert(check)
+            if (check === 0) {
+                // add vao gio hang
+                axios
+                .post("http://127.0.0.1:8000/sale/Orders-create/", object)
+                .then((response) => {
+                // console.log(response)
+                })
+                .catch((err) => {
+                console.log(err);
+                });
+            }
+      }
+      const inforLogin = useSelector(state => state.SignInReducer)
+      const handleAddToCart = (object) => {
+        // inforLogin.access === 1
+        // ?
+        // (
+        //     dispatch(showModalCart())
+        // )
+        // :
+        // (
+        //     navigate('/SignIn/')
+        // )
+    
+        // // xử lý chọn nhiều
+        let newArray = [];
+        axios
+          .get("http://127.0.0.1:8000/sale/Orders-list/")
+          .then((response) => {
+            return response.data;
+          })
+          .then((data) => {
+            newArray = data;
+            addOrUpdate(newArray, object)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    
+        
+      };
 
     const idOfProduct = useSelector(state => state.getIdProductReducer).id
 
@@ -130,6 +165,7 @@ const Detail = () => {
         setNumberOfProduct(numberOfItem)
     }, [numberOfItem])
 
+    const phone = useSelector((state) => state.SignInReducer).phone_number;
     return(
         <section className='Detail'>
             <div className='Detail__ListImage'>
@@ -164,12 +200,12 @@ const Detail = () => {
                     <button type='button' className='button' onClick={() => {
                         // handleNavigateCart()
                         const object = {
-                            id: item.id,
-                            name_product: item.name_product,
-                            number: numberOfItem,
-                            price: item.price,
-                            url: item.url,
-                        }
+                            total_price: item.price * numberOfItem,
+                            status: 0,
+                            number_product: numberOfItem,
+                            id_person: phone,
+                            id_product: item.id,
+                        };
                         handleAddToCart(object);
                     }}>
                         Add To Cart

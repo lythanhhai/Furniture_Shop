@@ -85,8 +85,9 @@ const Products = () => {
             });
         }
   }
+  const inforLogin = useSelector(state => state.SignInReducer)
   const handleAddToCart = (i, object) => {
-    // localStorage.getItem("accessToken") === 'true'
+    // inforLogin.access === 1
     // ?
     // (
     //     dispatch(showModalCart())
@@ -94,7 +95,6 @@ const Products = () => {
     // :
     // (
     //     navigate('/SignIn/')
-
     // )
 
     // // xử lý chọn nhiều

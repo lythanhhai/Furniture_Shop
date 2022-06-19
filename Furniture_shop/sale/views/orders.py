@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from pyparsing import Or
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from sale.Serializer.orders import OrdersSerializer
@@ -91,10 +92,26 @@ def taskCreate(request):
 @api_view(['POST'])
 def taskUpdate(request, pk):
 	item = Orders.objects.get(id=pk)
-	serializer = OrdersSerializer(instance=item, data=request.data)
+	serializer = OrdersSerializer(instance=item, data= request.data)
 
 	if serializer.is_valid():
 		serializer.save()
+		return JsonResponse("Update is successful", safe= False)
+	else :
+		return JsonResponse("Update is unsuccessful", safe= False)
+
+# @api_view(['POST'])
+# @csrf_exempt
+# def taskUpdate(request, pk):
+# 	item = Orders.objects.get(id=pk)
+# 	order_data = JSONParser().parse(request)
+# 	serializer = OrdersSerializer(instance= item, data= order_data)
+
+# 	if serializer.is_valid():
+# 		serializer.save()
+# 		return JsonResponse("Update is successful", safe= False)
+# 	else :
+# 		return JsonResponse("Update is unsuccessful", safe= False)
 
 @api_view(['DELETE'])
 def taskDelete(request, pk):

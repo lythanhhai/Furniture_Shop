@@ -71,9 +71,9 @@ def taskUpdate(request, pk):
 
 	if serializer.is_valid():
 		serializer.save()
-		return JsonResponse("Add is successful", safe= False)
+		return JsonResponse("Update is successful", safe= False)
 	else :
-		return JsonResponse("Add is unsuccessful", safe= False)
+		return JsonResponse("Update is unsuccessful", safe= False)
 
 
 
