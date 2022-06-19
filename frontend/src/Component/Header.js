@@ -123,6 +123,13 @@ const Header = () => {
                     </p>
                     <p
                       onClick={() => {
+                        navigate("/History");
+                      }}
+                    >
+                      History Orders
+                    </p>
+                    <p
+                      onClick={() => {
                         dispatch(LogoutAction());
 
                         navigate("/SignIn/");

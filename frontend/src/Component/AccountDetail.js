@@ -2,15 +2,17 @@ import React from 'react'
 import '../Asset/AccountDetail/AccountDetail.scss';
 import axios from "axios";
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SignInReducer from '../Reducer/SignInReducer';
 // export const phone = "0978337444";
+import { SignInAction, ChangeAddress } from '../Action/SignInAction';
 
 const AccountDetail = () => {
 
     const phone = useSelector(state => state.SignInReducer).phone_number
     // console.log(phone)
     //
+    const dispatch = useDispatch()
     const [input, setInput] = useState({
       CurrentPass: '',
       NewPass: '',
@@ -120,6 +122,10 @@ const AccountDetail = () => {
       .post(`http://127.0.0.1:8000/sale/Customer-update/${phone}/`, infor1)
       .then((response) => {
         console.log(response);
+        return response.data
+      })
+      .then(data => {
+        dispatch(ChangeAddress(data.address))
       })
       .catch((err) => {
         console.log(err);

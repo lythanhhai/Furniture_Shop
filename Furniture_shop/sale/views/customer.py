@@ -45,7 +45,7 @@ def signIn(request):
 	customer_list = list(Customer.objects.all())
 	for item in customer_list:
 		if input_data["phone_number"] == item.phone_number and input_data["pass_word"] == item.pass_word:
-			return JsonResponse({"key_per": item.key_per, "phone_number": item.phone_number}, safe= False)
+			return JsonResponse({"key_per": item.key_per, "phone_number": item.phone_number, "address": item.address}, safe= False)
 			
 	
 	return JsonResponse("SignIn unsuccessful", safe= False)
@@ -71,7 +71,7 @@ def taskUpdate(request, pk):
 
 	if serializer.is_valid():
 		serializer.save()
-		return JsonResponse("Update is successful", safe= False)
+		return JsonResponse(serializer.data, safe= False)
 	else :
 		return JsonResponse("Update is unsuccessful", safe= False)
 

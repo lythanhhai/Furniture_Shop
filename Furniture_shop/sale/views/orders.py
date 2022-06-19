@@ -55,6 +55,7 @@ def taskListModalCart(request):
 					'url': str(item_product.url),
 					'name_product': item_product.name_product,
 					'desc': item_product.desc,
+					'datetime': item_order.datetime,
 				}
 				count += 1
 				array.append(object)
