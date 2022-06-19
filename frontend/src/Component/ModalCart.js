@@ -6,18 +6,21 @@ import { showModalCart, hideModalCart } from '../Action/showModal'
 
 import { AiOutlineClose } from "react-icons/ai";
 import CartEmpty from './CartEmpty'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import SignInReducer from "../Reducer/SignInReducer";
 
 const ModalCart = () => {
     var showOrHide = useSelector(state => state.showModalReducer).value
     const dispatch = useDispatch()
 
     var [listCart, setListCart] = useState([])
+    const [totalPrice, setPrice] = useState(0.0)
 
     const navigate = useNavigate()
-    const [numberOfItem, setNumberOfProduct] = useState(1)
+    const [numberOfItem, setNumberOfProduct] = useState(0)
 
+    const phone = useSelector((state) => state.SignInReducer).phone_number;
     const getListCart = () => {
         axios
             .get("http://127.0.0.1:8000/sale/Orders-listModalCart/")
@@ -26,16 +29,27 @@ const ModalCart = () => {
                 return response.data;
             })
             .then((data) => {
-                setListCart(data)
+                let new_data = []
+                let price = 0
+                for(let i = 0; i < data.length; i++)
+                {
+                    if(data[i]["id_person"] === phone)
+                    {   
+                        price += data[i]["total_price"]
+                        new_data.push(data[i])
+                    }
+                }
+                setListCart(new_data)
+                setPrice(price)
             })
             .catch((err) => {
                 console.log(err);
         });
     }
 
-    // useEffect(() => {
-    //     getListCart()
-    // }, [])
+    useEffect(() => {
+        getListCart()
+    }, [showOrHide]) 
 
     useEffect(() => {
         setNumberOfProduct(numberOfItem)
@@ -62,7 +76,8 @@ const ModalCart = () => {
                 .post(`http://127.0.0.1:8000/sale/Orders-update/${id}/`, new_object)
                 .then((response) => {
                     console.log(response)
-                    setNumberOfProduct(new_object["number_product"])
+                    // setNumberOfProduct(new_object["number_product"])
+                    setNumberOfProduct(!numberOfItem)
 
                 })
                 .catch((err) => {
@@ -73,9 +88,8 @@ const ModalCart = () => {
         }
     }
 
-    const decreaseNumber = (id, price) => {
-        console.log(numberOfItem)
-        if(numberOfItem === 1)
+    const decreaseNumber = (id, price, number_product) => {
+        if(number_product === 1)
         {
             const newArray = listCart
             for(let i = 0; i < newArray.length; i++)
@@ -91,10 +105,10 @@ const ModalCart = () => {
                     // }
 
                     axios
-                    .post(`http://127.0.0.1:8000/sale/Orders-delete/${id}/`)
+                    .delete(`http://127.0.0.1:8000/sale/Orders-delete/${id}/`)
                     .then((response) => {
                         console.log(response)
-                        setNumberOfProduct(1)
+                        setNumberOfProduct(!numberOfItem)
                     })
                     .catch((err) => {
                         console.log(err);
@@ -122,7 +136,8 @@ const ModalCart = () => {
                     .post(`http://127.0.0.1:8000/sale/Orders-update/${id}/`, new_object)
                     .then((response) => {
                         console.log(response)
-                        setNumberOfProduct(new_object["number_product"])
+                        // setNumberOfProduct(new_object["number_product"])
+                        setNumberOfProduct(!numberOfItem)
                     })
                     .catch((err) => {
                         console.log(err);
@@ -135,22 +150,24 @@ const ModalCart = () => {
 
     const removeItem = (id) => {
 
-            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
-            const array = []
-            for(let i = 0; i < newArray.length; i++)
-            {
+        const newArray = listCart
+        for(let i = 0; i < newArray.length; i++)
+        {
+            if(id === newArray[i]["id"])
+            {                
 
-                if(id === newArray[i]["id"])
-                {                
-                    continue
-                }
-                else 
-                {
-                    array.push(newArray[i])
-                }
+                axios
+                .delete(`http://127.0.0.1:8000/sale/Orders-delete/${id}/`)
+                .then((response) => {
+                    console.log(response)
+                    setNumberOfProduct(!numberOfItem)
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+                break;
             }
-            setNumberOfProduct(-10)
-            sessionStorage.setItem("listCart", JSON.stringify(array)) 
+        }
 
     }
 
@@ -163,7 +180,7 @@ const ModalCart = () => {
                     <p>{name_product}</p>
                     <div class="quantity">
                         <input type="button" value="-" className="minus" onClick={() => {
-                            decreaseNumber(id, price)
+                            decreaseNumber(id, price, number_product)
                         }}/>
                         {/* <label className="screen-reader-text" for="quantity_62aa07f704c48">Candlestick Metal quantity</label> */}
                         <input type="number" id="quantity_62aa07f704c48" className="input-text qty text" step="1" min="0" max="" name="quantity" value={number_product} title="Qty" placeholder="" inputmode="numeric" />
@@ -183,7 +200,7 @@ const ModalCart = () => {
             </div>
         );
     })
-    const [totalPrice, setPrice] = useState(0.0)
+    
     return(
         <section className={showOrHide === 1 ? 'ModalCart' : "ModalCart_hide"}>
             <div className='ModalCart__transparent' onClick={() => {dispatch(hideModalCart())}}>
@@ -200,7 +217,7 @@ const ModalCart = () => {
                     </div>
                 </div> 
                 {
-                    totalPrice === 1 ?
+                    totalPrice === 0 ?
                     (<>
                         <CartEmpty />
                     </>)
@@ -216,6 +233,7 @@ const ModalCart = () => {
                     </>)
                 }   
                 <button type='button' className='Button' onClick={() => {
+                    // <Navigate to="/ViewCart/" />
                     navigate("/ViewCart")
                 }}>VIEW CART</button> 
             </div>

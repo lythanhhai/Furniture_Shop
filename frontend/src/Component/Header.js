@@ -160,24 +160,29 @@ const Header = () => {
                   </div>
                 )}
               </div>
+              {inforLogin.isAdmin === 0 ? (
+                <>
+                  <p className="Header__Function-search">
+                    <FaSearch />
+                  </p>
+                  <p className="Header__Function-list">
+                    <FaRegHeart />
+                  </p>
+                  <p
+                    className="Header__Function-cart"
+                    numberOfProduct={numberOfProduct}
+                    onClick={() => {
+                      handleClickCart();
+                    }}
+                  >
+                    <FaCartPlus />
+                  </p>
+              </>
+              ): (<></>)}
             </>
           )}
 
-          <p className="Header__Function-search">
-            <FaSearch />
-          </p>
-          <p className="Header__Function-list">
-            <FaRegHeart />
-          </p>
-          <p
-            className="Header__Function-cart"
-            numberOfProduct={numberOfProduct}
-            onClick={() => {
-              handleClickCart();
-            }}
-          >
-            <FaCartPlus />
-          </p>
+          
         </div>
       </section>
       {/* <div className="test">

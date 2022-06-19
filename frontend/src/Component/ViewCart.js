@@ -4,6 +4,8 @@ import Image from '../Public/Image/empty-cart.png'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import SignInReducer from "../Reducer/SignInReducer";
+import { useSelector, useDispatch } from 'react-redux'
 
 const ViewCart = () => {
     var [listCart, setListCart] = useState([])
@@ -11,6 +13,7 @@ const ViewCart = () => {
     const navigate = useNavigate()
     const [numberOfItem, setNumberOfProduct] = useState(1)
 
+    const phone = useSelector((state) => state.SignInReducer).phone_number;
     const getListCart = () => {
         axios
             .get("http://127.0.0.1:8000/sale/Orders-listModalCart/")
@@ -19,7 +22,15 @@ const ViewCart = () => {
                 return response.data;
             })
             .then((data) => {
-                setListCart(data)
+                let new_data = []
+                for(let i = 0; i < data.length; i++)
+                {
+                    if(data[i]["id_person"] === phone)
+                    {
+                        new_data.push(data[i])
+                    }
+                }
+                setListCart(new_data)
             })
             .catch((err) => {
                 console.log(err);
@@ -181,9 +192,15 @@ const ViewCart = () => {
                             <label>Free shipping</label>
                             <input type='radio'/>
                         </div>
-                        <p className='change'>Change address</p>
+                        <p className='change' onClick={() => {
+                            navigate("/my-account/AccountDetail")
+                        }}>Change address</p>
+
                     </div>
                 </div>
+                <p className='oke' onClick={() => {
+                           
+                        }}>Dia chi</p>
                 <div className='total'>
                     <p>Total</p>
                     <p>$123456</p>
