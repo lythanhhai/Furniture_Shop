@@ -5,7 +5,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { SignInAction, LogoutAction } from "../Action/SignInAction";
+import { SignInAction, LogoutAction, ChangeAddress } from "../Action/SignInAction";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -39,10 +39,12 @@ const SignIn = () => {
         if (data.key_per === 0) {
           console.log(data)
           dispatch(SignInAction(data.key_per, data.phone_number))
+          dispatch(ChangeAddress(data.address))
           navigate("/Home")
           
         } else if (data.key_per === 1) {
           dispatch(SignInAction(data.key_per, data.phone_number))
+          dispatch(ChangeAddress(data.address))
           navigate("/admin/manage-products")
         } else {
           console.log(typeof data.key_per);

@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import '../Variables/Variables.scss';
+
+html 
+{
+    font-size: 62.5%;
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+}
+
+.History
+{
+    margin: 0 auto;
+    width: 90%;
+    height: 45rem;
+    margin-top: 2rem;
+    position: relative;
+    // background-color: rebeccapurple;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .table
+    {
+        border-collapse: collapse;
+        width: 100%;
+        height: 100%;
+        
+        th, td
+        {
+            padding: 1.2rem;
+            border: 1px solid rgb(175, 172, 172);
+            text-align: left;
+            font-size: 1.6rem;
+        }
+        td:nth-child(2)
+        {
+            width: 35%;
+        }
+        td:nth-child(3)
+        {
+            width: 20%;
+        }
+        td:nth-child(4)
+        {
+            width: 15%;
+        }
+        td:nth-child(5)
+        {
+            width: 30%;
+        }
+        
+    }
+
+}
+// .Button
+// {
+//         background-color: rgb(30, 30, 233);
+//         padding: 1.5rem 3rem;
+//         outline: none;
+//         border: none;
+//         color: white;
+//         font-size: 1.5rem;
+//         font-weight: 500;
+//         margin-top: 3rem;
+//         cursor: pointer;
+// }

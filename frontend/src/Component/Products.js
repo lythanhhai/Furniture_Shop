@@ -51,8 +51,10 @@ const Products = () => {
         for (let i = 0; i < newArray.length; i++) {
         // console.log(object["id_product"] === newArray[i]["id_product"] && object["id_person"] === newArray[i]["id_person"])
         // console.log(object["id_product"])
-        // console.log(newArray[i]["id_product"])
-        if (object["id_product"] === newArray[i]["id_product"] && object["id_person"] === newArray[i]["id_person"])
+        // console.log(newArray[i]["status"] === false)
+        // console.log(newArray[i]["status"] === 'false')
+        // console.log(newArray[i]["status"] === 0)
+        if (object["id_product"] === newArray[i]["id_product"] && object["id_person"] === newArray[i]["id_person"] && newArray[i]["status"] === false)
         {
             check += 1;
             const new_object = {

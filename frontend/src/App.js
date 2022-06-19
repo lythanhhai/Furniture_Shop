@@ -14,6 +14,7 @@ import ManageProducts_Pages from "./Pages/ManageProducts_Pages";
 import SignInReducer from "./Reducer/SignInReducer";
 import Search1 from "./Pages/Search_page";
 import { SignInAction, LogoutAction } from "../src/Action/SignInAction";
+import History_page from "./Pages/History_page";
 
 function App() {
   // const [y, setY] = useState(window.scrollY);
@@ -39,18 +40,18 @@ function App() {
   //   };
   // }, [handleNavigation]);
   const dispatch = useDispatch();
+  const inforLogin = useSelector((state) => state.SignInReducer);
   // useEffect(() => {
   //   window.addEventListener("beforeunload", function (e) {
   //     dispatch(LogoutAction())
   //   });
-  // }, [])
+  // })
 
   let keywork = useSelector((state) => state.getIndexReducer).index;
   const [accessLogin, setAccessLogin] = useState(true);
 
   let id = useSelector((state) => state.getIndexReducer).index;
 
-  const inforLogin = useSelector((state) => state.SignInReducer);
 
   return (
     <BrowserRouter>
@@ -146,6 +147,24 @@ function App() {
         <Route
           path={`/admin/manage-products`}
           element={
+            
+              // if(inforLogin.access === 1)
+              // {
+              //     if(inforLogin.isAdmin === 1)
+              //     {
+              //       <ManageProducts_Pages />
+              //     }
+              //     else 
+              //     {
+              //       <Home />
+              //     }
+              // }
+              // else 
+              // {
+              //       <SignIn_Page />
+              // }
+              
+            
             inforLogin.access === 1 && inforLogin.isAdmin === 1 ? (
               <ManageProducts_Pages />
             ) : (
@@ -159,6 +178,16 @@ function App() {
           element={
             inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Search1 />
+            ) : (
+              <SignIn_Page />
+            )
+          }
+        ></Route>
+        <Route
+          path={`/History`}
+          element={
+            inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
+              <History_page />
             ) : (
               <SignIn_Page />
             )

@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 
 def upload_to(instance, filename):
@@ -14,6 +15,7 @@ class Customer(models.Model):
     pass_word= models.CharField(max_length= 100)
     address= models.TextField(null=True)
     key_per=models.IntegerField(default= 0)
+
 class History(models.Model):
     id=models.IntegerField(default= 1, primary_key= True)
     id_person=models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -34,3 +36,4 @@ class Orders(models.Model):
     number_product=models.IntegerField(default= 1)
     total_price= models.FloatField()
     status=models.BooleanField(default=0)
+    datetime= models.DateTimeField(blank= True, null= True)

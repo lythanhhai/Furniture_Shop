@@ -11,7 +11,10 @@ const ViewCart = () => {
     var [listCart, setListCart] = useState([])
 
     const navigate = useNavigate()
-    const [numberOfItem, setNumberOfProduct] = useState(1)
+    const [numberOfItem, setNumberOfProduct] = useState(0)
+    const [totalPrice, setPrice] = useState(0.0)
+    const [totalNewPrice, setTotalNewPrice] = useState(totalPrice)
+    const [count, setCount] = useState(0)
 
     const phone = useSelector((state) => state.SignInReducer).phone_number;
     const getListCart = () => {
@@ -23,14 +26,18 @@ const ViewCart = () => {
             })
             .then((data) => {
                 let new_data = []
+                let price = 0
                 for(let i = 0; i < data.length; i++)
                 {
-                    if(data[i]["id_person"] === phone)
+                    if(data[i]["id_person"] === phone && data[i]["status"] === false)
                     {
+                        price += data[i]["total_price"]
                         new_data.push(data[i])
                     }
                 }
                 setListCart(new_data)
+                setPrice(price)
+                setTotalNewPrice(price)
             })
             .catch((err) => {
                 console.log(err);
@@ -41,89 +48,158 @@ const ViewCart = () => {
         getListCart()
     }, [])
 
-    const increaseNumber = (id) => {
-        const newArray = JSON.parse(sessionStorage.getItem("listCart"))
+    useEffect(() => {
+        setNumberOfProduct(numberOfItem)
+        getListCart()
+    }, [numberOfItem])
+
+
+    const increaseNumber = (id, price) => {
+        const newArray = listCart
         for(let i = 0; i < newArray.length; i++)
         {
-
             if(id === newArray[i]["id"])
             {                
-                newArray[i] = {
-                    ...newArray[i],
-                    number: newArray[i]["number"] + 1
-                }
-                setNumberOfProduct(newArray[i]["number"])
+                const new_object = {
+					id_product: newArray[i]["id_product"],
+					id_person: newArray[i]["id_person"],
+					status: newArray[i]["status"],
+					total_price: (newArray[i]["number_product"] + 1) * price,
+					number_product: newArray[i]["number_product"] + 1,
+				}
+                // console.log(price)
+                // console.log(new_object)
+                axios
+                .post(`http://127.0.0.1:8000/sale/Orders-update/${id}/`, new_object)
+                .then((response) => {
+                    console.log(response)
+                    // setNumberOfProduct(new_object["number_product"])
+                    setNumberOfProduct(!numberOfItem)
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
                 break;
             }
         }
-        sessionStorage.setItem("listCart", JSON.stringify(newArray))
     }
-    useEffect(() => {
-        setNumberOfProduct(numberOfItem)
-    }, [numberOfItem])
 
-    const decreaseNumber = (id) => {
-        if(numberOfItem === 1)
+    const decreaseNumber = (id, price, number_product) => {
+        if(number_product === 1)
         {
-            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
-            const array = []
+            const newArray = listCart
             for(let i = 0; i < newArray.length; i++)
             {
-
                 if(id === newArray[i]["id"])
                 {                
-                    continue
-                }
-                else 
-                {
-                    array.push(newArray[i])
-                }
-            }
-            setNumberOfProduct(0)
-            sessionStorage.setItem("listCart", JSON.stringify(array)) 
-        }
-        else  
-        {
-            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
-            for(let i = 0; i < newArray.length; i++)
-            {
+                    // const new_object = {
+                    //     id_product: newArray[i]["id_product"],
+                    //     id_person: newArray[i]["id_person"],
+                    //     status: newArray[i]["status"],
+                    //     total_price: newArray[i]["number_product"] * price,
+                    //     number_product: newArray[i]["number_product"] + 1,
+                    // }
 
-                if(id === newArray[i]["id"])
-                {                
-                    newArray[i] = {
-                        ...newArray[i],
-                        number: newArray[i]["number"] - 1
-                    }
-                    setNumberOfProduct(newArray[i]["number"])
+                    axios
+                    .delete(`http://127.0.0.1:8000/sale/Orders-delete/${id}/`)
+                    .then((response) => {
+                        console.log(response)
+                        setNumberOfProduct(!numberOfItem)
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
                     break;
                 }
             }
-            sessionStorage.setItem("listCart", JSON.stringify(newArray))
         }
+        else  
+        {
+            const newArray = listCart
+            for(let i = 0; i < newArray.length; i++)
+            {
+                if(id === newArray[i]["id"])
+                {                
+                    const new_object = {
+                        id_product: newArray[i]["id_product"],
+                        id_person: newArray[i]["id_person"],
+                        status: newArray[i]["status"],
+                        total_price: (newArray[i]["number_product"] - 1) * price,
+                        number_product: newArray[i]["number_product"] - 1,
+                    }
+
+                    axios
+                    .post(`http://127.0.0.1:8000/sale/Orders-update/${id}/`, new_object)
+                    .then((response) => {
+                        console.log(response)
+                        // setNumberOfProduct(new_object["number_product"])
+                        setNumberOfProduct(!numberOfItem)
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+                    break;
+                }
+            }
+            }
     }
 
     const removeItem = (id) => {
 
-            const newArray = JSON.parse(sessionStorage.getItem("listCart"))
-            const array = []
-            for(let i = 0; i < newArray.length; i++)
-            {
+        const newArray = listCart
+        for(let i = 0; i < newArray.length; i++)
+        {
+            if(id === newArray[i]["id"])
+            {                
 
-                if(id === newArray[i]["id"])
-                {                
-                    continue
-                }
-                else 
-                {
-                    array.push(newArray[i])
-                }
+                axios
+                .delete(`http://127.0.0.1:8000/sale/Orders-delete/${id}/`)
+                .then((response) => {
+                    console.log(response)
+                    setNumberOfProduct(!numberOfItem)
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+                break;
             }
-            setNumberOfProduct(0)
-            sessionStorage.setItem("listCart", JSON.stringify(array)) 
+        }
 
     }
 
+    const handleOrder = () => {
+        const newArray = listCart
+        for(let i = 0; i < newArray.length; i++)
+        {
+                var today = new Date();
+                var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date+' '+time;
+                const new_object = {
+					...newArray[i],
+					status: 1,
+                    datetime: dateTime,
+				}
+                // console.log(price)
+                // console.log(new_object)
+                axios
+                .post(`http://127.0.0.1:8000/sale/Orders-update/${new_object["id"]}/`, new_object)
+                .then((response) => {
+                    console.log(response)
+                    // setNumberOfProduct(new_object["number_product"])
+                    setNumberOfProduct(!numberOfItem)
+                    
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+            
+    }
 
+    const inforLogin = useSelector((state) => state.SignInReducer)
+    // onsole.log(inforLogin)
     const elementItemCart = listCart.map((product, index) => {
         const {id, id_product, name_product, number_product, price, url, total_price } = product
         return(
@@ -137,13 +213,13 @@ const ViewCart = () => {
                 <td className='number'>
                     <div className='number__quantity'>
                         <button className='but_sub' type='button' onClick={() => {
-                            decreaseNumber(id)
+                            decreaseNumber(id, price, number_product)
                         }}>
                             -
                         </button>
                         <p>{number_product}</p>
                         <button className='but_add' type='button' onClick={() => {
-                            increaseNumber(id)
+                            increaseNumber(id, price)
                         }}>
                             +
                         </button>
@@ -179,18 +255,29 @@ const ViewCart = () => {
                 <p className='name'>Cart TOTALS</p>
                 <div className='subtotal'>
                     <p>Subtotal</p>
-                    <p>$123</p>
+                    <p>${totalPrice}</p>
                 </div>
                 <div className='shipping'>
                     <p>Shipping</p>
                     <div className='function'>
                         <div className='flat'>
                             <label>Flat rate: $20</label>
-                            <input type='radio'/>
+                            <input type='checkbox' value={20} onChange={(e) => {
+                                if(e.target.checked && count === 0)
+                                {
+                                    setCount(1)
+                                    setTotalNewPrice(totalPrice + parseInt(e.target.value))
+                                }
+                                else if(e.target.checked === false && count === 1)
+                                {
+                                    setCount(0)
+                                    setTotalNewPrice(totalPrice)
+                                }
+                            }}/>
                         </div>
                         <div className='free'>
                             <label>Free shipping</label>
-                            <input type='radio'/>
+                            <input type='checkbox'/>
                         </div>
                         <p className='change' onClick={() => {
                             navigate("/my-account/AccountDetail")
@@ -198,16 +285,21 @@ const ViewCart = () => {
 
                     </div>
                 </div>
-                <p className='oke' onClick={() => {
+                <div className='address'>
+                    <p className='oke' onClick={() => {
                            
-                        }}>Dia chi</p>
+                        }}>Current Address: {inforLogin.address}</p>
+                </div>
+
                 <div className='total'>
                     <p>Total</p>
-                    <p>$123456</p>
+                    <p>${totalNewPrice}</p>
                 </div>
                 <div className='button'>
-                    <button type='button' className='button_update'>UPDATE CART</button>
-                    <button type='button' className='button_proceed'>PROCEED CART</button>
+                    {/* <button type='button' className='button_update'>UPDATE CART</button> */}
+                    <button type='button' className='button_proceed' onClick={() => {
+                            handleOrder()
+                    }}>PROCEED CART</button>
                 </div>
             </div>
         </section>

@@ -33,7 +33,7 @@ const ModalCart = () => {
                 let price = 0
                 for(let i = 0; i < data.length; i++)
                 {
-                    if(data[i]["id_person"] === phone)
+                    if(data[i]["id_person"] === phone && data[i]["status"] === false)
                     {   
                         price += data[i]["total_price"]
                         new_data.push(data[i])

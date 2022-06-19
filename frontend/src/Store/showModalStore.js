@@ -7,7 +7,7 @@ import getIdProductReducer from '../Reducer/getIdProductReducer'
 import SignInReducer from '../Reducer/SignInReducer'
 
 import storage from 'redux-persist/lib/storage';
-import {configureStore} from '@reduxjs/toolkit';
+import {configureStore, Reducer, AnyAction} from '@reduxjs/toolkit';
 import {
     persistReducer,
     FLUSH,
@@ -18,11 +18,15 @@ import {
     REGISTER,
 } from 'redux-persist';
 
+const expireReducer = require("redux-persist-expire");
+
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['SignInReducer']
+    whitelist: ['SignInReducer'],
+    transforms: [expireReducer(SignInReducer, { expireSeconds: 20 })],
 };
+
 
 const CombineReducers = combineReducers(
     {
