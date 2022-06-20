@@ -174,7 +174,7 @@ function App() {
         ></Route>
 
         <Route
-          path={`/search/${keywork}`}
+          path={`/search`}
           element={
             inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Search1 />

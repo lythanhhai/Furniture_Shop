@@ -16,13 +16,13 @@ urlpatterns = [
 	path('Customer-update/<str:pk>/', customer.taskUpdate, name="Customer-update"),
 	path('Customer-delete/<str:pk>/', customer.taskDelete, name="Customer-delete"),
 	path('Customer-get/<str:pk>/', customer.taskGetAddress, name="Customer-get"),
-	###
-	path('History-list/', history.taskList, name="History-list"),
-	path('History-detail/<int:pk>/',  history.taskDetail, name="History-detail"),
-	path('History-person/<int:pk>/',  history.taskDetailPerson, name="History-person"),
-	path('History-create/',  history.taskCreate, name="History-create"),
-	path('History-update/<int:pk>/',  history.taskUpdate, name="History-update"),
-	path('History-delete/<int:pk>/',  history.taskDelete, name="History-delete"),
+	# ###
+	# path('History-list/', history.taskList, name="History-list"),
+	# path('History-detail/<int:pk>/',  history.taskDetail, name="History-detail"),
+	# path('History-person/<int:pk>/',  history.taskDetailPerson, name="History-person"),
+	# path('History-create/',  history.taskCreate, name="History-create"),
+	# path('History-update/<int:pk>/',  history.taskUpdate, name="History-update"),
+	# path('History-delete/<int:pk>/',  history.taskDelete, name="History-delete"),
 
 	###
 	path('Product-list/', product.taskList, name="Product-list"),

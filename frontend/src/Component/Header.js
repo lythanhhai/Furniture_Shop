@@ -16,7 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const handleClickDetail = (keywork) => {
     dispatch(getIdProductAction(keywork));
-    navigate(`/search/${keywork}`);
+    navigate(`/search`);
   };
   const handleClickCart = () => {
     if (showOrHide === 0) {
@@ -37,6 +37,7 @@ const Header = () => {
   };
 
   const inforLogin = useSelector((state) => state.SignInReducer);
+
   const phone = useSelector((state) => state.SignInReducer).phone_number;
   const number = useSelector((state) => state.SignInReducer).number_product;
   // const getNumberCart = () => {
@@ -67,6 +68,8 @@ const Header = () => {
   //   getNumberCart()
   // }, [numberOfProduct]);
 
+
+///
   return (
     <>
       <section className="Header">
@@ -81,7 +84,7 @@ const Header = () => {
         </div>
         <div className="Header_Search">
           <label htmlFor="search"></label>
-          <input
+          {/* <input
             type="text"
             placeholder="Enter name product"
             // onChange={(e)=>{
@@ -92,7 +95,19 @@ const Header = () => {
                 handleClickDetail(event.target.value);
               }
             }}
-          ></input>
+          ></input> */}
+           <div className='input-wrapper'>
+        <input
+           type="text"
+           placeholder="Search....."
+           onKeyPress={(event) => {
+             if (event.key === "Enter") {
+               handleClickDetail(event.target.value);
+             }
+           }}
+          />
+       
+      </div>
         </div>
         <div className="Header__Function">
           {inforLogin.access === 0 ? (
