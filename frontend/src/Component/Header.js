@@ -5,12 +5,13 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { showModalCart, hideModalCart } from "../Action/showModal";
 import { Navigate, useNavigate } from "react-router-dom";
-import { SignInAction, LogoutAction } from "../Action/SignInAction";
+import { SignInAction, LogoutAction, NumberInCart } from "../Action/SignInAction";
 import getIdProductAction from "../Action/getIdProductAction";
+import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [numberOfProduct, setNumberOfProduct] = useState(0);
+  // const [numberOfProduct, setNumberOfProduct] = useState(0);
   const showOrHide = useSelector((state) => state.showModalReducer).value;
   const dispatch = useDispatch();
   const handleClickDetail = (keywork) => {
@@ -36,7 +37,37 @@ const Header = () => {
   };
 
   const inforLogin = useSelector((state) => state.SignInReducer);
-///
+
+  const phone = useSelector((state) => state.SignInReducer).phone_number;
+  const number = useSelector((state) => state.SignInReducer).number_product;
+  // const getNumberCart = () => {
+  //   axios
+  //           .get("http://127.0.0.1:8000/sale/Orders-listModalCart/")
+  //           .then((response) => {
+  //               return response.data;
+  //           })
+  //           .then((data) => {
+  //               let new_data = []
+  //               let count = 0
+  //               for(let i = 0; i < data.length; i++)
+  //               {
+  //                   if(data[i]["id_person"] === phone && data[i]["status"] === false)
+  //                   {   
+  //                       count++;
+  //                       new_data.push(data[i])
+  //                   }
+  //               }
+  //               dispatch(NumberInCart(count))
+  //               setNumberOfProduct(count)
+  //           })
+  //           .catch((err) => {
+  //               console.log(err);
+  //       });
+  // }
+  // useEffect(() => {
+  //   getNumberCart()
+  // }, [numberOfProduct]);
+
 
 ///
   return (
@@ -191,7 +222,7 @@ const Header = () => {
                   </p>
                   <p
                     className="Header__Function-cart"
-                    numberOfProduct={numberOfProduct}
+                    numberOfProduct={number}
                     onClick={() => {
                       handleClickCart();
                     }}

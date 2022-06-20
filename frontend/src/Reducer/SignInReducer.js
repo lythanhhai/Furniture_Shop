@@ -2,7 +2,8 @@ const initial = {
     access: 1,
     isAdmin: 0,
     phone_number: 0,
-    address: ""
+    address: "",
+    number_product: 0
 }
 
 const SignInReducer = (state= initial, action) => {
@@ -43,6 +44,12 @@ const SignInReducer = (state= initial, action) => {
                     ...state,
                     address: action.payload.address
                 }
+    
+        case "getNumberInCart":
+             return{
+                 ...state,
+                number_product: action.payload.number_product
+            }
     
         default:
             return state

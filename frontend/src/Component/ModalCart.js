@@ -9,6 +9,7 @@ import CartEmpty from './CartEmpty'
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import SignInReducer from "../Reducer/SignInReducer";
+import {NumberInCart} from '../Action/SignInAction'
 
 const ModalCart = () => {
     var showOrHide = useSelector(state => state.showModalReducer).value
@@ -87,7 +88,7 @@ const ModalCart = () => {
             }
         }
     }
-
+    const number = useSelector((state) => state.SignInReducer).number_product;
     const decreaseNumber = (id, price, number_product) => {
         if(number_product === 1)
         {
@@ -109,6 +110,7 @@ const ModalCart = () => {
                     .then((response) => {
                         console.log(response)
                         setNumberOfProduct(!numberOfItem)
+                        dispatch(NumberInCart(number - 1))
                     })
                     .catch((err) => {
                         console.log(err);
@@ -161,6 +163,7 @@ const ModalCart = () => {
                 .then((response) => {
                     console.log(response)
                     setNumberOfProduct(!numberOfItem)
+                    dispatch(NumberInCart(number - 1))
                 })
                 .catch((err) => {
                     console.log(err);

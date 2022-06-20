@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import {showModalCart} from '../Action/showModal'
 import axios from 'axios'
 import SignInReducer from '../Reducer/SignInReducer'
+import { NumberInCart } from '../Action/SignInAction'
 
 const Detail = () => {
     const navigate = useNavigate()
@@ -49,6 +50,7 @@ const Detail = () => {
         // : navigate('/SignIn/')
     }
 
+    const number = useSelector((state) => state.SignInReducer).number_product;
     const dispatch = useDispatch()
     const addOrUpdate = (newArray, object) => {
         let check = 0;
@@ -83,6 +85,7 @@ const Detail = () => {
                 .post("http://127.0.0.1:8000/sale/Orders-create/", object)
                 .then((response) => {
                 // console.log(response)
+                    dispatch(NumberInCart(number + 1))
                 })
                 .catch((err) => {
                 console.log(err);
@@ -168,9 +171,9 @@ const Detail = () => {
     const phone = useSelector((state) => state.SignInReducer).phone_number;
     return(
         <section className='Detail'>
-            <div className='Detail__ListImage'>
+            {/* <div className='Detail__ListImage'>
                 {elementImage}
-            </div>
+            </div> */}
             <div className='Detail__Image' onMouseLeave={(e) => {
                 handleLeave(e)
             }}>
