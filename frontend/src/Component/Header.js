@@ -66,7 +66,7 @@ const Header = () => {
             }}
           ></input> */}
            <div className='input-wrapper'>
-        <input
+        <input className="input1"
            type="text"
            placeholder="Search....."
            onKeyPress={(event) => {
