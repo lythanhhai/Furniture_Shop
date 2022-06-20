@@ -93,7 +93,7 @@ const Search = () => {
             navigate(`/Detail/${id}`)
             dispatch(getIndex(id))
     }
-
+    
     
     const elementProducts = Products.map((Product, index) => {
         const {id, name_product, price, desc, url} = Product
@@ -138,13 +138,21 @@ const Search = () => {
             </div>
         )
     })
+   var avay=""
+     if(elementProducts.length > 0)
+     {
+        avay= "Will your clients accept that you go about things order."
+     }
+     else{
+        avay= "Damn!!!! the product doesn't exist, please search again "
+     }
     return(
         <section className='Product'>
             <h2 className='Product__title'>
                 Featured Products
             </h2>
             <p className='Product__desc'>
-                Will your clients accept that you go about things order.
+               {avay}
             </p>
             <div className='Product__list'>
                 {elementProducts}

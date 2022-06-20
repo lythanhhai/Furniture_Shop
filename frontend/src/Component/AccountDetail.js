@@ -27,6 +27,7 @@ const AccountDetail = () => {
    
     const onInputChange = e => {
       const { name, value } = e.target;
+      
       setInput(prev => ({
         ...prev,
         [name]: value
@@ -60,7 +61,7 @@ const AccountDetail = () => {
             if (!value) {
               stateObj[name] = "Please enter Confirm Password.";
             } else if (input.NewPass && value !== input.NewPass) {
-              stateObj[name] = "Password and Confirm Password does not match.";
+              stateObj[name] = "New Password and Confirm Password does not match.";
             }
             break;
    
@@ -104,11 +105,29 @@ const AccountDetail = () => {
     },[])
    const { user_name, phone_number, address, pass_word} = inforPerson
    //
-   const passs= pass_word;
+   const passs = pass_word;
   
-  
-   
+   var typee = ""
+   const check=(err,err1)=>
+   {
+    if (err == "" && err1 == "")
+    {
+      typee="submit";
+    }
+    else
+    {
+      typee="button"
+    }
+   }
 
+  const notification = (typee) => {
+    if(typee === "button")
+    {
+      alert("Không thành công!!")
+    }
+  }
+  
+  var noti = "Thanh cong roi me"
   const handleupdate = (e) => {
     e.preventDefault()
     const infor1 = {
@@ -126,6 +145,7 @@ const AccountDetail = () => {
       })
       .then(data => {
         dispatch(ChangeAddress(data.address))
+        alert(noti)
       })
       .catch((err) => {
         console.log(err);
@@ -190,7 +210,7 @@ const AccountDetail = () => {
                             //
                           //  value={input.pass}
                             onChange={onInputChange}
-                           onBlur={validateInput}
+                            onBlur={validateInput}
                             //
                             />
                             {error.CurrentPass && <span className='err'>{error.CurrentPass}</span>}
@@ -199,32 +219,48 @@ const AccountDetail = () => {
                         <div className='NewPass'>
                             <label htmlFor='NewPass'>New password (leave blank to leave unchanged)</label>
                             <input type='password' placeholder='' name='NewPass'
-                            onChange={(e) => {
-                                setInforPerson({
-                                  ...inforPerson,
-                                  pass_word: e.target.value,
-                                });
-                              }}
-                              //
-                             // value={input.password}
-                              
-                              onBlur={validateInput}
-                              //
+                             onChange={(e) => {
+                             
+                             
+                             
+                              setInforPerson({
+                                ...inforPerson,
+                                pass_word: e.target.value,
+                              });
+                            
+                              onInputChange(e);
+                             
+
+                            }}
+                            onBlur={validateInput}
+                            
                               />
-                               {error.NewPass && <span className='err'>{error.NewPass}</span>}
+                               {error.ConfirmPass&& <span className='err'>{error.ConfirmPass}</span>}
                         </div>
 
                         <div className='ConfirmPass'>
                             <label htmlFor='ConfirmPass'>Confirm new password</label>
                             <input type='password' placeholder='' name='ConfirmPass'
-                          //  value={input.confirmPassword}
-                            onChange={onInputChange}
-                            onBlur={validateInput}
+                          onChange={(e) => {
+                            console.log(error.ConfirmPass +""+error.CurrentPass+""+e.target.value)
+                            onInputChange(e)
+                          
+                          }}
+                           
+                            onBlur={validateInput
+                            }
                             />
-                            {error.ConfirmPass && <span className='err'>{error.ConfirmPass}</span>}
+                            {
+                            
+                            error.ConfirmPass && <span className='err' onChange={ check(error.ConfirmPass,error.CurrentPass)} >{error.ConfirmPass}</span>
+                          
+                            
+                            }
                         </div>
                     </div>
-                    <button type='submit' className='Account__form-saveChange'>SAVE CHANGE</button>
+                    <button type={typee} className='Account__form-saveChange' onClick={() => {
+                        notification(typee)
+                    }}>SAVE CHANGE</button>
                 </form>
         </section>
   );
