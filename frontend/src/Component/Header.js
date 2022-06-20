@@ -68,11 +68,9 @@ const Header = () => {
   //   getNumberCart()
   // }, [numberOfProduct]);
 
-
-///
   return (
     <>
-      <section className="Header">
+      <section className={sessionStorage.getItem("scrollY") < 80 ? "Header" : "Header1"}>
         <div
           className="Header__Logo"
           onClick={() => {
@@ -97,15 +95,15 @@ const Header = () => {
             }}
           ></input> */}
            <div className='input-wrapper'>
-        <input
-           type="text"
-           placeholder="Search....."
-           onKeyPress={(event) => {
-             if (event.key === "Enter") {
-               handleClickDetail(event.target.value);
-             }
-           }}
-          />
+            <input className="input1"
+              type="text"
+              placeholder="Search....."
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  handleClickDetail(event.target.value);
+                }
+              }}
+              />
        
       </div>
         </div>
@@ -195,10 +193,10 @@ const Header = () => {
                   >
                     <p
                       onClick={() => {
-                        navigate("/Products/");
+                        navigate("/admin/manage-products/");
                       }}
                     >
-                      Add Products
+                      Manage Products
                     </p>
                     <p
                       onClick={() => {
@@ -214,9 +212,9 @@ const Header = () => {
               </div>
               {inforLogin.isAdmin === 0 ? (
                 <>
-                  <p className="Header__Function-search">
+                  {/* <p className="Header__Function-search">
                     <FaSearch />
-                  </p>
+                  </p> */}
                   <p className="Header__Function-list">
                     <FaRegHeart />
                   </p>

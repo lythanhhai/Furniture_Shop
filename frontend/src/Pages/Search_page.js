@@ -8,7 +8,7 @@ const Search1 = () => {
   
     return(
         <div className="App"> 
-      <Search_bar />
+                <Header />
                 <Search/>
                 <ModalCart />
                 <Footer />

@@ -47,11 +47,6 @@ const ViewCart = () => {
 
     useEffect(() => {
         getListCart()
-    }, [])
-
-    useEffect(() => {
-        // setNumberOfProduct(numberOfItem)
-        getListCart()
     }, [numberOfItem])
 
     const number = useSelector((state) => state.SignInReducer).number_product;
@@ -178,6 +173,7 @@ const ViewCart = () => {
                 var today = new Date();
                 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
                 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                // var timezone = today.getTimezoneOffset()
                 var dateTime = date+' '+time;
                 const new_object = {
 					...newArray[i],
@@ -196,8 +192,8 @@ const ViewCart = () => {
                 .catch((err) => {
                     console.log(err);
                 });
-            }
-        setNumberOfProduct(100)
+        }
+        setNumberOfProduct(!numberOfItem)
         dispatch(NumberInCart(number - newArray.length))    
     }
 
