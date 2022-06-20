@@ -43,10 +43,10 @@ const History = () =>
         const {id, name_product, price, desc, url, number_product, total_price, datetime} = product
         return(
                 <tr key={index}>
-                    <td className='data'>{id}</td>
+                    {/* <td className='data'>{id}</td> */}
                     <td className='data'>{name_product}</td>
                     <td className='data'>{number_product}</td>
-                    <td className='data'>{total_price}</td>
+                    <td className='data'>{"$" + total_price}</td>
                     <td className='data'>{datetime}</td>
                 </tr>
         );
@@ -57,7 +57,7 @@ const History = () =>
                 <table className='table'>
                     <thead>
                         <tr>
-                            <th className='head'>ID</th>
+                            {/* <th className='head'>ID</th> */}
                             <th className='head'>Name Product</th>
                             <th className='head'>Number Product</th>
                             <th className='head'>Total Price</th>

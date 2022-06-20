@@ -21,13 +21,14 @@ body
     align-items: flex-start;
     // background-color: $backFb;
     width: 60%;
-    // height: 34vw;
+    height: 40vw;
     margin: 0 auto;
     padding: 1rem;
     &__title
     {
         font-size: 1.8rem;
         font-weight: 600;
+        margin-top: -1rem;
     }
 
     &__form

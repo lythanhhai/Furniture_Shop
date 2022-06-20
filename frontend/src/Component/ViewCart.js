@@ -6,10 +6,11 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import SignInReducer from "../Reducer/SignInReducer";
 import { useSelector, useDispatch } from 'react-redux'
+import { NumberInCart } from '../Action/SignInAction'
 
 const ViewCart = () => {
     var [listCart, setListCart] = useState([])
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [numberOfItem, setNumberOfProduct] = useState(0)
     const [totalPrice, setPrice] = useState(0.0)
@@ -49,11 +50,11 @@ const ViewCart = () => {
     }, [])
 
     useEffect(() => {
-        setNumberOfProduct(numberOfItem)
+        // setNumberOfProduct(numberOfItem)
         getListCart()
     }, [numberOfItem])
 
-
+    const number = useSelector((state) => state.SignInReducer).number_product;
     const increaseNumber = (id, price) => {
         const newArray = listCart
         for(let i = 0; i < newArray.length; i++)
@@ -106,6 +107,7 @@ const ViewCart = () => {
                     .then((response) => {
                         console.log(response)
                         setNumberOfProduct(!numberOfItem)
+                        dispatch(NumberInCart(number - 1))
                     })
                     .catch((err) => {
                         console.log(err);
@@ -158,6 +160,7 @@ const ViewCart = () => {
                 .then((response) => {
                     console.log(response)
                     setNumberOfProduct(!numberOfItem)
+                    dispatch(NumberInCart(number - 1))
                 })
                 .catch((err) => {
                     console.log(err);
@@ -167,7 +170,7 @@ const ViewCart = () => {
         }
 
     }
-
+    
     const handleOrder = () => {
         const newArray = listCart
         for(let i = 0; i < newArray.length; i++)
@@ -188,14 +191,14 @@ const ViewCart = () => {
                 .then((response) => {
                     console.log(response)
                     // setNumberOfProduct(new_object["number_product"])
-                    setNumberOfProduct(!numberOfItem)
                     
                 })
                 .catch((err) => {
                     console.log(err);
                 });
-        }
-            
+            }
+        setNumberOfProduct(100)
+        dispatch(NumberInCart(number - newArray.length))    
     }
 
     const inforLogin = useSelector((state) => state.SignInReducer)

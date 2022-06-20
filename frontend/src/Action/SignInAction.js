@@ -22,4 +22,13 @@ const ChangeAddress = (address) => {
     }
 }
 
-export { SignInAction, LogoutAction, ChangeAddress }
+const NumberInCart = (number_product) => {
+    return {
+        type: "getNumberInCart",
+        payload: {
+            number_product: number_product
+        }
+    }
+}
+
+export { SignInAction, LogoutAction, ChangeAddress, NumberInCart}

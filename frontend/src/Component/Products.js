@@ -10,6 +10,7 @@ import getIndex from "../Action/getIndexProduct";
 import axios from "axios";
 import getIdProductAction from "../Action/getIdProductAction";
 import SignInReducer from "../Reducer/SignInReducer";
+import { NumberInCart } from "../Action/SignInAction";
 
 const Products = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Products = () => {
   const dispatch = useDispatch();
 
 
-
+  const number = useSelector((state) => state.SignInReducer).number_product;
   const addOrUpdate = (newArray, object) => {
     let check = 0;
         for (let i = 0; i < newArray.length; i++) {
@@ -81,6 +82,7 @@ const Products = () => {
             .post("http://127.0.0.1:8000/sale/Orders-create/", object)
             .then((response) => {
             // console.log(response)
+              dispatch(NumberInCart(number + 1))
             })
             .catch((err) => {
             console.log(err);
