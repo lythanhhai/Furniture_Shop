@@ -54,6 +54,7 @@ const History = () =>
     return(
         <>
             <section className='History' onClick={() => {}}>
+                <h2 className='History__title'>History Orders</h2>
                 <table className='table'>
                     <thead>
                         <tr>

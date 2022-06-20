@@ -71,6 +71,7 @@ const Detail = () => {
                 .post(`http://127.0.0.1:8000/sale/Orders-update/${newArray[i]["id"]}/`, new_object)
                 .then((response) => {
                     // console.log(response)
+                    dispatch(showModalCart())
                 })
                 .catch((err) => {
                     console.log(err);
@@ -86,6 +87,7 @@ const Detail = () => {
                 .then((response) => {
                 // console.log(response)
                     dispatch(NumberInCart(number + 1))
+                    dispatch(showModalCart())
                 })
                 .catch((err) => {
                 console.log(err);

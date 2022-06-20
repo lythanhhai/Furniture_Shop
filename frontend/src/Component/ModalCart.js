@@ -50,12 +50,12 @@ const ModalCart = () => {
 
     useEffect(() => {
         getListCart()
-    }, [showOrHide]) 
+    }, [showOrHide, numberOfItem]) 
 
-    useEffect(() => {
-        setNumberOfProduct(numberOfItem)
-        getListCart()
-    }, [numberOfItem])
+    // useEffect(() => {
+    //     setNumberOfProduct(numberOfItem)
+    //     getListCart()
+    // }, [numberOfItem])
 
 
     const increaseNumber = (id, price) => {

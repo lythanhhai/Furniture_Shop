@@ -37,6 +37,16 @@ body
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 2rem;
         margin-top: 3rem;
+        .image__noProduct
+        {
+            width: 37rem;
+            height: 37rem;
+            object-fit: cover;
+            position: relative;
+            top: 0;
+            left: 150%;
+            transform: translateX(-31%);
+        }
         .product
         {
             display: flex;

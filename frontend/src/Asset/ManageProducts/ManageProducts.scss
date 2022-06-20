@@ -18,13 +18,17 @@ body
 {
     margin: 0 auto;
     width: 90%;
-    height: 45rem;
+    height: 50rem;
     margin-top: 2rem;
     position: relative;
     // background-color: rebeccapurple;
     overflow-y: scroll;
     &::-webkit-scrollbar {
         display: none;
+    }
+    &__title
+    {
+        font-size: 2rem;
     }
     .table
     {

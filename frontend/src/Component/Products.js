@@ -68,6 +68,7 @@ const Products = () => {
             .post(`http://127.0.0.1:8000/sale/Orders-update/${newArray[i]["id"]}/`, new_object)
             .then((response) => {
                 // console.log(response)
+                dispatch(showModalCart())
             })
             .catch((err) => {
                 console.log(err);
@@ -81,8 +82,9 @@ const Products = () => {
             axios
             .post("http://127.0.0.1:8000/sale/Orders-create/", object)
             .then((response) => {
-            // console.log(response)
+              console.log(response)
               dispatch(NumberInCart(number + 1))
+              dispatch(showModalCart())
             })
             .catch((err) => {
             console.log(err);
@@ -113,6 +115,7 @@ const Products = () => {
         newArray = data;
         // console.log(newArray)
         addOrUpdate(newArray, object)
+        
       })
       .catch((err) => {
         console.log(err);
@@ -123,7 +126,7 @@ const Products = () => {
 
   const handleClickDetail = (id) => {
     dispatch(getIdProductAction(id));
-    navigate(`/Detail/${id}`);
+    navigate(`/Detail`);
     dispatch(getIndex(id));
   };
 

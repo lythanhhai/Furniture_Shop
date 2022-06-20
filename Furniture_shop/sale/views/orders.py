@@ -37,7 +37,7 @@ def taskList(request):
 @api_view(['GET'])
 def taskListModalCart(request):
 	# list_item = list(Orders.objects.all().order_by('-id'))
-	list_item = list(Orders.objects.all())
+	list_item = list(Orders.objects.all().order_by('-datetime'))
 	product_list = list(Products.objects.all())
 	array = []
 	count = 0
@@ -55,7 +55,7 @@ def taskListModalCart(request):
 					'url': str(item_product.url),
 					'name_product': item_product.name_product,
 					'desc': item_product.desc,
-					'datetime': item_order.datetime,
+					'datetime': str(item_order.datetime),
 				}
 				count += 1
 				array.append(object)
