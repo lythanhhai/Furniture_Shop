@@ -15,7 +15,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const handleClickDetail = (keywork) => {
     dispatch(getIdProductAction(keywork));
-    navigate(`/search/${keywork}`);
+    navigate(`/search`);
   };
   const handleClickCart = () => {
     if (showOrHide === 0) {
