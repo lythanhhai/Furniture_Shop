@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from sale.Serializer.customer import CustomerSerializer
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
@@ -48,7 +47,7 @@ def signIn(request):
 			return JsonResponse({"key_per": item.key_per, "phone_number": item.phone_number, "address": item.address}, safe= False)
 			
 	
-	return JsonResponse("SignIn unsuccessful", safe= False)
+	return JsonResponse("SignIn unsuccessful!!!", safe= False)
 
 
 @api_view(['POST'])
@@ -58,9 +57,9 @@ def taskCreate(request):
 	serializer = CustomerSerializer(data= customer_data)
 	if serializer.is_valid():
 		serializer.save()
-		return JsonResponse("Add is successful", safe= False)
+		return JsonResponse("Register successful!!!", safe= False)
 	else:
-		return JsonResponse("Add is unsuccessful", safe= False)
+		return JsonResponse("Register unsuccessful!!!", safe= False)
 
 @api_view(['POST'])
 @csrf_exempt

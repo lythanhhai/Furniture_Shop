@@ -1,9 +1,10 @@
-const SignInAction = (admin, phone_number) => {
+const SignInAction = (admin, phone_number, number_product) => {
     return {
         type: "login",
         payload: {
             admin: admin,
             phone_number: phone_number, 
+            number_product: number_product
         }
     }
 }
