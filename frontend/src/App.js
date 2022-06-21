@@ -17,28 +17,44 @@ import { SignInAction, LogoutAction } from "../src/Action/SignInAction";
 import History_page from "./Pages/History_page";
 
 function App() {
-  // const [y, setY] = useState(window.scrollY);
+  const [y, setY] = useState(window.scrollY);
 
-  // const handleNavigation = useCallback(
-  //   e => {
-  //     const window = e.currentTarget;
-  //     if (y > window.scrollY) {
-  //       console.log("scrolling up");
-  //     } else if (y < window.scrollY) {
-  //       console.log("scrolling down");
-  //     }
-  //     setY(window.scrollY);
-  //   }, [y]
-  // );
+  const handleNavigation = useCallback(
+    e => {
+      const window = e.currentTarget;
+      if (y > window.scrollY) {
+        //console.log("scrolling up");
+      } else if (y < window.scrollY) {
+        //console.log("scrolling down");
+      }
+      setY(window.scrollY);
+    }, [y]
+  );
+
+  useEffect(() => {
+    setY(window.scrollY);
+    console.log(y)
+    window.addEventListener("scroll", handleNavigation);
+
+    return () => {
+      window.removeEventListener("scroll", handleNavigation);
+    };
+  }, [handleNavigation]);
+
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  // const handleScroll = () => {
+  //   const position = window.pageYOffset;
+  //   setScrollPosition(position);
+  // };
 
   // useEffect(() => {
-  //   setY(window.scrollY);
-  //   window.addEventListener("scroll", handleNavigation);
-
+  //   window.addEventListener("scroll", handleScroll);
+  //   console.log(scrollPosition)
   //   return () => {
-  //     window.removeEventListener("scroll", handleNavigation);
+  //     window.removeEventListener("scroll", handleScroll);
   //   };
-  // }, [handleNavigation]);
+  // }, []);
+
   const dispatch = useDispatch();
   const inforLogin = useSelector((state) => state.SignInReducer);
   // useEffect(() => {
@@ -46,6 +62,10 @@ function App() {
   //     dispatch(LogoutAction())
   //   });
   // })
+
+  useEffect(() => {
+    sessionStorage.setItem("scrollY", y)
+  })
 
   let keywork = useSelector((state) => state.getIndexReducer).index;
   const [accessLogin, setAccessLogin] = useState(true);

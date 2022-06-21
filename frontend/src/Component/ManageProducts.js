@@ -13,6 +13,7 @@ const ManageProducts = () =>
     const ModalUpdate = useSelector(state => state.showModalProductReducer).value_edit
     const [checkAdd, setCheckAdd] = useState(0)
     const [checkEdit, setCheckEdit] = useState(0)
+    const [checkDelete, setCheckDelete] = useState(0)
     const [idClick, setIdClick] = useState(-1)
 
     const dispatch = useDispatch()
@@ -69,7 +70,7 @@ const ManageProducts = () =>
 
     useEffect(() => {
         getProducts()
-    }, [checkAdd, checkEdit])
+    }, [checkAdd, checkEdit, checkDelete])
 
 
     const handleDelete = (id) => {
@@ -79,6 +80,7 @@ const ManageProducts = () =>
             {
                 console.log(res)
                 console.log(res.data)
+                setCheckDelete(!checkDelete)
             }
             
         )
@@ -116,7 +118,9 @@ const ManageProducts = () =>
     })
     return(
         <>
+
             <section className='ManageProducts' onClick={() => {}}>
+                <h2 className='ManageProducts__title'>Manage Product</h2>
                 <table className='table'>
                     <thead>
                         <tr>
