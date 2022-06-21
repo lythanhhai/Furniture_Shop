@@ -45,6 +45,8 @@ const ModalAddProduct = ({getCheckAddSuccess}) => {
           }).then(res => {
               //handle success
               getCheckAddSuccess(1)
+              alert("Add Product Success!!!")
+              window.location.reload();
               console.log(res);
             }).catch(err => {
               //handle error

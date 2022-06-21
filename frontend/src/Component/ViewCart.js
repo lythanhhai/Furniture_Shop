@@ -177,6 +177,7 @@ const ViewCart = () => {
                 var dateTime = date+' '+time;
                 const new_object = {
 					...newArray[i],
+                    total_price: totalNewPrice,
 					status: 1,
                     datetime: dateTime,
 				}
@@ -193,7 +194,9 @@ const ViewCart = () => {
                     console.log(err);
                 });
         }
-        setNumberOfProduct(!numberOfItem)
+        // setNumberOfProduct(!numberOfItem)
+        alert("Order Success!!!")
+        window.location.reload()
         dispatch(NumberInCart(number - newArray.length))    
     }
 

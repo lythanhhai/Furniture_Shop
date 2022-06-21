@@ -58,10 +58,16 @@ function App() {
   const dispatch = useDispatch();
   const inforLogin = useSelector((state) => state.SignInReducer);
   // useEffect(() => {
-  //   window.addEventListener("beforeunload", function (e) {
+  //   // window.addEventListener("beforeunload", function (e) {
+  //   //   e.preventDefault()
+  //   //   dispatch(LogoutAction())
+  //   // });
+  //   if(window.close)
+  //   {
   //     dispatch(LogoutAction())
-  //   });
-  // })
+  //   }
+  //   // window.onbeforeunload = () => dispatch(LogoutAction())
+  // }, [])
 
   useEffect(() => {
     sessionStorage.setItem("scrollY", y)
