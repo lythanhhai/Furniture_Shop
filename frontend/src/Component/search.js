@@ -207,7 +207,7 @@ const Search = () => {
           </div>
         );
       });
-   var avay=""
+     var avay=""
      if(elementProducts.length > 0)
      {
         avay= "Will your clients accept that you go about things order."
@@ -223,7 +223,7 @@ const Search = () => {
             <p className='Product__desc'>
                {avay}
             </p>
-            <div className='Product__list'>
+            <div className={elementProducts.length > 0 ? 'Product__list' : 'Product__noList'} >
                 {elementProducts.length > 0 ? elementProducts : <img className='image__noProduct' src="https://www.imepress.com/assets/images/no-product.jpg" alt="err" />}
             </div>
         </section>

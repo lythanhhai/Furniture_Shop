@@ -81,6 +81,7 @@ const ManageProducts = () =>
                 console.log(res)
                 console.log(res.data)
                 setCheckDelete(!checkDelete)
+                alert("Delete Product Success!!!")
             }
             
         )

@@ -114,6 +114,8 @@ const ModalEditProduct = ({getCheckEditSuccess, id}) => {
             headers: { "Content-Type": "multipart/form-data" },
           }).then(res => {
               getCheckEditSuccess(1)
+              alert("Edit Product Success!!!")
+              window.location.reload();
               console.log(res);
             }).catch(err => {
               console.log(err);

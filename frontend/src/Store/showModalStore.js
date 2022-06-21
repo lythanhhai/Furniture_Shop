@@ -7,6 +7,7 @@ import getIdProductReducer from '../Reducer/getIdProductReducer'
 import SignInReducer from '../Reducer/SignInReducer'
 
 import storage from 'redux-persist/lib/storage';
+import storageSession from 'redux-persist/lib/storage/session'
 import {configureStore, Reducer, AnyAction} from '@reduxjs/toolkit';
 import {
     persistReducer,
@@ -22,9 +23,10 @@ const expireReducer = require("redux-persist-expire");
 
 const persistConfig = {
     key: 'root',
+    // storageSession,
     storage,
     whitelist: ['SignInReducer', 'getIdProductReducer'],
-    transforms: [expireReducer(SignInReducer, { expireSeconds: 20 })],
+    transforms: [expireReducer(SignInReducer, { expireSeconds: 60 })],
 };
 
 
@@ -48,6 +50,7 @@ const ConfigureStore = configureStore({
             getDefaultMiddleware({
                 serializableCheck: {
                     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                    // ignoreActions: true
                 },
             }),
 })
