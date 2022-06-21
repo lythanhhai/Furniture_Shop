@@ -90,7 +90,7 @@ const Search = () => {
     
     const handleClickDetail = (id) => {
             dispatch(getIdProductAction(id))
-            navigate(`/Detail/${id}`)
+            navigate(`/Detail`)
             dispatch(getIndex(id))
     }
     

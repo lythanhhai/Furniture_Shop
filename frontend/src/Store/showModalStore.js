@@ -23,7 +23,7 @@ const expireReducer = require("redux-persist-expire");
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['SignInReducer'],
+    whitelist: ['SignInReducer', 'getIdProductReducer'],
     transforms: [expireReducer(SignInReducer, { expireSeconds: 20 })],
 };
 
@@ -47,7 +47,8 @@ const ConfigureStore = configureStore({
     middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
                 serializableCheck: {
-                    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                    // ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                    ignoreActions: true
                 },
             }),
 })

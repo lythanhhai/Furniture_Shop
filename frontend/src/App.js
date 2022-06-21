@@ -101,7 +101,7 @@ function App() {
         ></Route>
 
         <Route
-          path={`/Detail/${id}`}
+          path={`/Detail`}
           element={
             inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
               <Detail_Page />
