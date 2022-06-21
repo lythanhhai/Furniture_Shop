@@ -28,7 +28,8 @@ const SignUp = () => {
       .then((response) => {
         if(response.status === 200)
         {
-          console.log(response);
+          // console.log(response);
+          alert(response.data)
           navigate("/SignIn")
         }
         else 

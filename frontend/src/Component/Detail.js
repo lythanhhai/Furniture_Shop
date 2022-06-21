@@ -81,9 +81,14 @@ const Detail = () => {
             }
             // alert(check)
             if (check === 0) {
+                const new_object = {
+                    ...object,
+                    number_product: object["number_product"],
+                    total_price: numberOfItem * object["total_price"]
+                }
                 // add vao gio hang
                 axios
-                .post("http://127.0.0.1:8000/sale/Orders-create/", object)
+                .post("http://127.0.0.1:8000/sale/Orders-create/", new_object)
                 .then((response) => {
                 // console.log(response)
                     dispatch(NumberInCart(number + 1))
@@ -93,18 +98,10 @@ const Detail = () => {
                 console.log(err);
                 });
             }
+            setNumberOfProduct(1)
       }
       const inforLogin = useSelector(state => state.SignInReducer)
       const handleAddToCart = (object) => {
-        // inforLogin.access === 1
-        // ?
-        // (
-        //     dispatch(showModalCart())
-        // )
-        // :
-        // (
-        //     navigate('/SignIn/')
-        // )
     
         // // xử lý chọn nhiều
         let newArray = [];
@@ -205,7 +202,7 @@ const Detail = () => {
                     <button type='button' className='button' onClick={() => {
                         // handleNavigateCart()
                         const object = {
-                            total_price: item.price * numberOfItem,
+                            total_price: item.price,
                             status: 0,
                             number_product: numberOfItem,
                             id_person: phone,

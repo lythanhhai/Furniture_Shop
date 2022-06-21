@@ -97,7 +97,7 @@ const Header = () => {
            <div className='input-wrapper'>
             <input className="input1"
               type="text"
-              placeholder="Search....."
+              placeholder="Search product by name....."
               onKeyPress={(event) => {
                 if (event.key === "Enter") {
                   handleClickDetail(event.target.value);

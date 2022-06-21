@@ -10,14 +10,14 @@ import getIndex from "../Action/getIndexProduct";
 import axios from "axios";
 import getIdProductAction from "../Action/getIdProductAction";
 import SignInReducer from "../Reducer/SignInReducer";
-import { NumberInCart } from "../Action/SignInAction";
+import { NumberInCart, SignInAction } from "../Action/SignInAction";
 
 const Products = () => {
   const navigate = useNavigate();
   const [Products, setProducts] = useState([]);
   const [mouseOver, setMouseOver] = useState(0);
   const [indexCurrent, setIndexCurrent] = useState(-1);
-
+  const phone = useSelector((state) => state.SignInReducer).phone_number;
   const handleMouseOver = (i) => {
     setMouseOver(1);
     setIndexCurrent(i);
@@ -44,6 +44,36 @@ const Products = () => {
   }, []);
 
   const dispatch = useDispatch();
+  const [numberInitial, setNumberInitial] = useState(0)
+  const getNumber = () => {
+    axios
+        .get("http://127.0.0.1:8000/sale/Orders-listModalCart/")
+        .then((response) => {
+            // console.log(response)
+            return response.data;
+        })
+        .then((data) => {
+            let count = 0
+            for(let i = 0; i < data.length; i++)
+            {
+                if(data[i]["id_person"] === phone && data[i]["status"] === false)
+                {   
+                    count += 1
+                }
+            }
+            setNumberInitial(count)
+            
+        })
+        .catch((err) => {
+            console.log(err);
+    });
+  }
+  useEffect(() => {
+    getNumber()
+  }, [])
+useEffect(() => {
+  dispatch(SignInAction(0, phone, numberInitial))
+}, [numberInitial])
 
 
   const number = useSelector((state) => state.SignInReducer).number_product;
@@ -130,7 +160,7 @@ const Products = () => {
     dispatch(getIndex(id));
   };
 
-  const phone = useSelector((state) => state.SignInReducer).phone_number;
+  
   const elementProducts = Products.map((Product, index) => {
     const { id, name_product, price, desc, url } = Product;
     return (
