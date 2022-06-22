@@ -37,7 +37,7 @@ const ManageProducts = () =>
         // return 
         if(data === 1)
         {
-            setCheckAdd(1)
+            setCheckAdd(!checkAdd)
         }
         else
         {
@@ -48,7 +48,7 @@ const ManageProducts = () =>
         // return 
         if(data === 1)
         {
-            setCheckEdit(1)
+            setCheckEdit(!checkEdit)
         }
         else
         {
@@ -88,6 +88,7 @@ const ManageProducts = () =>
         .catch(err => {console.log(err)})
     }
 
+    var id_1 = 0
     const dataProductElement = products.map((product, index) => {
         const {id, name_product, price, desc, url} = product
         return(
@@ -101,6 +102,7 @@ const ManageProducts = () =>
                         <button    className='edit' 
                         onClick={() => {
                             setIdClick(id)
+                            // id_1 = id
                             handleShowModalUpdate();
                            
                         }}>

@@ -68,6 +68,7 @@ const Header = () => {
   //   getNumberCart()
   // }, [numberOfProduct]);
 
+  const name = useSelector((state) => state.SignInReducer).name;
   return (
     <>
       <section className={sessionStorage.getItem("scrollY") < 80 ? "Header" : "Header1"}>
@@ -131,7 +132,7 @@ const Header = () => {
                     handleMouseOutAccount();
                   }}
                 >
-                  My Account
+                  <img className="image_avatar" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="image err"/> {name}
                 </p>
                 {inforLogin.isAdmin === 0 ? (
                   <div

@@ -3,7 +3,8 @@ const initial = {
     isAdmin: 0,
     phone_number: 0,
     address: "",
-    number_product: 0
+    number_product: 0,
+    name: ""
 }
 
 const SignInReducer = (state= initial, action) => {
@@ -17,6 +18,7 @@ const SignInReducer = (state= initial, action) => {
                     access: 1,
                     isAdmin: 1,
                     phone_number: action.payload.phone_number,
+                    name: action.payload.name,
                     
                 }
             }
@@ -28,6 +30,7 @@ const SignInReducer = (state= initial, action) => {
                     isAdmin: 0,
                     phone_number: action.payload.phone_number,
                     number_product: action.payload.number_product,
+                    name: action.payload.name,
                 }
             }
         case "logout":
@@ -37,7 +40,8 @@ const SignInReducer = (state= initial, action) => {
                 access: 0,
                 isAdmin: 0,
                 phone_number: 0,
-                address: ""
+                address: "",
+                name: ""
             }
 
         case "changeAddress":

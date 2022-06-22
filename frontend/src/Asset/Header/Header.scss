@@ -90,15 +90,27 @@ body
             {
                 @include textHeader(black, 1.6rem, "'Lato', sans-serif", 600);
                 margin-right: 2rem;
+                padding: 1rem;
                 cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                .image_avatar 
+                {
+                    width: 3rem;
+                    height: 3rem;
+                    object-fit: cover;
+                    margin-right: 0.5rem;
+                }
             }
             .Down
             {
                 position: absolute;
-                width: 200%;
+                //width: 150%;
                 padding: 1rem 0rem;
                 top: 100%;
-                left: -10%;
+                left: 0%;
                 z-index: 1;
                 background-color: rgb(255, 255, 255);
                 color: rgb(170, 170, 170);

@@ -100,8 +100,31 @@ function App() {
                     <Loader />
                 }
               ></Route>
+              {/* <Route
+            path="/Home/"
+            element={
+              <Loader />
+            }
+          ></Route>
+  
+          <Route
+            path="/SignIn/"
+            element={
+              <Loader />
+            }
+          ></Route>
+  
+          <Route
+            path="/SignUp/"
+            element={
+              <Loader />
+            }
+          ></Route> */}
             </>
-          ) : (<><Route
+
+          ) : (
+            
+          <><Route
             path=""
             element={
               inforLogin.access === 1 && inforLogin.isAdmin === 0 ? (
