@@ -166,7 +166,7 @@ Ràng buộc:
 
 Giao diện của chức năng 
 
-<img src="https://github.com/lythanhhai/Furniture_Shop/blob/main/picture/admin.png" title="hover text">
+<img src="https://github.com/lythanhhai/Furniture_Shop/blob/main/picture/search.png" title="hover text">
 
 <hr>
 Giao diện thêm, sửa, xóa sản phẩm 
@@ -177,8 +177,8 @@ Giúp admin có thể quản lý các sản phẩm dễ dàng
 
 Giao diện của chức năng 
 
-<img src="https://github.com/lythanhhai/Furniture_Shop/blob/main/picture/admin.png" title="hover text">
+<img src="https://github.com/lythanhhai/Furniture_Shop/blob/main/picture/addProduct.png" title="hover text">
 <hr>
-<img src="https://github.com/lythanhhai/Furniture_Shop/blob/main/picture/admin.png" title="hover text">
+<img src="https://github.com/lythanhhai/Furniture_Shop/blob/main/picture/editProduct.png" title="hover text">
 <hr>
 
