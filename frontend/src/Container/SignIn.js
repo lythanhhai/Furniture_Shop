@@ -38,12 +38,12 @@ const SignIn = () => {
         
         if (data.key_per === 0) {
           console.log(data)
-          dispatch(SignInAction(data.key_per, data.phone_number, 0))
+          dispatch(SignInAction(data.key_per, data.phone_number, 0, data.user_name))
           dispatch(ChangeAddress(data.address))
           navigate("/Home")
           
         } else if (data.key_per === 1) {
-          dispatch(SignInAction(data.key_per, data.phone_number, 0))
+          dispatch(SignInAction(data.key_per, data.phone_number, 0, data.user_name))
           dispatch(ChangeAddress(data.address))
           navigate("/admin/manage-products")
         } else {

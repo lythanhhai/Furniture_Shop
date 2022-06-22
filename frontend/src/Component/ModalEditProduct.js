@@ -115,7 +115,7 @@ const ModalEditProduct = ({getCheckEditSuccess, id}) => {
           }).then(res => {
               getCheckEditSuccess(1)
               alert("Edit Product Success!!!")
-              window.location.reload();
+              // window.location.reload();
               console.log(res);
             }).catch(err => {
               console.log(err);

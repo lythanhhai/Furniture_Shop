@@ -71,8 +71,9 @@ const Products = () => {
   useEffect(() => {
     getNumber()
   }, [])
+  const user_name = useSelector((state) => state.SignInReducer).name;
 useEffect(() => {
-  dispatch(SignInAction(0, phone, numberInitial))
+  dispatch(SignInAction(0, phone, numberInitial, user_name))
 }, [numberInitial])
 
 
